@@ -6,7 +6,7 @@ public class Faker {
     private static final String[] NOMBRES = {"Juan", "Fran", "David", "Alba", "Natalia", "Maria"};
     private static final String[] PROVINCIAS = {"Almeria", "Malaga", "Granada", "Sevilla", "Huelva", "Cadiz", "Cordoba"};
     private static final String[] APELLIDOS = {"Castillo", "Muñoz", "Rodriguez", "Brull", "Garcia", "Ortiz"};
-
+//hola
     public static String nombres() {
         Random r1 = new Random();
         String nombre;
