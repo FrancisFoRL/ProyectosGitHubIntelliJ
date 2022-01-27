@@ -1,5 +1,7 @@
 package libreria;
 
+import java.util.Objects;
+
 public class GestionArray {
 
     /*
@@ -163,12 +165,12 @@ public class GestionArray {
                 } /* fin if */
     } /* fin burbuja_asc */
 
-    public static int buscar_secuencial(float v[], float ele) {
+    public static int buscar_secuencial(String[] texto, String ele) {
         int i, pos = -1;
         boolean encontrado = false;
         /* !encontrado es igual que encontrado == false */
-        for (i = 0; i < v.length && !encontrado; i++)
-            if (v[i] == ele) {
+        for (i = 0; i < texto.length && !encontrado; i++)
+            if (Objects.equals(texto[i], ele)) {
                 // se ha encontrado el elemento ele en el vector
                 encontrado = true;
                 pos = i;
