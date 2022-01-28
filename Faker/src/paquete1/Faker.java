@@ -3,7 +3,9 @@ package paquete1;
 import java.util.Random;
 
 public class Faker {
-    private static final String[] NOMBRES = {"Juan", "Fran", "David", "Alba", "Natalia", "Maria"};
+    private static final String[] NOMBRES = {"Alan", "Jacinto", "Martinez", "Alicia", "Jesús", "Mirta", "Andrea", "Josefina", "Mónica", "Andrés", "Juan",
+            "Nicolás", "Antonia", "Juana", "Noé" , "Antonio", "Juárez", "Noelia", "Azul", "Julia", "Paula" ,"Bartolomé", "Julián", "Patricio", "Belén", "Juliana",
+            "Renzo", "Celeste", "Julio", "Rodrigo", "Edgardo", "Leandro", "Rodríguez", "Felicia", "Luis", "Romina", "Florencia", "Luisa", "Rosario", "Gaspar", "Marcelo"};
     private static final String[] PROVINCIAS = {"Almeria", "Malaga", "Granada", "Sevilla", "Huelva", "Cadiz", "Cordoba"};
     private static final String[] APELLIDOS = {"Castillo", "Muñoz", "Rodriguez", "Brull", "Garcia", "Ortiz"};
 //hola
