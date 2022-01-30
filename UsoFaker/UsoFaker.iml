@@ -8,5 +8,9 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Faker" level="project" />
+    <orderEntry type="library" name="Faker2" level="project" />
+    <orderEntry type="library" name="Faker1" level="project" />
+    <orderEntry type="module" module-name="Faker" />
+    <orderEntry type="library" name="LibreriaJava" level="project" />
   </component>
 </module>

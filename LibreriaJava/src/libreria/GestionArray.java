@@ -112,6 +112,13 @@ public class GestionArray {
         }
     }
 
+    public static void mostrarVectorCadena(String[] vector) {
+        System.out.println("---------Mostrar vector---------");
+        for (int x = 0; x < vector.length; x++) {
+            System.out.println("Valor fila " + x + ": " + vector[x]);
+        }
+    }
+
     /*
      Función que muestra por pantalla los valores de un array unidimensional de decimales.
      In: int [] vector es el array a mostrar
@@ -194,42 +201,33 @@ public class GestionArray {
      * Busqueda Binaria
      */
     public static int b_binaria_asc(float v[], float ele) {
-// colocar la izquierda al principio y la derecha al final
         int izquierda = 0, derecha = v.length - 1, posicion, mitad;
-// calcular la mitad
         mitad = (izquierda + derecha) / 2;
-/* realizar la búsqueda mientras no encontremos el elemento
-y el rango de búsqueda sea correcto*/
         while (v[mitad] != ele && izquierda <= derecha) {
             if (ele > v[mitad])
-                /* buscar en la parte derecha */
                 izquierda = mitad + 1;
             else
-                /* buscar en la parte izquierda */
                 derecha = mitad - 1;
-// calcular de nuevo la mitad
-            mitad = (izquierda + derecha) / 2;
-        } /* fin while */
-        if (v[mitad] == ele)
-// se ha encontrado el elemento
-            posicion = mitad;
-        else
-// no se ha encontrado
-            posicion = -1;
-        return posicion;
-    } /* fin b_binaria_asc */
-
-    public static int b_binaria_asc (String[] v, String ele) {
-        int izquierda=0, derecha=v.length-1, posicion, mitad;
-        mitad = (izquierda + derecha) / 2;
-        while (!v[mitad].equals(ele) && izquierda <= derecha) {
-            if (ele.compareTo (v[mitad]) > 0)
-                izquierda = mitad +1;
-            else
-                derecha = mitad -1;
             mitad = (izquierda + derecha) / 2;
         }
-        if ( v[mitad].equals(ele) )
+        if (v[mitad] == ele)
+            posicion = mitad;
+        else
+            posicion = -1;
+        return posicion;
+    }
+
+    public static int b_binaria_asc(String[] v, String ele) {
+        int izquierda = 0, derecha = v.length - 1, posicion, mitad;
+        mitad = (izquierda + derecha) / 2;
+        while (!v[mitad].equals(ele) && izquierda <= derecha) {
+            if (ele.compareTo(v[mitad]) > 0)
+                izquierda = mitad + 1;
+            else
+                derecha = mitad - 1;
+            mitad = (izquierda + derecha) / 2;
+        }
+        if (v[mitad].equals(ele))
             posicion = mitad;
         else
             posicion = -1;
@@ -239,145 +237,146 @@ y el rango de búsqueda sea correcto*/
     /**
      * Metodo burbuja
      */
-    public static void burbuja_asc (int v[])
-    {
-        int i, j; int temp;
+    public static void burbuja_asc(int v[]) {
+        int i, j;
+        int temp;
         int num_ele = v.length;
-        for (i=1; i < num_ele; i++)
-            for (j=0 ; j < num_ele - i; j++)
-                if (v[j] > v[j+1]) {
+        for (i = 1; i < num_ele; i++)
+            for (j = 0; j < num_ele - i; j++)
+                if (v[j] > v[j + 1]) {
                     temp = v[j];
-                    v[j] = v[j+1];
-                    v[j+1] = temp;
+                    v[j] = v[j + 1];
+                    v[j + 1] = temp;
                 }
     }
-    public static void muestra (int v[]) {
+
+    public static void muestra(int v[]) {
         System.out.println("\n El vector de enteros es:\n");
         for (int f = 0; f < v.length; f++)
             System.out.print(v[f] + " ");
     }
-    public static void aleatorio (int v[]) {
-        for (int f=0; f < v.length; f++)
-            v[f] = (int) Math.round (Math.random()*1000);
+
+    public static void aleatorio(int v[]) {
+        for (int f = 0; f < v.length; f++)
+            v[f] = (int) Math.round(Math.random() * 1000);
     }
 
-    public static void burbuja_asc (String[] v)
-    {
+    public static void burbuja_asc(String[] v) {
         int i, j;
         String temp;
         int num_ele = v.length;
-        for (i=1; i < num_ele; i++)
-            for (j=0 ; j < num_ele - i; j++)
+        for (i = 1; i < num_ele; i++)
+            for (j = 0; j < num_ele - i; j++)
                 if (v[j].compareTo(v[j + 1]) > 0) {
                     temp = v[j];
-                    v[j] = v[j+1];
-                    v[j+1] = temp;
+                    v[j] = v[j + 1];
+                    v[j + 1] = temp;
                 }
     }
 
     /**
      * Metodo Shell
      */
-    public static void shell_asc (int v[]) {
+    public static void shell_asc(int v[]) {
         int d, i, ele;
         boolean ordenado;
         int num_ele = v.length;
-        d = num_ele/2;
+        d = num_ele / 2;
         while (d >= 1) {
             ordenado = false;
             while (!ordenado) {
                 ordenado = true;
-                for (i=0; i < num_ele-d; i++)
-                    if (v[i] > v[i+d]) {
+                for (i = 0; i < num_ele - d; i++)
+                    if (v[i] > v[i + d]) {
                         ele = v[i];
-                        v[i] = v[i+d];
-                        v[i+d] = ele;
+                        v[i] = v[i + d];
+                        v[i + d] = ele;
                         ordenado = false;
                     }
             }
-            d = d/2;
+            d = d / 2;
         }
     }
 
-    public static void shell_asc (String[] v) {
+    public static void shell_asc(String[] v) {
         int d, i;
         String ele;
         boolean ordenado;
         int num_ele = v.length;
-        d = num_ele/2;
+        d = num_ele / 2;
         while (d >= 1) {
             ordenado = false;
             while (!ordenado) {
                 ordenado = true;
-                for (i=0; i < num_ele-d; i++)
-                    if (v[i].compareTo(v[i+d]) > 0) {
+                for (i = 0; i < num_ele - d; i++)
+                    if (v[i].compareTo(v[i + d]) > 0) {
                         ele = v[i];
-                        v[i] = v[i+d];
-                        v[i+d] = ele;
+                        v[i] = v[i + d];
+                        v[i + d] = ele;
                         ordenado = false;
                     }
             }
-            d = d/2;
+            d = d / 2;
         }
     }
 
     /**
      * Metodo Quicksort
      */
-    public static void quicksort_asc (int v[]) {
-        quicksort_asc(v, 0, v.length-1);
+    public static void quicksort_asc(int v[]) {
+        quicksort_asc(v, 0, v.length - 1);
     }
 
-    private static void quicksort_asc (int v[], int izq, int der) {
-        int pivote=v[izq];
-        int i=izq;
-        int j=der;
+    private static void quicksort_asc(int v[], int izq, int der) {
+        int pivote = v[izq];
+        int i = izq;
+        int j = der;
         int aux;
-        while(i<j){
-            while(v[i]<=pivote && i<j)
+        while (i < j) {
+            while (v[i] <= pivote && i < j)
                 i++;
-            while(v[j]>pivote)
+            while (v[j] > pivote)
                 j--;
-            if (i<j) {
-                aux= v[i];
-                v[i]=v[j];
-                v[j]=aux;
+            if (i < j) {
+                aux = v[i];
+                v[i] = v[j];
+                v[j] = aux;
             }
         }
-        v[izq]=v[j];
-        v[j]=pivote;
-        if(izq<j-1)
-            quicksort_asc(v,izq,j-1);
-        if(j+1 <der)
-            quicksort_asc(v,j+1,der);
+        v[izq] = v[j];
+        v[j] = pivote;
+        if (izq < j - 1)
+            quicksort_asc(v, izq, j - 1);
+        if (j + 1 < der)
+            quicksort_asc(v, j + 1, der);
     }
 
-    public static void quicksort_asc (String[] v) {
-        quicksort_asc(v, 0, v.length-1);
+    public static void quicksort_asc(String[] v) {
+        quicksort_asc(v, 0, v.length - 1);
     }
 
-    private static void quicksort_asc (String[] v, int izq, int der) {
-        String pivote=v[izq];
-        int i=izq;
-        int j=der;
+    private static void quicksort_asc(String[] v, int izq, int der) {
+        String pivote = v[izq];
+        int i = izq;
+        int j = der;
         String aux;
-        while(i<j){
-            while(v[i].compareTo(pivote) == 0 && i<j)
+        while (i < j) {
+            while (v[i].compareTo(pivote) == 0 && i < j)
                 i++;
-            while(v[j].compareTo(pivote) > 0)
+            while (v[j].compareTo(pivote) > 0)
                 j--;
-            if (i<j) {
-                aux= v[i];
-                v[i]=v[j];
-                v[j]=aux;
+            if (i < j) {
+                aux = v[i];
+                v[i] = v[j];
+                v[j] = aux;
             }
         }
-        v[izq]=v[j];
-        v[j]=pivote;
-        if(izq<j-1)
-            quicksort_asc(v,izq,j-1);
-        if(j+1 <der)
-            quicksort_asc(v,j+1,der);
+        v[izq] = v[j];
+        v[j] = pivote;
+        if (izq < j - 1)
+            quicksort_asc(v, izq, j - 1);
+        if (j + 1 < der)
+            quicksort_asc(v, j + 1, der);
     }
 
 }

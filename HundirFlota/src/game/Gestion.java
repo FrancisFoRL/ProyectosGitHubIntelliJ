@@ -21,7 +21,7 @@ public class Gestion {
     private static final int fila = 5;
     /**
      * EL atributo columna, privado, estatico y final, el cual lleva el numero de columnas que se usara en un array. Este sera estatico ya que sera
-     *      * igual para todos y nos no interesa que este sea cambiado.
+     * igual para todos y nos no interesa que este sea cambiado.
      */
     private static final int columna = 5;
     /**
@@ -65,7 +65,8 @@ public class Gestion {
     }
 
     /**
-     * Funcion que muestra la funcion que se ve por pantalla. Aqui se controla la forma en la que se va a ver, para que asi no se vea de una forma
+     * Funcion que muestra el array que se pasa por parametro y controla que se visualize correctamente
+     * Aqui se controla la forma en la que se va a ver, para que asi no se vea de una forma
      * desordena y que sea algo legible para el usuario.
      *
      * @param matriz El parametro matriz que se recibe es la matriz que se mostrara por pantalla.
@@ -158,15 +159,15 @@ public class Gestion {
                 System.out.println("Barco Hundido!");
                 barcos--;
 
-            }else if (filas < fila && columnas < columna && tabVista[filas][columnas + 1].equals("T") && tabGestion[filas][columnas + 1] == tabGestion[filas][columnas]) {
+            } else if (filas < fila && columnas < columna && tabVista[filas][columnas + 1].equals("T") && tabGestion[filas][columnas + 1] == tabGestion[filas][columnas]) {
                 System.out.println("Barco Hundido!");
                 barcos--;
 
-            } else if (filas+1 != fila) {
-                 if (filas < fila && columnas < columna && tabVista[filas + 1][columnas].equals("T") && tabGestion[filas + 1][columnas] == tabGestion[filas][columnas]) {
-                     System.out.println("Barco Hundido!");
-                     barcos--;
-                 }
+            } else if (filas + 1 != fila) {
+                if (filas < fila && columnas < columna && tabVista[filas + 1][columnas].equals("T") && tabGestion[filas + 1][columnas] == tabGestion[filas][columnas]) {
+                    System.out.println("Barco Hundido!");
+                    barcos--;
+                }
             }
         }
     }
