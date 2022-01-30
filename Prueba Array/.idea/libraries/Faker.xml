@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Faker">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../Faker/out/artifacts/Faker_jar/Faker.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
