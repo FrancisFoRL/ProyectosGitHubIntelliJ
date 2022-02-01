@@ -20,9 +20,9 @@ public class Principal {
         /*
          * Arrays de tipo String que sera copias del array principal.
          */
-        String[] copiaBurbuja = new String[100];
-        String[] copiaShell = new String[100];
-        String[] copiaQuicksort = new String[100];
+        String[] copiaBurbuja;
+        String[] copiaShell;
+        String[] copiaQuicksort;
         long inicio, fin, tiempo; //Atributos que nos valdra para el tiempo de ejecucion de un algoritmo.
         int posicion;//Atributo que guarda la posicion del nombre que se busca.
 
