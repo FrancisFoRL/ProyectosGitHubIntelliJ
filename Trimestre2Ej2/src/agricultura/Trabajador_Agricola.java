@@ -37,9 +37,7 @@ public class Trabajador_Agricola {
 	// sobreescribe el método toString que hereda de la clase Object
 	@Override
 	public String toString() {
-		return 	"nombre='" + nombre + '\'' +
-				", dni=" + dni +
-				", sueldo_base=" + sueldo_base;
+		return 	"Nombre: " + nombre + " || Dni: " + dni + " || Sueldo Base: " + sueldo_base;
 	}
 } // fin Trabajador_Agricola
 
