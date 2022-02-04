@@ -1,5 +1,8 @@
 package agricultura;
 
+/**
+ * Clase de prueba para usar la diferentes clase creadas anteriormente en el paquete.
+ */
 public class PruebaHerencia {
     public static void main(String[] args) {
         Trabajador_Agricola tAgricola = new Trabajador_Agricola("Perico Pérez", 12345678, 985.75);

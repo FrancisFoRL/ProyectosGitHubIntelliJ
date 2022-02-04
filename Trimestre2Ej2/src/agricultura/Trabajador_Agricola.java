@@ -5,40 +5,40 @@ package agricultura;
 // al que pertenece dentro del proyecto de Intellij IDEA, NetBeans o Eclipse.
 
 public class Trabajador_Agricola {
-	// atributos de instancia u objeto
-	private String nombre;
-	private int dni;
-	private double sueldo_base;
-	// atributo de clase
-	private static int num_trabajadores = 0;
-	
-	// métodos
+    // atributos de instancia u objeto
+    private String nombre;
+    private int dni;
+    private double sueldo_base;
+    // atributo de clase
+    private static int num_trabajadores = 0;
 
-	// constructor con atributos
-	public Trabajador_Agricola (String nom, int dni2, double sueldo) {
-		nombre = nom;
-		dni = dni2;
-		sueldo_base = sueldo;
-		// aumentar num_trabajadores
-		num_trabajadores ++;
-	}// fin constructor con atributos
+    // métodos
 
-	// obtener el número total de trabajadores creados
-	public static int getNum_trabajadores() {
-		return num_trabajadores;
-	}
+    // constructor con atributos
+    public Trabajador_Agricola(String nom, int dni2, double sueldo) {
+        nombre = nom;
+        dni = dni2;
+        sueldo_base = sueldo;
+        // aumentar num_trabajadores
+        num_trabajadores++;
+    }// fin constructor con atributos
 
-	// este método devuelve el sueldo del trabajador
-	// en este caso coincide el salario con el sueldo base
-	public double salario () {
-		return sueldo_base;	
-	}
+    // obtener el número total de trabajadores creados
+    public static int getNum_trabajadores() {
+        return num_trabajadores;
+    }
 
-	// sobreescribe el método toString que hereda de la clase Object
-	@Override
-	public String toString() {
-		return 	"Nombre: " + nombre + " || Dni: " + dni + " || Sueldo Base: " + sueldo_base;
-	}
+    // este método devuelve el sueldo del trabajador
+    // en este caso coincide el salario con el sueldo base
+    public double salario() {
+        return sueldo_base;
+    }
+
+    // sobreescribe el método toString que hereda de la clase Object
+    @Override
+    public String toString() {
+        return "Nombre: " + nombre + " || Dni: " + dni + " || Sueldo Base: " + sueldo_base;
+    }
 } // fin Trabajador_Agricola
 
 // no cambies nada de este código, no modiques nada, ni añadas ningún método o atributo
