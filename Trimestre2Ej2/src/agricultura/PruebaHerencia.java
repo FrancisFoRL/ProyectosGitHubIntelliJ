@@ -1,7 +1,7 @@
 package agricultura;
 
 /**
- * Clase de prueba para usar la diferentes clase creadas anteriormente en el paquete.
+ * Clase de prueba para usar las diferentes clases creadas anteriormente en el paquete.
  */
 public class PruebaHerencia {
     public static void main(String[] args) {
