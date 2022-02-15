@@ -5,7 +5,7 @@ public abstract class Figura {
     private String color;
     private int borde;
 
-    public Figura(String figura, String color, int borde){
+    public Figura(String figura, String color, int borde) {
         this.figura = figura;
         this.color = color;
         this.borde = borde;
@@ -35,7 +35,10 @@ public abstract class Figura {
         return figura;
     }
 
-    public int calcularArea() {
-        return borde;
+    public abstract double calcularArea();
+
+    @Override
+    public String toString() {
+        return "Area" + figura +": "+ calcularArea();
     }
 }

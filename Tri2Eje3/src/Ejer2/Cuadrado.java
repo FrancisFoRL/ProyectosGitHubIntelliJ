@@ -1,33 +1,33 @@
 package Ejer2;
 
 public class Cuadrado extends Figura2D{
-    private int lados;
-    public Cuadrado(String figura, String color, int borde, int lados) {
+    private double lado;
+
+    public Cuadrado(String figura, String color, int borde, double lado) {
         super(figura, color, borde);
-        this.lados = lados;
+        this.lado = lado;
     }
 
     public void setLados(int lados) {
-        this.lados = lados;
+        this.lado = lado;
     }
 
-    public int getLados() {
-        return lados;
-    }
-
-    @Override
-    public int calcularArea() {
-        return lados * lados;
+    public double getLados() {
+        return lado;
     }
 
     @Override
-    public double calcularPerimetro(double longuitud) {
-        return Math.pow(longuitud, lados);
+    public double calcularArea() {
+        return lado * lado;
     }
 
-    public double calcularDiagonal(double longuitud){
-        double diagonal= (Math.pow(longuitud,2)+Math.pow(longuitud,2));
-        return (Math.sqrt(diagonal));
+    @Override
+    public double calcularPerimetro() {
+        return Math.pow(lado, 4);
+    }
+
+    public double calcularDiagonal(){
+        return lado * (Math.sqrt(2));
     }
 
 }

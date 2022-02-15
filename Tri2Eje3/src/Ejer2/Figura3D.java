@@ -6,7 +6,5 @@ public abstract class Figura3D extends Figura {
         super(figura, color, borde);
     }
 
-    public double calcularVolumen(double volumen){
-        return volumen;
-    }
+    public abstract double calcularVolumen();
 }
