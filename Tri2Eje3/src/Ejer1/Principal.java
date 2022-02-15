@@ -1,4 +1,4 @@
-package tri2eje3;
+package Ejer1;
 
 public class Principal {
     public static void main(String[] args) {

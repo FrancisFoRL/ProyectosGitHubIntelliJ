@@ -1,4 +1,4 @@
-package tri2eje3;
+package Ejer1;
 
 import java.util.Random;
 

@@ -1,4 +1,4 @@
-package tri2eje3;
+package Ejer1;
 
 public abstract class Sorteo {
     protected int posibilidades;
