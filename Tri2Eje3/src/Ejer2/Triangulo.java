@@ -50,13 +50,12 @@ public class Triangulo extends Figura2D{
 
     @Override
     public double calcularPerimetro() {
-        String figura= getFigura().toUpperCase();
-        if(figura.equals("EQUILATERO")) {
-            return 3 * lado1;
-        }else if(figura.equals("ISOSCELES")){
+        if(lado1>lado2 || lado2>lado1 || base>lado1 || base > lado2) {
+            return lado1+lado2+base;
+        }else if(lado1 == lado2 && base < lado1 || base < lado2){
             return 2*lado1+base;
         }else{
-            return lado1+lado2+base;
+            return 3 * lado1;
         }
     }
 }
