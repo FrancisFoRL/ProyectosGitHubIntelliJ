@@ -2,7 +2,15 @@ package federacion;
 
 public class JugadorBaloncesto extends Jugador implements Estadisticas {
     private int anotacion;
-    private static int totalJugadores;
+    protected static int totalJugadores;
+
+    public int getAnotacion() {
+        return anotacion;
+    }
+
+    public void setAnotacion(int anotacion) {
+        this.anotacion = anotacion;
+    }
 
     @Override
     public void setNombre(String nombre) {
@@ -24,6 +32,7 @@ public class JugadorBaloncesto extends Jugador implements Estadisticas {
         super.setPuesto(puesto);
     }
 
+    //TODO Revisar fecha de nacimiento
     @Override
     public void setFechaNacimiento(Fecha fechaNacimiento) {
         super.setFechaNacimiento(fechaNacimiento);

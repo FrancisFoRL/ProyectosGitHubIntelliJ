@@ -2,7 +2,7 @@ package federacion;
 
 public class JugadorFutbol extends Jugador implements Estadisticas {
     private int golesMarcados, partidosEmpatados;
-    private static int totalJugadores;
+    protected static int totalJugadores;
 
     @Override
     public void setNombre(String nombre) {

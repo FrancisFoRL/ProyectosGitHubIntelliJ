@@ -1,7 +1,7 @@
 package federacion;
 
 public class Equipo implements Estadisticas {
-    int partidosJugados, partidosGanados, partidosPerdidos;
+    private int partidosJugados, partidosGanados, partidosPerdidos;
 
     public int getPartidosJugados() {
         return partidosJugados;

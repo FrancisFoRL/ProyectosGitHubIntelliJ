@@ -2,7 +2,7 @@ package federacion;
 
 public class JugadorBalonmano extends Jugador implements Estadisticas {
     private int golesMarcados, partidosEmpados;
-    private static int totalJugadores;
+    protected static int totalJugadores;
 
     @Override
     public double porcentajeVictorias() {
