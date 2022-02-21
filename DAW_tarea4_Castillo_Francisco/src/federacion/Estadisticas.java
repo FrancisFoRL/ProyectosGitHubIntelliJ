@@ -4,3 +4,4 @@ public interface Estadisticas {
     double porcentajeVictorias();
     double valoracion();
 }
+
