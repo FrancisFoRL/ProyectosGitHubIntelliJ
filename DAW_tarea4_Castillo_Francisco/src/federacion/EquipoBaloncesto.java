@@ -34,7 +34,7 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas{
             }while (!comprobarDorsal(dorsal));
             jugadorBaloncesto.setDorsal(dorsal);
             jugadorBaloncesto.setPuesto(PeticionDatos.pedirCadena("Puesto Jugador: "));
-            //jugadorBaloncesto.setFechaNacimiento(); //TODO Revisar fecha de nacimiento
+            //jugadorBaloncesto.setFechaNacimiento(); //TODO Revisar fecha de nacimiento, primero se comprueba que con Fecha se valido y despues que la edad este en el rango
             jugadorBaloncesto.setPartidosJugados(PeticionDatos.pedirEntero("Partidos jugados: "));
             jugadorBaloncesto.setMinutosJugados(PeticionDatos.pedirEntero("Minutos jugados: "));
             jugadorBaloncesto.setPartidosGanados(PeticionDatos.pedirEntero("Partidos ganados: "));

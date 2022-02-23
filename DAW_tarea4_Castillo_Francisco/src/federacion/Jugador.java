@@ -6,7 +6,7 @@ public abstract class Jugador {
     protected String nombre, apellido1, apellido2, puesto;
     protected Fecha fechaNacimiento;
     protected int dorsal, minutosJugados, partidosJugados, partidosGanados, partidosPerdidos;
-
+    private int year = Year.now().getValue();
     public Jugador() {
     }
 
@@ -45,7 +45,6 @@ public abstract class Jugador {
     }
 
     public void setFechaNacimiento(Fecha fechaNacimiento) {
-        int year = Year.now().getValue();
         if ((fechaNacimiento.getAnio() <= year - 8) && (fechaNacimiento.getAnio() >= year - 65)) {
             this.fechaNacimiento = fechaNacimiento;
         } else {
