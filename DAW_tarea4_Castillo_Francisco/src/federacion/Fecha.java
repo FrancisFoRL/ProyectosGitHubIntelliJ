@@ -50,6 +50,27 @@ public class Fecha {
         return true;
     }
 
+    public boolean setFechaCompletaRango(int rangoMayor, int rangoMenor, int dia, int mes, int anio){
+        if (comprobarAnio(anio) || anio <= rangoMayor || anio >= rangoMenor) {
+            this.anio = anio;
+        } else {
+            return false;
+        }
+
+        if (comprobarMes(mes)) {
+            this.mes = mes;
+        } else {
+            return false;
+        }
+
+        if (comprobarDia(dia, mes, anio)) {
+            this.dia = dia;
+        } else {
+            return false;
+        }
+        return true;
+    }
+
     public int getDia() {
         return dia;
     }
@@ -62,7 +83,7 @@ public class Fecha {
         return anio;
     }
 
-    private boolean comprobarAnio(int anio) {
+    private static boolean comprobarAnio(int anio) {
         if (anio < 1950 || anio > 2018) {
             return false;
         }
@@ -76,7 +97,7 @@ public class Fecha {
         return true;
     }
 
-    private boolean comprobarDia(int dia, int mes, int anio) {
+    public boolean comprobarDia(int dia, int mes, int anio) {
         if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) {
             if (dia < 1 || dia > 31) {
                 return false;
@@ -104,6 +125,11 @@ public class Fecha {
             return anio % 400 == 0;
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return dia + "/" + mes + "/" + anio;
     }
 
 

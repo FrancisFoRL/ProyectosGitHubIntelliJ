@@ -1,10 +1,36 @@
 package federacion;
 
 public class JugadorBalonmano extends Jugador implements Estadisticas {
-    protected int golesMarcados, partidosEmpados;
+    protected int golesMarcados, partidosEmpatados;
     protected static int totalJugadores;
 
+    public JugadorBalonmano() {
 
+        totalJugadores++;
+    }
+
+    public JugadorBalonmano(String nombre, String apellido1, String apellido2, String puesto, Fecha fechaNacimiento, int dorsal, int minutosJugados, int partidosJugados, int partidosGanados, int partidosPerdidos, int golesMarcados, int partidosEmpados) {
+        super(nombre, apellido1, apellido2, puesto, fechaNacimiento, dorsal, minutosJugados, partidosJugados, partidosGanados, partidosPerdidos);
+        this.golesMarcados = golesMarcados;
+        this.partidosEmpatados = partidosEmpados;
+        totalJugadores++;
+    }
+
+    public int getGolesMarcados() {
+        return golesMarcados;
+    }
+
+    public void setGolesMarcados(int golesMarcados) {
+        this.golesMarcados = golesMarcados;
+    }
+
+    public int getPartidosEmpatados() {
+        return partidosEmpatados;
+    }
+
+    public void setPartidosEmpatados(int partidosEmpados) {
+        this.partidosEmpatados = partidosEmpados;
+    }
 
     @Override
     public double porcentajeVictorias() {

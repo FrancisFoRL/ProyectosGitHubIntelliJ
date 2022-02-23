@@ -45,11 +45,13 @@ public abstract class Jugador {
     }
 
     public void setFechaNacimiento(Fecha fechaNacimiento) {
-        if ((fechaNacimiento.getAnio() <= year - 8) && (fechaNacimiento.getAnio() >= year - 65)) {
+        this.fechaNacimiento=fechaNacimiento;
+       /* if ((fechaNacimiento.getAnio() <= year - 8) && (fechaNacimiento.getAnio() >= year - 65)) {
             this.fechaNacimiento = fechaNacimiento;
         } else {
             this.fechaNacimiento.setFechaCompleta(1, 1, 1);
         }
+        */
     }
 
     public void setDorsal(int dorsal) {

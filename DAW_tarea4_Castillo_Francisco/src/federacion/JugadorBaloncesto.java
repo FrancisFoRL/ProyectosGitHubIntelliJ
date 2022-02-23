@@ -8,8 +8,9 @@ public class JugadorBaloncesto extends Jugador implements Estadisticas {
         totalJugadores++;
     }
 
-    public JugadorBaloncesto(String nombre, String apellido1, String apellido2, String puesto, Fecha fechaNacimiento, int dorsal, int minutosJugados, int partidosJugados, int partidosGanados, int partidosPerdidos) {
+    public JugadorBaloncesto(String nombre, String apellido1, String apellido2, String puesto, Fecha fechaNacimiento, int dorsal, int minutosJugados, int partidosJugados, int partidosGanados, int partidosPerdidos, int anotacion) {
         super(nombre, apellido1, apellido2, puesto, fechaNacimiento, dorsal, minutosJugados, partidosJugados, partidosGanados, partidosPerdidos);
+        this.anotacion = anotacion;
         totalJugadores++;
     }
 
@@ -122,10 +123,6 @@ public class JugadorBaloncesto extends Jugador implements Estadisticas {
         return super.getPartidosPerdidos();
     }
 
-    @Override
-    public String toString() {
-        return super.toString();
-    }
 
     @Override
     boolean validarPuesto(String puesto) {
@@ -156,5 +153,22 @@ public class JugadorBaloncesto extends Jugador implements Estadisticas {
 
     private void actualizarAnotacion(int newPuntos){
         anotacion+=newPuntos;
+    }
+
+    @Override
+    public String toString() {
+        return "JugadorBaloncesto{" +
+                "nombre='" + nombre + '\'' +
+                ", apellido1='" + apellido1 + '\'' +
+                ", apellido2='" + apellido2 + '\'' +
+                ", puesto='" + puesto + '\'' +
+                ", fechaNacimiento=" + fechaNacimiento +
+                ", dorsal=" + dorsal +
+                ", minutosJugados=" + minutosJugados +
+                ", partidosJugados=" + partidosJugados +
+                ", partidosGanados=" + partidosGanados +
+                ", partidosPerdidos=" + partidosPerdidos +
+                ", anotacion=" + anotacion +
+                '}';
     }
 }

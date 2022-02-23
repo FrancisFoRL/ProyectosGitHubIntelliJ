@@ -2,6 +2,25 @@ package federacion;
 
 public class Equipo implements Estadisticas {
     protected int partidosJugados, partidosGanados, partidosPerdidos;
+    protected String nombreEquipo;
+
+    public Equipo(){
+    }
+
+    public Equipo(int partidosJugados, int partidosGanados, int partidosPerdidos, String nombreEquipo) {
+        this.partidosJugados = partidosJugados;
+        this.partidosGanados = partidosGanados;
+        this.partidosPerdidos = partidosPerdidos;
+        this.nombreEquipo = nombreEquipo;
+    }
+
+    public String getNombreEquipo() {
+        return nombreEquipo;
+    }
+
+    public void setNombreEquipo(String nombreEquipo) {
+        this.nombreEquipo = nombreEquipo;
+    }
 
     public int getPartidosJugados() {
         return partidosJugados;

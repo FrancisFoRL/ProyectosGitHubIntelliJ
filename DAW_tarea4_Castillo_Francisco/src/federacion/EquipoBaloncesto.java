@@ -2,18 +2,22 @@ package federacion;
 
 import libreria.PeticionDatos;
 
+import java.time.Year;
 import java.util.Random;
 
 public class EquipoBaloncesto extends Equipo implements Estadisticas{
 
     //TODO comprobar array ESTATICO
-    private static JugadorBaloncesto[] jugadorBaloncesto = new JugadorBaloncesto[18];
+    private static JugadorBaloncesto[] jugadorBaloncesto;
     protected int anotacionTotal;
+    private int year = Year.now().getValue();
 
-    public EquipoBaloncesto(JugadorBaloncesto[] jugadorBaloncesto, int anotacionTotal) {
-        EquipoBaloncesto.jugadorBaloncesto = new JugadorBaloncesto[18];
+    public EquipoBaloncesto(String nombreEquipo) {
+        super(nombreEquipo);
+        jugadorBaloncesto = new JugadorBaloncesto[18];
         this.anotacionTotal = 0;
     }
+
 
     /**
      * Funcion de tipo JugadorBaloncesto que crear el objeto y lo rellena aleatoriamente o por teclado segun lo que se pase por el parametro.
@@ -49,24 +53,33 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas{
             do {
                 dorsal = num.nextInt(4,24);
             }while (!comprobarDorsal(dorsal));
+            jugadorBaloncesto.setFechaNacimiento(Faker.fechaAleatoria(year-65,year-8));
             jugadorBaloncesto.setPuesto(Faker.puestoBaloncesto());
             jugadorBaloncesto.setDorsal(dorsal);
             jugadorBaloncesto.setPartidosJugados(num.nextInt(0,40));
             jugadorBaloncesto.setMinutosJugados(num.nextInt(0,1600));
-            jugadorBaloncesto.setPartidosGanados(num.nextInt(0,partidosJugados));
-            jugadorBaloncesto.setPartidosPerdidos(partidosJugados-partidosGanados);
+            jugadorBaloncesto.setPartidosGanados(num.nextInt(0,5));
+            jugadorBaloncesto.setPartidosPerdidos(jugadorBaloncesto.partidosJugados-jugadorBaloncesto.partidosGanados);
             jugadorBaloncesto.setAnotacion(num.nextInt(0,250));
+            //TODO preguntar a David
+            System.out.println(partidosJugados+" + "+partidosGanados);
+            System.out.println(jugadorBaloncesto.partidosJugados+" + "+jugadorBaloncesto.getPartidosGanados());
         }
-
+        this.jugadorBaloncesto[0] = jugadorBaloncesto;
         return jugadorBaloncesto;
+    }
+    private static void asignaArray(JugadorBaloncesto jugador){
+        jugadorBaloncesto[0]=jugador;
     }
 
     //TODO JugadorBaloncesto con todos lo parametros necesarios para crear el objeto
     //TODO Necesario crear constructor con parametros
-    public JugadorBaloncesto crearJugador(String nombre, String apellido1, String apellido2, String puesto, Fecha fechaNacimiento, int dorsal, int minutosJugados, int partidosJugados, int partidosGanados, int partidosPerdidos){
-        JugadorBaloncesto jugadorBaloncesto = new JugadorBaloncesto(nombre, apellido1, apellido2,puesto, fechaNacimiento, dorsal, minutosJugados, partidosJugados,  partidosGanados, partidosPerdidos);
+    public JugadorBaloncesto crearJugador(String nombre, String apellido1, String apellido2, String puesto, Fecha fechaNacimiento, int dorsal, int minutosJugados, int partidosJugados, int partidosGanados, int partidosPerdidos, int anotaciones){
+        JugadorBaloncesto jugadorBaloncesto = new JugadorBaloncesto(nombre, apellido1, apellido2,puesto, fechaNacimiento, dorsal, minutosJugados, partidosJugados,  partidosGanados, partidosPerdidos, anotaciones);
         return jugadorBaloncesto;
     }
+
+
 
     private static boolean comprobarDorsal(int dorsal) {
         if(JugadorBaloncesto.totalJugadores == 1){
@@ -79,6 +92,11 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas{
             }
         }
         return true;
+    }
+
+    @Override
+    public void setNombreEquipo(String nombreEquipo) {
+        super.setNombreEquipo(nombreEquipo);
     }
 
     @Override
@@ -110,5 +128,13 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas{
 
     public void setAnotacionTotal(int anotacionTotal) {
         this.anotacionTotal = anotacionTotal;
+    }
+
+    @Override
+    public String toString() {
+        return "EquipoBaloncesto{" +
+                "anotacionTotal=" + anotacionTotal +
+                ", year=" + year +
+                '}'+jugadorBaloncesto[0];
     }
 }

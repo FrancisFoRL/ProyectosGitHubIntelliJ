@@ -21,6 +21,9 @@ public class Faker {
      */
 
     private static final String[] PUESTO_BALONCESTO = {"Pivot", "Alero", "Base"};
+    private static final String[] PUESTO_FUTBOL = {"Delantero", "Mediocentro", "Defensa"};
+    private static final String[] PUESTO_BALONMANO = {"Pivot", "Central", "Defensa"};
+    private static final String[] NOMBRE_EQUIPO = {"Troyanos","Real Boludos","Manes Club","Messidores","Mochos Fútbol Club","Penaldos","Atletas de Mentiras FC","Todo Terreno"};
     public static String nombres() {
         Random r1 = new Random();
         String nombre;
@@ -44,6 +47,40 @@ public class Faker {
         Random r1 = new Random();
         String puesto;
         int num = r1.nextInt(PUESTO_BALONCESTO.length);
-        return puesto = APELLIDOS[num];
+        return puesto = PUESTO_BALONCESTO[num];
+    }
+
+    public static String puestoFutbol() {
+        Random r1 = new Random();
+        String puesto;
+        int num = r1.nextInt(PUESTO_FUTBOL.length);
+        return puesto = PUESTO_FUTBOL[num];
+    }
+
+    public static String puestoBalonmano() {
+        Random r1 = new Random();
+        String puesto;
+        int num = r1.nextInt(PUESTO_BALONMANO.length);
+        return puesto = PUESTO_BALONMANO[num];
+    }
+
+    public static String nombreEquipo() {
+        Random r1 = new Random();
+        String nombre;
+        int num = r1.nextInt(NOMBRE_EQUIPO.length);
+        return nombre = NOMBRE_EQUIPO[num];
+    }
+
+    public static Fecha fechaAleatoria(int rango1, int rango2){
+        Random r = new Random();
+        Fecha fecha = new Fecha();
+        int dia;
+        int anio = r.nextInt(rango1,rango2);
+        int mes = r.nextInt(1,12);
+        do{
+            dia = r.nextInt(1,31);
+        }while(!fecha.comprobarDia(dia,mes,anio));
+        fecha.setFechaCompleta(dia,mes,anio);
+        return fecha;
     }
 }

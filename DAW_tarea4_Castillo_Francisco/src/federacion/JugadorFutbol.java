@@ -1,8 +1,34 @@
 package federacion;
 
 public class JugadorFutbol extends Jugador implements Estadisticas {
-    private int golesMarcados, partidosEmpatados;
+    protected int golesMarcados, partidosEmpatados;
     protected static int totalJugadores;
+
+    public JugadorFutbol(){
+        totalJugadores++;
+    }
+
+    public JugadorFutbol(String nombre, String apellido1, String apellido2, String puesto, Fecha fechaNacimiento, int dorsal, int minutosJugados, int partidosJugados, int partidosGanados, int partidosPerdidos, int golesMarcados, int partidosEmpatados) {
+        super(nombre, apellido1, apellido2, puesto, fechaNacimiento, dorsal, minutosJugados, partidosJugados, partidosGanados, partidosPerdidos);
+        this.golesMarcados = golesMarcados;
+        this.partidosEmpatados = partidosEmpatados;
+    }
+
+    public int getGolesMarcados() {
+        return golesMarcados;
+    }
+
+    public void setGolesMarcados(int golesMarcados) {
+        this.golesMarcados = golesMarcados;
+    }
+
+    public int getPartidosEmpatados() {
+        return partidosEmpatados;
+    }
+
+    public void setPartidosEmpatados(int partidosEmpatados) {
+        this.partidosEmpatados = partidosEmpatados;
+    }
 
     @Override
     public void setNombre(String nombre) {
