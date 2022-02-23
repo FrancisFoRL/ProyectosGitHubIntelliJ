@@ -1,8 +1,17 @@
 package federacion;
 
 public class JugadorBaloncesto extends Jugador implements Estadisticas {
-    private int anotacion;
+    protected int anotacion;
     protected static int totalJugadores;
+
+    public JugadorBaloncesto() {
+        totalJugadores++;
+    }
+
+    public JugadorBaloncesto(String nombre, String apellido1, String apellido2, String puesto, Fecha fechaNacimiento, int dorsal, int minutosJugados, int partidosJugados, int partidosGanados, int partidosPerdidos) {
+        super(nombre, apellido1, apellido2, puesto, fechaNacimiento, dorsal, minutosJugados, partidosJugados, partidosGanados, partidosPerdidos);
+        totalJugadores++;
+    }
 
     public int getAnotacion() {
         return anotacion;
@@ -137,12 +146,12 @@ public class JugadorBaloncesto extends Jugador implements Estadisticas {
 
     @Override
     public double porcentajeVictorias() {
-        return (getPartidosGanados() / getPartidosJugados())*100;
+        return (partidosGanados / partidosJugados)*100;
     }
 
     @Override
     public double valoracion() {
-        return (anotacion / getMinutosJugados())*100;
+        return (anotacion / minutosJugados)*100;
     }
 
     private void actualizarAnotacion(int newPuntos){

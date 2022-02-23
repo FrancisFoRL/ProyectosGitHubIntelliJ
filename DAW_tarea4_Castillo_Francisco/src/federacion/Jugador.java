@@ -1,9 +1,28 @@
 package federacion;
 
+import java.time.Year;
+
 public abstract class Jugador {
-    private String nombre, apellido1, apellido2, puesto;
-    private Fecha fechaNacimiento;
-    private int dorsal, minutosJugados, partidosJugados, partidosGanados, partidosPerdidos;
+    protected String nombre, apellido1, apellido2, puesto;
+    protected Fecha fechaNacimiento;
+    protected int dorsal, minutosJugados, partidosJugados, partidosGanados, partidosPerdidos;
+
+    public Jugador() {
+    }
+
+    public Jugador(String nombre, String apellido1, String apellido2, String puesto, Fecha fechaNacimiento, int dorsal, int minutosJugados, int partidosJugados, int partidosGanados, int partidosPerdidos) {
+        this.nombre = nombre;
+        this.apellido1 = apellido1;
+        this.apellido2 = apellido2;
+        this.puesto = puesto;
+        this.fechaNacimiento = fechaNacimiento;
+        this.dorsal = dorsal;
+        this.minutosJugados = minutosJugados;
+        this.partidosJugados = partidosJugados;
+        this.partidosGanados = partidosGanados;
+        this.partidosPerdidos = partidosPerdidos;
+    }
+
 
     abstract boolean validarPuesto(String puesto);
 
@@ -26,7 +45,12 @@ public abstract class Jugador {
     }
 
     public void setFechaNacimiento(Fecha fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
+        int year = Year.now().getValue();
+        if ((fechaNacimiento.getAnio() <= year - 8) && (fechaNacimiento.getAnio() >= year - 65)) {
+            this.fechaNacimiento = fechaNacimiento;
+        } else {
+            this.fechaNacimiento.setFechaCompleta(1, 1, 1);
+        }
     }
 
     public void setDorsal(int dorsal) {

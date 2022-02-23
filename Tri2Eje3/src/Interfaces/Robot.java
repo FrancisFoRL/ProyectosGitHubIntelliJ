@@ -26,10 +26,12 @@ public class Robot implements Movimiento{
         if(pasos >= 100){
         }else{
             if((pasos+cantidad) > 100){
+                pasos = 100;
+                return "El robot ha dado "+pasos+" pasos";
             }else{
                 pasos+=cantidad;
-                return "El robot ha dado "+pasos+" pasos";
             }
+            return "El robot ha dado "+pasos+" pasos";
         }
         return "Los pasos no se pueden aumentar";
     }
@@ -38,7 +40,9 @@ public class Robot implements Movimiento{
     public String frenar(int cantidad) {
         if(pasos <= 0){
         }else{
-            if((pasos+cantidad) < 0){
+            if((pasos-cantidad) < 0){
+                pasos = 100;
+                return "El robot ha dado "+pasos+" pasos";
             }else{
                 pasos-=cantidad;
                 return "El robot ha dado "+pasos+" pasos";

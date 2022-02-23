@@ -4,7 +4,7 @@ public class Fecha {
     private int dia, mes, anio;
 
     public Fecha(){
-        anio = 2000;
+        anio = 1;
         mes = 1;
         dia = 1;
     }
@@ -13,7 +13,7 @@ public class Fecha {
         if (comprobarAnio(anio)) {
             this.anio = anio;
         } else {
-            this.anio = 2000;
+            this.anio = 1;
         }
 
         if (comprobarMes(mes)) {
@@ -28,7 +28,7 @@ public class Fecha {
             this.dia = 1;
         }
     }
-
+//Todo Comprobar funcion fecha completa
     public boolean setFechaCompleta(int dia, int mes, int anio){
         if (comprobarAnio(anio)) {
             this.anio = anio;
@@ -85,7 +85,7 @@ public class Fecha {
             if (dia < 1 || dia > 30) {
                 return false;
             }
-        } else if (mes == 2 && anio % 4 == 0) {
+        } else if (mes == 2 && anioBisiesto(anio)) {
             if (dia < 1 || dia > 29) {
                 return false;
             }
@@ -95,6 +95,15 @@ public class Fecha {
             }
         }
         return true;
+    }
+
+    private boolean anioBisiesto(int anio){
+        if(anio % 4 == 0){
+            return anio % 100 != 0;
+        }else if(anio % 100 == 0){
+            return anio % 400 == 0;
+        }
+        return false;
     }
 
 

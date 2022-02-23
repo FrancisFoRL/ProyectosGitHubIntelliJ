@@ -111,12 +111,12 @@ public class JugadorFutbol extends Jugador implements Estadisticas {
 
     @Override
     public double porcentajeVictorias() {
-        return (getPartidosGanados() / getPartidosJugados()) * 100;
+        return (partidosGanados / partidosJugados) * 100;
     }
 
     @Override
     public double valoracion() {
-        return (golesMarcados / getMinutosJugados()) * 100;
+        return (golesMarcados / minutosJugados) * 100;
     }
 
     @Override

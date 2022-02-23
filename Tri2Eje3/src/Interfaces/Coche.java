@@ -32,6 +32,8 @@ public class Coche implements Movimiento{
         if(velocidad >= 220){
         }else{
             if((velocidad+cantidad) > 220){
+                velocidad = 220;
+                return "El coche va la velocidad de "+velocidad;
             }else{
                 velocidad+=cantidad;
                 return "El coche va la velocidad de "+velocidad;
@@ -45,6 +47,8 @@ public class Coche implements Movimiento{
         if(velocidad <= 0){
         }else{
             if((velocidad-cantidad) < 0){
+                velocidad = 0;
+                return "El coche va la velocidad de "+velocidad;
             }else{
                 velocidad-=cantidad;
                 return "El coche va la velocidad de "+velocidad;

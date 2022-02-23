@@ -1,17 +1,19 @@
 package federacion;
 
 public class JugadorBalonmano extends Jugador implements Estadisticas {
-    private int golesMarcados, partidosEmpados;
+    protected int golesMarcados, partidosEmpados;
     protected static int totalJugadores;
+
+
 
     @Override
     public double porcentajeVictorias() {
-        return (getPartidosGanados() / getPartidosJugados())*100;
+        return (partidosGanados / partidosJugados)*100;
     }
 
     @Override
     public double valoracion() {
-        return (golesMarcados / getMinutosJugados())*100;
+        return (golesMarcados / minutosJugados)*100;
     }
 
     @Override
