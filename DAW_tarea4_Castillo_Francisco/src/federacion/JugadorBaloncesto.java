@@ -8,9 +8,9 @@ public class JugadorBaloncesto extends Jugador implements Estadisticas {
         totalJugadores++;
     }
 
-    public JugadorBaloncesto(String nombre, String apellido1, String apellido2, String puesto, Fecha fechaNacimiento, int dorsal, int minutosJugados, int partidosJugados, int partidosGanados, int partidosPerdidos, int anotacion) {
-        super(nombre, apellido1, apellido2, puesto, fechaNacimiento, dorsal, minutosJugados, partidosJugados, partidosGanados, partidosPerdidos);
-        this.anotacion = anotacion;
+    public JugadorBaloncesto(String nombre, String apellido1, String apellido2, String puesto, Fecha fechaNacimiento, int dorsal) {
+        super(nombre, apellido1, apellido2, puesto, fechaNacimiento, dorsal);
+        this.anotacion = 0;
         totalJugadores++;
     }
 
@@ -164,11 +164,6 @@ public class JugadorBaloncesto extends Jugador implements Estadisticas {
                 ", puesto='" + puesto + '\'' +
                 ", fechaNacimiento=" + fechaNacimiento +
                 ", dorsal=" + dorsal +
-                ", minutosJugados=" + minutosJugados +
-                ", partidosJugados=" + partidosJugados +
-                ", partidosGanados=" + partidosGanados +
-                ", partidosPerdidos=" + partidosPerdidos +
-                ", anotacion=" + anotacion +
                 '}';
     }
 }

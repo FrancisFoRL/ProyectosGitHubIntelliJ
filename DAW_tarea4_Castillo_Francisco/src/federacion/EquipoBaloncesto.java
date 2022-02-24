@@ -28,6 +28,8 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas{
     public JugadorBaloncesto crearJugador(boolean aleatorio){
         Random num = new Random();
         int dorsal;
+        String puesto;
+        Fecha fecha = new Fecha();
         JugadorBaloncesto jugadorBaloncesto = new JugadorBaloncesto();
         if(!aleatorio){
             jugadorBaloncesto.setNombre(PeticionDatos.pedirCadena("Nombre del jugador: "));
@@ -37,14 +39,22 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas{
                 dorsal = PeticionDatos.pedirEnteroRango(1, 24, 3, "Dorsal del jugador: ");
             }while (!comprobarDorsal(dorsal));
             jugadorBaloncesto.setDorsal(dorsal);
-            jugadorBaloncesto.setPuesto(PeticionDatos.pedirCadena("Puesto Jugador: "));
+            do {
+                puesto = PeticionDatos.pedirCadena("Puesto Jugador: ");
+            }while (!jugadorBaloncesto.validarPuesto(puesto));
+            jugadorBaloncesto.setPuesto(puesto);
+
             //TODO generar fecha aleatoria en Faker
-            //jugadorBaloncesto.setFechaNacimiento(); //TODO Revisar fecha de nacimiento, primero se comprueba que con Fecha se valido y despues que la edad este en el rango
+            do{
+            }while (!fecha.setFechaCompleta(PeticionDatos.pedirEntero("Dia: "), PeticionDatos.pedirEntero("Mes: "), PeticionDatos.pedirEntero("Año: ")));
+            jugadorBaloncesto.setFechaNacimiento(fecha); //TODO Revisar fecha de nacimiento, primero se comprueba que con Fecha se valido y despues que la edad este en el rango
+            /*
             jugadorBaloncesto.setPartidosJugados(PeticionDatos.pedirEntero("Partidos jugados: "));
             jugadorBaloncesto.setMinutosJugados(PeticionDatos.pedirEntero("Minutos jugados: "));
             jugadorBaloncesto.setPartidosGanados(PeticionDatos.pedirEntero("Partidos ganados: "));
             jugadorBaloncesto.setPartidosPerdidos(PeticionDatos.pedirEntero("Partidos perdidos: "));
             jugadorBaloncesto.setAnotacion(PeticionDatos.pedirEntero("Puntos anotados: "));
+             */
         }else{
             //TODO Cambiar a aleatorio
             jugadorBaloncesto.setNombre(Faker.nombres());
@@ -56,14 +66,17 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas{
             jugadorBaloncesto.setFechaNacimiento(Faker.fechaAleatoria(year-65,year-8));
             jugadorBaloncesto.setPuesto(Faker.puestoBaloncesto());
             jugadorBaloncesto.setDorsal(dorsal);
+            /*
             jugadorBaloncesto.setPartidosJugados(num.nextInt(0,40));
             jugadorBaloncesto.setMinutosJugados(num.nextInt(0,1600));
-            jugadorBaloncesto.setPartidosGanados(num.nextInt(0,5));
+            jugadorBaloncesto.setPartidosGanados(num.nextInt(0,jugadorBaloncesto.partidosJugados));
             jugadorBaloncesto.setPartidosPerdidos(jugadorBaloncesto.partidosJugados-jugadorBaloncesto.partidosGanados);
-            jugadorBaloncesto.setAnotacion(num.nextInt(0,250));
-            //TODO preguntar a David
+            jugadorBaloncesto.setAnotacion(num.nextInt(0,jugadorBaloncesto.partidosJugados*20));
+
+            */
             System.out.println(partidosJugados+" + "+partidosGanados);
             System.out.println(jugadorBaloncesto.partidosJugados+" + "+jugadorBaloncesto.getPartidosGanados());
+
         }
         this.jugadorBaloncesto[0] = jugadorBaloncesto;
         return jugadorBaloncesto;
@@ -74,9 +87,8 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas{
 
     //TODO JugadorBaloncesto con todos lo parametros necesarios para crear el objeto
     //TODO Necesario crear constructor con parametros
-    public JugadorBaloncesto crearJugador(String nombre, String apellido1, String apellido2, String puesto, Fecha fechaNacimiento, int dorsal, int minutosJugados, int partidosJugados, int partidosGanados, int partidosPerdidos, int anotaciones){
-        JugadorBaloncesto jugadorBaloncesto = new JugadorBaloncesto(nombre, apellido1, apellido2,puesto, fechaNacimiento, dorsal, minutosJugados, partidosJugados,  partidosGanados, partidosPerdidos, anotaciones);
-        return jugadorBaloncesto;
+    public JugadorBaloncesto crearJugador(String nombre, String apellido1, String apellido2, String puesto, Fecha fechaNacimiento, int dorsal){
+        return new JugadorBaloncesto(nombre, apellido1, apellido2,puesto, fechaNacimiento, dorsal);
     }
 
 
@@ -108,16 +120,14 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas{
     //TODO Comprobar valoracion
     @Override
     public double valoracion() {
-
-
+        for(int i=0; i < jugadorBaloncesto.length; i++){
+            anotacionTotal+= jugadorBaloncesto[i].anotacion;
+        }
         //TODO añadir punto extra por cada 20 puntos
-        /*
         if (getAnotacionTotal() > 20){
-            int cociente = getAnotacionTotal() / 20;
+            int cociente = anotacionTotal / 20;
             anotacionTotal+=cociente;
         }
-        */
-
         return anotacionTotal;
     }
 
@@ -130,10 +140,11 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas{
         this.anotacionTotal = anotacionTotal;
     }
 
+    //Todo revisar toString
     @Override
     public String toString() {
         return "EquipoBaloncesto{" +
-                "anotacionTotal=" + anotacionTotal +
+                "anotacionTotal=" + nombreEquipo +
                 ", year=" + year +
                 '}'+jugadorBaloncesto[0];
     }

@@ -7,12 +7,13 @@ public class Equipo implements Estadisticas {
     public Equipo(){
     }
 
-    public Equipo(int partidosJugados, int partidosGanados, int partidosPerdidos, String nombreEquipo) {
-        this.partidosJugados = partidosJugados;
-        this.partidosGanados = partidosGanados;
-        this.partidosPerdidos = partidosPerdidos;
+    public Equipo(String nombreEquipo) {
         this.nombreEquipo = nombreEquipo;
+        partidosJugados = 0;
+        partidosGanados = 0;
+        partidosPerdidos = 0;
     }
+
 
     public String getNombreEquipo() {
         return nombreEquipo;

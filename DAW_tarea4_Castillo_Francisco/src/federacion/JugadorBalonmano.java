@@ -5,14 +5,13 @@ public class JugadorBalonmano extends Jugador implements Estadisticas {
     protected static int totalJugadores;
 
     public JugadorBalonmano() {
-
         totalJugadores++;
     }
 
-    public JugadorBalonmano(String nombre, String apellido1, String apellido2, String puesto, Fecha fechaNacimiento, int dorsal, int minutosJugados, int partidosJugados, int partidosGanados, int partidosPerdidos, int golesMarcados, int partidosEmpados) {
-        super(nombre, apellido1, apellido2, puesto, fechaNacimiento, dorsal, minutosJugados, partidosJugados, partidosGanados, partidosPerdidos);
-        this.golesMarcados = golesMarcados;
-        this.partidosEmpatados = partidosEmpados;
+    public JugadorBalonmano(String nombre, String apellido1, String apellido2, String puesto, Fecha fechaNacimiento, int dorsal) {
+        super(nombre, apellido1, apellido2, puesto, fechaNacimiento, dorsal);
+        this.golesMarcados = 0;
+        this.partidosEmpatados = 0;
         totalJugadores++;
     }
 

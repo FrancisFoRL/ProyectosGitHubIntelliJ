@@ -25,7 +25,9 @@ public class EquipoBalonmano extends Equipo implements Estadisticas{
      */
     public JugadorBalonmano crearJugador(boolean aleatorio){
         Random num = new Random();
+        Fecha fecha = new Fecha();
         int dorsal;
+        String puesto;
         JugadorBalonmano jugadorBalonmano = new JugadorBalonmano();
         if(!aleatorio){
             jugadorBalonmano.setNombre(PeticionDatos.pedirCadena("Nombre del jugador: "));
@@ -36,14 +38,21 @@ public class EquipoBalonmano extends Equipo implements Estadisticas{
             }while (!comprobarDorsal(dorsal));
             jugadorBalonmano.setDorsal(dorsal);
             jugadorBalonmano.setPuesto(PeticionDatos.pedirCadena("Puesto Jugador: "));
-            //TODO generar fecha aleatoria en Faker
-            //jugadorBaloncesto.setFechaNacimiento(); //TODO Revisar fecha de nacimiento, primero se comprueba que con Fecha se valido y despues que la edad este en el rango
+            do {
+                puesto = PeticionDatos.pedirCadena("Puesto Jugador: ");
+            }while (!jugadorBalonmano.validarPuesto(puesto));
+            jugadorBalonmano.setPuesto(puesto);
+            do{
+            }while (!fecha.setFechaCompleta(PeticionDatos.pedirEntero("Dia: "), PeticionDatos.pedirEntero("Mes: "), PeticionDatos.pedirEntero("Año: ")));
+            jugadorBalonmano.setFechaNacimiento(fecha);
+            /*
             jugadorBalonmano.setPartidosJugados(PeticionDatos.pedirEnteroRango(0,36,3,"Partidos jugados: "));
             jugadorBalonmano.setMinutosJugados(PeticionDatos.pedirEnteroRango(0,60*partidosJugados,3,"Minutos jugados: "));
             jugadorBalonmano.setPartidosGanados(PeticionDatos.pedirEnteroRango(0,partidosJugados,3,"Partidos ganados: "));
             jugadorBalonmano.setPartidosEmpatados(PeticionDatos.pedirEnteroRango(0,partidosJugados-partidosGanados,3, "Partidos empatados: "));
             jugadorBalonmano.setPartidosPerdidos(PeticionDatos.pedirEnteroRango(0,partidosJugados-partidosGanados-jugadorBalonmano.partidosEmpatados,3,"Partidos perdidos: "));
             jugadorBalonmano.setGolesMarcados(PeticionDatos.pedirEnteroRango(0,partidosJugados*6,3,"Goles anotados: "));
+             */
         }else{
             //TODO Cambiar a aleatorio
             jugadorBalonmano.setNombre(Faker.nombres());
@@ -55,12 +64,14 @@ public class EquipoBalonmano extends Equipo implements Estadisticas{
             jugadorBalonmano.setFechaNacimiento(Faker.fechaAleatoria(year-8,year-65));
             jugadorBalonmano.setPuesto(Faker.puestoBalonmano());
             jugadorBalonmano.setDorsal(dorsal);
+            /*
             jugadorBalonmano.setPartidosJugados(num.nextInt(0,36));
             jugadorBalonmano.setMinutosJugados(num.nextInt(0, partidosJugados*60));
             jugadorBalonmano.setPartidosGanados(num.nextInt(0,partidosJugados));
             jugadorBalonmano.setPartidosPerdidos(partidosJugados-partidosGanados);
             jugadorBalonmano.setPartidosEmpatados(partidosJugados-partidosGanados- partidosPerdidos);
             jugadorBalonmano.setGolesMarcados(num.nextInt(0,partidosJugados*6));
+             */
         }
 
         return jugadorBalonmano;
@@ -68,8 +79,8 @@ public class EquipoBalonmano extends Equipo implements Estadisticas{
 
     //TODO JugadorBaloncesto con todos lo parametros necesarios para crear el objeto
     //TODO Necesario crear constructor con parametros
-    public JugadorFutbol crearJugador(String nombre, String apellido1, String apellido2, String puesto, Fecha fechaNacimiento, int dorsal, int minutosJugados, int partidosJugados, int partidosGanados, int partidosPerdidos, int golesMarcados, int partidosEmpatados){
-        return new JugadorFutbol(nombre, apellido1, apellido2,puesto, fechaNacimiento, dorsal, minutosJugados, partidosJugados,  partidosGanados, partidosPerdidos, golesMarcados, partidosEmpatados);
+    public JugadorFutbol crearJugador(String nombre, String apellido1, String apellido2, String puesto, Fecha fechaNacimiento, int dorsal){
+        return new JugadorFutbol(nombre, apellido1, apellido2,puesto, fechaNacimiento, dorsal);
     }
 
     private static boolean comprobarDorsal(int dorsal) {

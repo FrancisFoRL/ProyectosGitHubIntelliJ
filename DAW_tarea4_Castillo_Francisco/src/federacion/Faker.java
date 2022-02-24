@@ -74,8 +74,12 @@ public class Faker {
     public static Fecha fechaAleatoria(int rango1, int rango2){
         Random r = new Random();
         Fecha fecha = new Fecha();
-        int dia;
-        int anio = r.nextInt(rango1,rango2);
+        int dia, anio = 0;
+        if (rango1<rango2){
+            anio = r.nextInt(rango1,rango2);
+        }else if(rango1>rango2){
+            anio = r.nextInt(rango2,rango1);
+        }
         int mes = r.nextInt(1,12);
         do{
             dia = r.nextInt(1,31);

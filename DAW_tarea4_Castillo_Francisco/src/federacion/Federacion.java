@@ -23,12 +23,12 @@ public class Federacion {
         equipos[0] = equipob;
         equipos[1] = equipob1;
         equipos[2] = equipob2;
-        equipos[4] = equipof;
-        equipos[5] = equipof1;
-        equipos[6] = equipof2;
-        equipos[8] = equipoba;
-        equipos[9] = equipoba1;
-        equipos[10] = equipoba2;
+        equipos[3] = equipof;
+        equipos[4] = equipof1;
+        equipos[5] = equipof2;
+        equipos[6] = equipoba;
+        equipos[7] = equipoba1;
+        equipos[8] = equipoba2;
 
         System.out.println("\n1. Añadir nuevo equipo");
         System.out.println("2. Añadir nuevo jugador");
@@ -44,7 +44,7 @@ public class Federacion {
             case 1:
                 break;
             case 2:
-                equipob.crearJugador(true);
+                equipob.crearJugador(false);
                 System.out.println(equipob);
                 break;
             case 3:

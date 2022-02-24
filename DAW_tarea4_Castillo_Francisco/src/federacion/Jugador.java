@@ -10,17 +10,17 @@ public abstract class Jugador {
     public Jugador() {
     }
 
-    public Jugador(String nombre, String apellido1, String apellido2, String puesto, Fecha fechaNacimiento, int dorsal, int minutosJugados, int partidosJugados, int partidosGanados, int partidosPerdidos) {
+    public Jugador(String nombre, String apellido1, String apellido2, String puesto, Fecha fechaNacimiento, int dorsal) {
         this.nombre = nombre;
         this.apellido1 = apellido1;
         this.apellido2 = apellido2;
         this.puesto = puesto;
         this.fechaNacimiento = fechaNacimiento;
         this.dorsal = dorsal;
-        this.minutosJugados = minutosJugados;
-        this.partidosJugados = partidosJugados;
-        this.partidosGanados = partidosGanados;
-        this.partidosPerdidos = partidosPerdidos;
+        this.minutosJugados = 0;
+        this.partidosJugados = 0;
+        this.partidosGanados = 0;
+        this.partidosPerdidos = 0;
     }
 
 

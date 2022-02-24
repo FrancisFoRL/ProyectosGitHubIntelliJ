@@ -8,10 +8,10 @@ public class JugadorFutbol extends Jugador implements Estadisticas {
         totalJugadores++;
     }
 
-    public JugadorFutbol(String nombre, String apellido1, String apellido2, String puesto, Fecha fechaNacimiento, int dorsal, int minutosJugados, int partidosJugados, int partidosGanados, int partidosPerdidos, int golesMarcados, int partidosEmpatados) {
-        super(nombre, apellido1, apellido2, puesto, fechaNacimiento, dorsal, minutosJugados, partidosJugados, partidosGanados, partidosPerdidos);
-        this.golesMarcados = golesMarcados;
-        this.partidosEmpatados = partidosEmpatados;
+    public JugadorFutbol(String nombre, String apellido1, String apellido2, String puesto, Fecha fechaNacimiento, int dorsal) {
+        super(nombre, apellido1, apellido2, puesto, fechaNacimiento, dorsal);
+        this.golesMarcados = 0;
+        this.partidosEmpatados = 0;
     }
 
     public int getGolesMarcados() {
