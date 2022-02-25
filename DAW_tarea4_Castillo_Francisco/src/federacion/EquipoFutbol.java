@@ -7,90 +7,110 @@ import java.util.Random;
 
 public class EquipoFutbol extends Equipo implements Estadisticas{
     //TODO comprobar array ESTATICO
-    protected static JugadorFutbol[] jugadorFutbol;
-    protected int anotacionTotal;
+    private JugadorFutbol[] jugadorFutbol;
+    protected int golesTotal;
     private int year = Year.now().getValue();
     protected static int totalEquipos;
 
     public EquipoFutbol(String nombreEquipo) {
         super(nombreEquipo);
         jugadorFutbol = new JugadorFutbol[24];
-        this.anotacionTotal = 0;
+        this.golesTotal = 0;
         totalEquipos++;
     }
+
 
     /**
      * Funcion de tipo JugadorBaloncesto que crear el objeto y lo rellena aleatoriamente o por teclado segun lo que se pase por el parametro.
      * Despues de rellenar toda la informacion del objeto, este se devolvera.
+     *
      * @param aleatorio Si el valor es true se creara un JugadorBaloncesto aleatorio usando la clase Faker sino se creara a partir de teclado
      * @return Objeto de tipo JugadorBaloncesto con todos los datos necesarios
      */
-    public JugadorFutbol crearJugador(boolean aleatorio){
+    public JugadorFutbol crearJugador(boolean aleatorio) {
         Random num = new Random();
         int dorsal;
         String puesto;
         Fecha fecha = new Fecha();
         JugadorFutbol jugadorFutbol = new JugadorFutbol();
-        if(!aleatorio){
+        if (!aleatorio) {
             jugadorFutbol.setNombre(PeticionDatos.pedirCadena("Nombre del jugador: "));
             jugadorFutbol.setApellido1(PeticionDatos.pedirCadena("1ª apellido del jugador: "));
             jugadorFutbol.setApellido2(PeticionDatos.pedirCadena("2º apellido del jugador: "));
             do {
                 dorsal = PeticionDatos.pedirEnteroRango(1, 24, 3, "Dorsal del jugador: ");
-            }while (!comprobarDorsal(dorsal));
+            } while (!comprobarDorsal(dorsal, getJugadorFutbol()));
             jugadorFutbol.setDorsal(dorsal);
             do {
                 puesto = PeticionDatos.pedirCadena("Puesto Jugador: ");
-            }while (!jugadorFutbol.validarPuesto(puesto));
-            do{
-            }while (!fecha.setFechaCompleta(PeticionDatos.pedirEntero("Dia: "), PeticionDatos.pedirEntero("Mes: "), PeticionDatos.pedirEntero("Año: ")));
-            jugadorFutbol.setFechaNacimiento(fecha);
+            } while (!jugadorFutbol.validarPuesto(puesto));
+            jugadorFutbol.setPuesto(puesto);
+
             //TODO generar fecha aleatoria en Faker
-            //jugadorBaloncesto.setFechaNacimiento(); //TODO Revisar fecha de nacimiento, primero se comprueba que con Fecha se valido y despues que la edad este en el rango
+            do {
+            } while (!fecha.setFechaCompleta(PeticionDatos.pedirEntero("Dia: "), PeticionDatos.pedirEntero("Mes: "), PeticionDatos.pedirEntero("Año: ")));
+            jugadorFutbol.setFechaNacimiento(fecha); //TODO Revisar fecha de nacimiento, primero se comprueba que con Fecha se valido y despues que la edad este en el rango
             /*
-            jugadorFutbol.setPartidosJugados(PeticionDatos.pedirEnteroRango(0,36,3,"Partidos jugados: "));
-            jugadorFutbol.setMinutosJugados(PeticionDatos.pedirEnteroRango(0,60*partidosJugados,3,"Minutos jugados: "));
-            jugadorFutbol.setPartidosGanados(PeticionDatos.pedirEnteroRango(0,partidosJugados,3,"Partidos ganados: "));
-            jugadorFutbol.setPartidosEmpatados(PeticionDatos.pedirEnteroRango(0,partidosJugados-partidosGanados,3, "Partidos empatados: "));
-            jugadorFutbol.setPartidosPerdidos(PeticionDatos.pedirEnteroRango(0,partidosJugados-partidosGanados-jugadorFutbol.partidosEmpatados,3,"Partidos perdidos: "));
-            jugadorFutbol.setGolesMarcados(PeticionDatos.pedirEnteroRango(0,partidosJugados*4,3,"Goles anotados: "));
+            jugadorBaloncesto.setPartidosJugados(PeticionDatos.pedirEntero("Partidos jugados: "));
+            jugadorBaloncesto.setMinutosJugados(PeticionDatos.pedirEntero("Minutos jugados: "));
+            jugadorBaloncesto.setPartidosGanados(PeticionDatos.pedirEntero("Partidos ganados: "));
+            jugadorBaloncesto.setPartidosPerdidos(PeticionDatos.pedirEntero("Partidos perdidos: "));
+            jugadorBaloncesto.setAnotacion(PeticionDatos.pedirEntero("Puntos anotados: "));
              */
-        }else{
+        } else {
             //TODO Cambiar a aleatorio
             jugadorFutbol.setNombre(Faker.nombres());
             jugadorFutbol.setApellido1(Faker.apellidos());
             jugadorFutbol.setApellido2(Faker.apellidos());
             do {
-                dorsal = num.nextInt(4,24);
-            }while (!comprobarDorsal(dorsal));
-            jugadorFutbol.setFechaNacimiento(Faker.fechaAleatoria(year-8,year-65));
-            jugadorFutbol.setPuesto(Faker.puestoFutbol());
+                dorsal = num.nextInt(4, 24);
+            } while (!comprobarDorsal(dorsal, getJugadorFutbol()));
+            jugadorFutbol.setFechaNacimiento(Faker.fechaAleatoria(year - 65, year - 8));
+            jugadorFutbol.setPuesto(Faker.puestoBaloncesto());
             jugadorFutbol.setDorsal(dorsal);
             /*
-            jugadorFutbol.setPartidosJugados(num.nextInt(0,36));
-            jugadorFutbol.setMinutosJugados(num.nextInt(0, partidosJugados*60));
-            jugadorFutbol.setPartidosGanados(num.nextInt(0,partidosJugados));
-            jugadorFutbol.setPartidosPerdidos(partidosJugados-partidosGanados);
-            jugadorFutbol.setPartidosEmpatados(partidosJugados-partidosGanados- partidosPerdidos);
-            jugadorFutbol.setGolesMarcados(num.nextInt(0,partidosJugados*4));
-             */
-        }
+            jugadorBaloncesto.setPartidosJugados(num.nextInt(0,40));
+            jugadorBaloncesto.setMinutosJugados(num.nextInt(0,1600));
+            jugadorBaloncesto.setPartidosGanados(num.nextInt(0,jugadorBaloncesto.partidosJugados));
+            jugadorBaloncesto.setPartidosPerdidos(jugadorBaloncesto.partidosJugados-jugadorBaloncesto.partidosGanados);
+            jugadorBaloncesto.setAnotacion(num.nextInt(0,jugadorBaloncesto.partidosJugados*20));
 
+            */
+
+        }
+        System.out.println(JugadorBaloncesto.totalJugadores);
         return jugadorFutbol;
+    }
+
+    public void setJugadorFutbol(JugadorFutbol[] jugadorFutbol) {
+        this.jugadorFutbol = jugadorFutbol;
+    }
+
+    public JugadorFutbol[] getJugadorFutbol() {
+        return jugadorFutbol;
+    }
+
+    private static void nuevoJugadorArray(JugadorFutbol jugador, JugadorFutbol[] jugador1) {
+        int cont = 0;
+        while (jugador1[cont] != null) {
+            cont++;
+        }
+        jugador1[cont] = jugador;
     }
 
     //TODO JugadorBaloncesto con todos lo parametros necesarios para crear el objeto
     //TODO Necesario crear constructor con parametros
-    public JugadorFutbol crearJugador(String nombre, String apellido1, String apellido2, String puesto, Fecha fechaNacimiento, int dorsal){
-        return new JugadorFutbol(nombre, apellido1, apellido2,puesto, fechaNacimiento, dorsal);
+    public JugadorFutbol crearJugador(String nombre, String apellido1, String apellido2, String puesto, Fecha fechaNacimiento, int dorsal) {
+        return new JugadorFutbol(nombre, apellido1, apellido2, puesto, fechaNacimiento, dorsal);
     }
 
-    private static boolean comprobarDorsal(int dorsal) {
-        if(JugadorFutbol.totalJugadores == 1){
+
+    private static boolean comprobarDorsal(int dorsal, JugadorFutbol[] jugador) {
+        if (JugadorFutbol.totalJugadores == 1) {
             return true;
-        }else {
+        } else {
             for (int array = 0; array < JugadorFutbol.totalJugadores - 1; array++) {
-                if (jugadorFutbol[array].getDorsal() == dorsal) {
+                if (jugador[array].getDorsal() == dorsal) {
                     return false;
                 }
             }
@@ -105,33 +125,46 @@ public class EquipoFutbol extends Equipo implements Estadisticas{
 
     @Override
     public double porcentajeVictorias() {
-        return (partidosGanados / partidosJugados)*100;
+        return (partidosGanados / partidosJugados) * 100;
     }
 
 
     //TODO Comprobar valoracion
     @Override
     public double valoracion() {
-
-
-        //TODO añadir punto extra por cada 20 puntos
-        /*
-        if (getAnotacionTotal() > 20){
-            int cociente = getAnotacionTotal() / 20;
-            anotacionTotal+=cociente;
+        for (int i = 0; i < jugadorFutbol.length; i++) {
+            golesTotal += jugadorFutbol[i].golesMarcados;
         }
-        */
-
-        return anotacionTotal;
+        //TODO añadir punto extra por cada 20 puntos
+        if (getGolesTotal() > 20) {
+            int cociente = golesTotal / 20;
+            golesTotal += cociente;
+        }
+        return golesTotal;
     }
 
 
-    public int getAnotacionTotal() {
-        return anotacionTotal;
+    public int getGolesTotal() {
+        return golesTotal;
     }
 
-    public void setAnotacionTotal(int anotacionTotal) {
-        this.anotacionTotal = anotacionTotal;
+    public void setGolesTotal(int golesTotal) {
+        this.golesTotal = golesTotal;
+    }
+
+    public void mostrarJugadores() {
+        for (int i = 1; i < JugadorBaloncesto.totalJugadores; i++) {
+            System.out.println(jugadorFutbol[i - 1]);
+        }
+    }
+
+    //Todo revisar toString
+    @Override
+    public String toString() {
+        System.out.println("------Equipo " + nombreEquipo + "------");
+        mostrarJugadores();
+        System.out.println();
+        return "";
     }
 
 }

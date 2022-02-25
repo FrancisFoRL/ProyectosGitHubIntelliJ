@@ -23,7 +23,7 @@ public class Faker {
     private static final String[] PUESTO_BALONCESTO = {"Pivot", "Alero", "Base"};
     private static final String[] PUESTO_FUTBOL = {"Delantero", "Mediocentro", "Defensa"};
     private static final String[] PUESTO_BALONMANO = {"Pivot", "Central", "Defensa"};
-    private static final String[] NOMBRE_EQUIPO = {"Troyanos","Real Boludos","Manes Club","Messidores","Mochos Fútbol Club","Penaldos","Atletas de Mentiras FC","Todo Terreno"};
+    private static final String[] NOMBRE_EQUIPO = {"Troyanos","Real Boludos","Gandules Club","Messidores","Mochos Fútbol Club","Penaldos","Atletas de Mentiras FC","Todo Terreno"};
     public static String nombres() {
         Random r1 = new Random();
         String nombre;

@@ -9,13 +9,16 @@ import java.io.ObjectOutputStream;
 
 public class Federacion{
 
-    public static void main(String[] args) throws IOException {
-        boolean comprobar;
+    public static void main(String[] args) {
         int opcion;
         int nuevoEquipo = 9;
         Equipo[] equipos = new Equipo[12];
         EquipoBaloncesto equipob = new EquipoBaloncesto(Faker.nombreEquipo());
+        equipos[0] = equipob;
+        añadirJugadorBalocesto(equipob);
         EquipoBaloncesto equipob1 = new EquipoBaloncesto(Faker.nombreEquipo());
+        equipos[1] = equipob1;
+        añadirJugadorBalocesto(equipob1);
         EquipoBaloncesto equipob2 = new EquipoBaloncesto(Faker.nombreEquipo());
         EquipoFutbol equipof = new EquipoFutbol(Faker.nombreEquipo());
         EquipoFutbol equipof1 = new EquipoFutbol(Faker.nombreEquipo());
@@ -24,11 +27,9 @@ public class Federacion{
         EquipoBalonmano equipoba1 = new EquipoBalonmano(Faker.nombreEquipo());
         EquipoBalonmano equipoba2 = new EquipoBalonmano(Faker.nombreEquipo());
 
-        equipos[0] = equipob;
-        añadirJugadorBalocesto(equipob);
+
+
         /*
-        equipos[1] = equipob1;
-        añadirJugadorBalocesto(equipob1);
         equipos[2] = equipob2;
         añadirJugadorBalocesto(equipob2);
         equipos[3] = equipof;
@@ -44,8 +45,10 @@ public class Federacion{
         equipos[8] = equipoba2;
         añadirJugadorBalonmano(equipoba2);
          */
-
+        //Todo comprobar porque se incian todas la posiciones y las pone a null
         System.out.println(equipob);
+        System.out.println(equipob1);
+
 
         do{
 
@@ -98,6 +101,8 @@ public class Federacion{
 
                 break;
             case 3:
+
+                mostrarEquipos(equipos);
                 shell_ascInt(equipob.getJugadorBaloncesto());
                 System.out.println(equipob);
                 break;
@@ -147,8 +152,8 @@ public class Federacion{
     }
 
     private static void añadirJugadorBalocesto(EquipoBaloncesto jugadores){
-        for(int i=0; i <= 5;i++){
-            jugadores.crearJugador(true);
+        for(int i=1; i <= 5;i++){
+            jugadores.nuevoJugadorArray(jugadores.crearJugador(true));
         }
     }
 
@@ -164,29 +169,15 @@ public class Federacion{
         }
     }
 
-    /*
-    public static void shell_asc(Jugador[] v) {
-        int d, i;
-        String ele;
-        boolean ordenado;
-        int num_ele = v.length;
-        d = num_ele / 2;
-        while (d >= 1) {
-            ordenado = false;
-            while (!ordenado) {
-                ordenado = true;
-                for (i = 0; i < num_ele - d; i++)
-                    if (v[i].getApellido1().compareTo(v[i + d].getApellido1()) > 0) {
-                        ele = v[i].getApellido1();
-                        v[i]= v[i + d].getApellido1();
-                        v[i + d].getApellido1() = ele;
-                        ordenado = false;
-                    }
-            }
-            d = d / 2;
+    private static void mostrarEquipos(Equipo[] equipos){
+        int cont=0;
+        System.out.println("---------Equipos actuales---------");
+        while(equipos[cont]!=null){
+            System.out.println((cont+1)+".-"+equipos[cont]);
+            cont++;
         }
     }
-     */
+
 
     public static void shell_ascInt(Jugador v[]) {
         int d, i, ele;

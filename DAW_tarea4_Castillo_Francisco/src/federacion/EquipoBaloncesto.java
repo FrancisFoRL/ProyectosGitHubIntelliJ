@@ -5,10 +5,10 @@ import libreria.PeticionDatos;
 import java.time.Year;
 import java.util.Random;
 
-public class EquipoBaloncesto extends Equipo implements Estadisticas{
+public class EquipoBaloncesto extends Equipo implements Estadisticas {
 
     //TODO comprobar array ESTATICO
-    protected JugadorBaloncesto[] jugadorBaloncesto;
+    private JugadorBaloncesto[] jugadorBaloncesto;
     protected int anotacionTotal;
     private int year = Year.now().getValue();
     protected static int totalEquipos;
@@ -24,31 +24,33 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas{
     /**
      * Funcion de tipo JugadorBaloncesto que crear el objeto y lo rellena aleatoriamente o por teclado segun lo que se pase por el parametro.
      * Despues de rellenar toda la informacion del objeto, este se devolvera.
+     *
      * @param aleatorio Si el valor es true se creara un JugadorBaloncesto aleatorio usando la clase Faker sino se creara a partir de teclado
      * @return Objeto de tipo JugadorBaloncesto con todos los datos necesarios
      */
-    public JugadorBaloncesto crearJugador(boolean aleatorio){
+    public JugadorBaloncesto crearJugador(boolean aleatorio) {
         Random num = new Random();
         int dorsal;
         String puesto;
         Fecha fecha = new Fecha();
         JugadorBaloncesto jugadorBaloncesto = new JugadorBaloncesto();
-        if(!aleatorio){
+
+        if (!aleatorio) {
             jugadorBaloncesto.setNombre(PeticionDatos.pedirCadena("Nombre del jugador: "));
             jugadorBaloncesto.setApellido1(PeticionDatos.pedirCadena("1ª apellido del jugador: "));
             jugadorBaloncesto.setApellido2(PeticionDatos.pedirCadena("2º apellido del jugador: "));
             do {
                 dorsal = PeticionDatos.pedirEnteroRango(1, 24, 3, "Dorsal del jugador: ");
-            }while (!comprobarDorsal(dorsal,getJugadorBaloncesto()));
+            } while (!comprobarDorsal(dorsal, getJugadorBaloncesto()));
             jugadorBaloncesto.setDorsal(dorsal);
             do {
                 puesto = PeticionDatos.pedirCadena("Puesto Jugador: ");
-            }while (!jugadorBaloncesto.validarPuesto(puesto));
+            } while (!jugadorBaloncesto.validarPuesto(puesto));
             jugadorBaloncesto.setPuesto(puesto);
 
             //TODO generar fecha aleatoria en Faker
-            do{
-            }while (!fecha.setFechaCompleta(PeticionDatos.pedirEntero("Dia: "), PeticionDatos.pedirEntero("Mes: "), PeticionDatos.pedirEntero("Año: ")));
+            do {
+            } while (!fecha.setFechaCompleta(PeticionDatos.pedirEntero("Dia: "), PeticionDatos.pedirEntero("Mes: "), PeticionDatos.pedirEntero("Año: ")));
             jugadorBaloncesto.setFechaNacimiento(fecha); //TODO Revisar fecha de nacimiento, primero se comprueba que con Fecha se valido y despues que la edad este en el rango
             /*
             jugadorBaloncesto.setPartidosJugados(PeticionDatos.pedirEntero("Partidos jugados: "));
@@ -57,15 +59,14 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas{
             jugadorBaloncesto.setPartidosPerdidos(PeticionDatos.pedirEntero("Partidos perdidos: "));
             jugadorBaloncesto.setAnotacion(PeticionDatos.pedirEntero("Puntos anotados: "));
              */
-        }else{
-            //TODO Cambiar a aleatorio
+        } else {
             jugadorBaloncesto.setNombre(Faker.nombres());
             jugadorBaloncesto.setApellido1(Faker.apellidos());
             jugadorBaloncesto.setApellido2(Faker.apellidos());
             do {
-                dorsal = num.nextInt(4,24);
-            }while (!comprobarDorsal(dorsal,getJugadorBaloncesto()));
-            jugadorBaloncesto.setFechaNacimiento(Faker.fechaAleatoria(year-65,year-8));
+                dorsal = num.nextInt(4, 24);
+            } while (!comprobarDorsal(dorsal, getJugadorBaloncesto()));
+            jugadorBaloncesto.setFechaNacimiento(Faker.fechaAleatoria(year - 65, year - 8));
             jugadorBaloncesto.setPuesto(Faker.puestoBaloncesto());
             jugadorBaloncesto.setDorsal(dorsal);
             /*
@@ -74,12 +75,8 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas{
             jugadorBaloncesto.setPartidosGanados(num.nextInt(0,jugadorBaloncesto.partidosJugados));
             jugadorBaloncesto.setPartidosPerdidos(jugadorBaloncesto.partidosJugados-jugadorBaloncesto.partidosGanados);
             jugadorBaloncesto.setAnotacion(num.nextInt(0,jugadorBaloncesto.partidosJugados*20));
-
             */
-
         }
-        System.out.println(JugadorBaloncesto.totalJugadores);
-        this.jugadorBaloncesto[JugadorBaloncesto.totalJugadores -1] = jugadorBaloncesto;
         return jugadorBaloncesto;
     }
 
@@ -91,24 +88,30 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas{
         return jugadorBaloncesto;
     }
 
-    private static void asignaArray(JugadorBaloncesto[] jugador){
-
+    public void nuevoJugadorArray(JugadorBaloncesto jugador) {
+        int cont = 0;
+        while (getJugadorBaloncesto()[cont] != null) {
+            cont++;
+        }
+        getJugadorBaloncesto()[cont] = jugador;
     }
 
     //TODO JugadorBaloncesto con todos lo parametros necesarios para crear el objeto
     //TODO Necesario crear constructor con parametros
-    public JugadorBaloncesto crearJugador(String nombre, String apellido1, String apellido2, String puesto, Fecha fechaNacimiento, int dorsal){
-        return new JugadorBaloncesto(nombre, apellido1, apellido2,puesto, fechaNacimiento, dorsal);
+    public JugadorBaloncesto crearJugador(String nombre, String apellido1, String apellido2, String puesto, Fecha fechaNacimiento, int dorsal) {
+        return new JugadorBaloncesto(nombre, apellido1, apellido2, puesto, fechaNacimiento, dorsal);
     }
 
 
     private static boolean comprobarDorsal(int dorsal, JugadorBaloncesto[] jugador) {
-        if(JugadorBaloncesto.totalJugadores == 1){
+        System.out.println(JugadorBaloncesto.totalJugadores);
+        if (jugador[1] == null) {
             return true;
-        }else {
+        } else {
             for (int array = 0; array < JugadorBaloncesto.totalJugadores - 1; array++) {
-                if (jugador[array].getDorsal() == dorsal) {
-                    return false;
+                if (jugador[array+1] == null) {
+                }else if(jugador[array].getDorsal() == dorsal){
+                   return true;
                 }
             }
         }
@@ -122,20 +125,20 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas{
 
     @Override
     public double porcentajeVictorias() {
-        return (partidosGanados / partidosJugados)*100;
+        return (partidosGanados / partidosJugados) * 100;
     }
 
 
     //TODO Comprobar valoracion
     @Override
     public double valoracion() {
-        for(int i=0; i < jugadorBaloncesto.length; i++){
-            anotacionTotal+= jugadorBaloncesto[i].anotacion;
+        for (int i = 0; i < jugadorBaloncesto.length; i++) {
+            anotacionTotal += jugadorBaloncesto[i].anotacion;
         }
         //TODO añadir punto extra por cada 20 puntos
-        if (getAnotacionTotal() > 20){
+        if (getAnotacionTotal() > 20) {
             int cociente = anotacionTotal / 20;
-            anotacionTotal+=cociente;
+            anotacionTotal += cociente;
         }
         return anotacionTotal;
     }
@@ -149,19 +152,17 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas{
         this.anotacionTotal = anotacionTotal;
     }
 
-    public void mostrarJugadores(){
-        for(int i=1; i<JugadorBaloncesto.totalJugadores;i++){
-            System.out.println(JugadorBaloncesto.totalJugadores);
-            System.out.println(jugadorBaloncesto[i-1]);
+    public void mostrarJugadores() {
+        for (int i = 1; i < JugadorBaloncesto.totalJugadores; i++) {
+            System.out.println(jugadorBaloncesto[i - 1]);
         }
     }
 
     //Todo revisar toString
     @Override
     public String toString() {
-        System.out.println("------Equipo "+nombreEquipo+"------");
+        System.out.println("------Equipo " + nombreEquipo + "------");
         mostrarJugadores();
-        System.out.println();
         return "";
     }
 }
