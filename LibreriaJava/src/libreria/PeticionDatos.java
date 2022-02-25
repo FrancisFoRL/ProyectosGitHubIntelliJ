@@ -1234,7 +1234,7 @@ public class PeticionDatos {
             cadena = sc.nextLine();
             for (int i = 0; i < cadena.length(); i++) {
                 char caracter = cadena.toUpperCase().charAt(i);
-                if ((int) caracter != 165 && ((int) caracter < 65 || (int) caracter > 90)) {
+                if ((int) caracter != 165 &&  ((int) caracter < 65 || (int) caracter > 90) && (int) caracter!=32) {
                     comprobar = false;
                 }
             }

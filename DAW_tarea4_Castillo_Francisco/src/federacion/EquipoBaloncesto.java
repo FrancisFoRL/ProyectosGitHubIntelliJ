@@ -8,14 +8,16 @@ import java.util.Random;
 public class EquipoBaloncesto extends Equipo implements Estadisticas{
 
     //TODO comprobar array ESTATICO
-    private static JugadorBaloncesto[] jugadorBaloncesto;
+    protected JugadorBaloncesto[] jugadorBaloncesto;
     protected int anotacionTotal;
     private int year = Year.now().getValue();
+    protected static int totalEquipos;
 
     public EquipoBaloncesto(String nombreEquipo) {
         super(nombreEquipo);
         jugadorBaloncesto = new JugadorBaloncesto[18];
         this.anotacionTotal = 0;
+        totalEquipos++;
     }
 
 
@@ -37,7 +39,7 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas{
             jugadorBaloncesto.setApellido2(PeticionDatos.pedirCadena("2º apellido del jugador: "));
             do {
                 dorsal = PeticionDatos.pedirEnteroRango(1, 24, 3, "Dorsal del jugador: ");
-            }while (!comprobarDorsal(dorsal));
+            }while (!comprobarDorsal(dorsal,getJugadorBaloncesto()));
             jugadorBaloncesto.setDorsal(dorsal);
             do {
                 puesto = PeticionDatos.pedirCadena("Puesto Jugador: ");
@@ -62,7 +64,7 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas{
             jugadorBaloncesto.setApellido2(Faker.apellidos());
             do {
                 dorsal = num.nextInt(4,24);
-            }while (!comprobarDorsal(dorsal));
+            }while (!comprobarDorsal(dorsal,getJugadorBaloncesto()));
             jugadorBaloncesto.setFechaNacimiento(Faker.fechaAleatoria(year-65,year-8));
             jugadorBaloncesto.setPuesto(Faker.puestoBaloncesto());
             jugadorBaloncesto.setDorsal(dorsal);
@@ -74,15 +76,23 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas{
             jugadorBaloncesto.setAnotacion(num.nextInt(0,jugadorBaloncesto.partidosJugados*20));
 
             */
-            System.out.println(partidosJugados+" + "+partidosGanados);
-            System.out.println(jugadorBaloncesto.partidosJugados+" + "+jugadorBaloncesto.getPartidosGanados());
 
         }
-        this.jugadorBaloncesto[0] = jugadorBaloncesto;
+        System.out.println(JugadorBaloncesto.totalJugadores);
+        this.jugadorBaloncesto[JugadorBaloncesto.totalJugadores -1] = jugadorBaloncesto;
         return jugadorBaloncesto;
     }
-    private static void asignaArray(JugadorBaloncesto jugador){
-        jugadorBaloncesto[0]=jugador;
+
+    public void setJugadorBaloncesto(JugadorBaloncesto[] jugadorBaloncesto) {
+        this.jugadorBaloncesto = jugadorBaloncesto;
+    }
+
+    public JugadorBaloncesto[] getJugadorBaloncesto() {
+        return jugadorBaloncesto;
+    }
+
+    private static void asignaArray(JugadorBaloncesto[] jugador){
+
     }
 
     //TODO JugadorBaloncesto con todos lo parametros necesarios para crear el objeto
@@ -92,13 +102,12 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas{
     }
 
 
-
-    private static boolean comprobarDorsal(int dorsal) {
+    private static boolean comprobarDorsal(int dorsal, JugadorBaloncesto[] jugador) {
         if(JugadorBaloncesto.totalJugadores == 1){
             return true;
         }else {
             for (int array = 0; array < JugadorBaloncesto.totalJugadores - 1; array++) {
-                if (jugadorBaloncesto[array].getDorsal() == dorsal) {
+                if (jugador[array].getDorsal() == dorsal) {
                     return false;
                 }
             }
@@ -140,12 +149,19 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas{
         this.anotacionTotal = anotacionTotal;
     }
 
+    public void mostrarJugadores(){
+        for(int i=1; i<JugadorBaloncesto.totalJugadores;i++){
+            System.out.println(JugadorBaloncesto.totalJugadores);
+            System.out.println(jugadorBaloncesto[i-1]);
+        }
+    }
+
     //Todo revisar toString
     @Override
     public String toString() {
-        return "EquipoBaloncesto{" +
-                "anotacionTotal=" + nombreEquipo +
-                ", year=" + year +
-                '}'+jugadorBaloncesto[0];
+        System.out.println("------Equipo "+nombreEquipo+"------");
+        mostrarJugadores();
+        System.out.println();
+        return "";
     }
 }

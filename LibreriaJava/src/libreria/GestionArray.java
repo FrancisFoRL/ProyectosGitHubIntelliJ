@@ -404,33 +404,4 @@ public class GestionArray {
             quicksort_asc(v, j + 1, der);
     }
 
-    /*
-    public static void quicksort_asc(Objects[] v) {
-        quicksort_asc(v, 0, v.length - 1);
-    }
-
-    private static void quicksort_asc(Objects[] v, int izq, int der) {
-        Objects pivote = v[izq];
-        int i = izq;
-        int j = der;
-        String aux;
-        while (i < j) {
-            while (v[i].compareTo(pivote) == 0 && i < j)
-                i++;
-            while (v[j].compareTo(pivote) > 0)
-                j--;
-            if (i < j) {
-                aux = v[i];
-                v[i] = v[j];
-                v[j] = aux;
-            }
-        }
-        v[izq] = v[j];
-        v[j] = pivote;
-        if (izq < j - 1)
-            quicksort_asc(v, izq, j - 1);
-        if (j + 1 < der)
-            quicksort_asc(v, j + 1, der);
-    }
-*/
 }

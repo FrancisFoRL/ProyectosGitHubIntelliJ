@@ -10,11 +10,13 @@ public class EquipoBalonmano extends Equipo implements Estadisticas{
     private static JugadorBalonmano[] jugadorBalonmano;
     protected int anotacionTotal;
     private int year = Year.now().getValue();
+    protected static int totalEquipos;
 
     public EquipoBalonmano(String nombreEquipo) {
         super(nombreEquipo);
         jugadorBalonmano = new JugadorBalonmano[14];
         this.anotacionTotal = 0;
+        totalEquipos++;
     }
 
     /**

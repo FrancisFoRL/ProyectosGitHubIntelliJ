@@ -116,6 +116,8 @@ public abstract class Jugador {
 
     @Override
     public String toString() {
-        return "Jugador " + nombre + " " + apellido1 + " " + apellido2 + " (Dorsal " + dorsal + ")";
+        return "- " + nombre + " " + apellido1 + " " + apellido2 +
+                " ( Puesto: " + puesto + " || Fecha de Nacimiento: " + fechaNacimiento +
+                " || Dorsal: " + dorsal + " )";
     }
 }

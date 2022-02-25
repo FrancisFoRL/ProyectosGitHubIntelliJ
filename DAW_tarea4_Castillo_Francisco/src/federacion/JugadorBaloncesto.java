@@ -143,27 +143,20 @@ public class JugadorBaloncesto extends Jugador implements Estadisticas {
 
     @Override
     public double porcentajeVictorias() {
-        return (partidosGanados / partidosJugados)*100;
+        return (partidosGanados / partidosJugados) * 100;
     }
 
     @Override
     public double valoracion() {
-        return (anotacion / minutosJugados)*100;
+        return (anotacion / minutosJugados) * 100;
     }
 
-    private void actualizarAnotacion(int newPuntos){
-        anotacion+=newPuntos;
+    private void actualizarAnotacion(int newPuntos) {
+        anotacion += newPuntos;
     }
 
     @Override
     public String toString() {
-        return "JugadorBaloncesto{" +
-                "nombre='" + nombre + '\'' +
-                ", apellido1='" + apellido1 + '\'' +
-                ", apellido2='" + apellido2 + '\'' +
-                ", puesto='" + puesto + '\'' +
-                ", fechaNacimiento=" + fechaNacimiento +
-                ", dorsal=" + dorsal +
-                '}';
+        return super.toString();
     }
 }
