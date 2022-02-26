@@ -13,9 +13,9 @@ public class Federacion{
         int opcion;
         int nuevoEquipo = 9;
         Equipo[] equipos = new Equipo[12];
-        EquipoBaloncesto equipob = new EquipoBaloncesto(Faker.nombreEquipo());
-        equipos[0] = equipob;
-        añadirJugadorBalocesto(equipob);
+        //EquipoBaloncesto equipob = new EquipoBaloncesto(Faker.nombreEquipo());
+        equipos[0] = new EquipoBaloncesto(Faker.nombreEquipo());
+        añadirJugadorBalocesto((EquipoBaloncesto) equipos[0]);
         EquipoBaloncesto equipob1 = new EquipoBaloncesto(Faker.nombreEquipo());
         equipos[1] = equipob1;
         añadirJugadorBalocesto(equipob1);
@@ -27,8 +27,7 @@ public class Federacion{
         EquipoBalonmano equipoba1 = new EquipoBalonmano(Faker.nombreEquipo());
         EquipoBalonmano equipoba2 = new EquipoBalonmano(Faker.nombreEquipo());
 
-
-
+        //Todo posible cambio a equipo[x] = new EquipoBaloncesto(Faker.nombreEquipo());
         /*
         equipos[2] = equipob2;
         añadirJugadorBalocesto(equipob2);
@@ -46,7 +45,7 @@ public class Federacion{
         añadirJugadorBalonmano(equipoba2);
          */
         //Todo comprobar porque se incian todas la posiciones y las pone a null
-        System.out.println(equipob);
+        System.out.println(equipos[0]);
         System.out.println(equipob1);
 
 
@@ -74,17 +73,14 @@ public class Federacion{
                         //TODO Arreglar espacios en peticion de datos
                         EquipoBaloncesto equipob3 = new EquipoBaloncesto(PeticionDatos.pedirCadena("\nNombre del equipo: "));
                         equipos[nuevoEquipo] = equipob3;
-                        nuevoEquipo++;
                         break;
                     case 2:
                         EquipoFutbol equipof3 = new EquipoFutbol(PeticionDatos.pedirCadena("\nNombre del equipo: "));
                         equipos[nuevoEquipo] = equipof3;
-                        nuevoEquipo++;
                         break;
                     case 3:
                         EquipoBalonmano equipoba3 = new EquipoBalonmano(PeticionDatos.pedirCadena("\nNombre del equipo: "));
                         equipos[nuevoEquipo] = equipoba3;
-                        nuevoEquipo++;
                         break;
                 }
                 break;
@@ -102,9 +98,8 @@ public class Federacion{
                 break;
             case 3:
 
-                mostrarEquipos(equipos);
-                shell_ascInt(equipob.getJugadorBaloncesto());
-                System.out.println(equipob);
+                shell_ascInt(((EquipoBaloncesto) equipos[0]).getJugadorBaloncesto());
+                System.out.println(equipos[0]);
                 break;
             case 4:
                 System.out.println("\n¿De que tipo de equipos se pasaran a fichero?");

@@ -64,7 +64,7 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas {
             jugadorBaloncesto.setApellido1(Faker.apellidos());
             jugadorBaloncesto.setApellido2(Faker.apellidos());
             do {
-                dorsal = num.nextInt(4, 24);
+                dorsal = num.nextInt(1, 24);
             } while (!comprobarDorsal(dorsal, getJugadorBaloncesto()));
             jugadorBaloncesto.setFechaNacimiento(Faker.fechaAleatoria(year - 65, year - 8));
             jugadorBaloncesto.setPuesto(Faker.puestoBaloncesto());
@@ -104,19 +104,20 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas {
 
 
     private static boolean comprobarDorsal(int dorsal, JugadorBaloncesto[] jugador) {
-        System.out.println(JugadorBaloncesto.totalJugadores);
-        if (jugador[1] == null) {
-            return true;
-        } else {
-            for (int array = 0; array < JugadorBaloncesto.totalJugadores - 1; array++) {
-                if (jugador[array+1] == null) {
-                }else if(jugador[array].getDorsal() == dorsal){
-                   return true;
-                }
+        int cont=0;
+        while(jugador[cont]!=null)
+        {
+            cont++;
+        }
+        for (int x = 0; x < cont ; x++) {
+            if (jugador[x].getDorsal() == dorsal) {
+                return false;
             }
         }
         return true;
     }
+
+
 
     @Override
     public void setNombreEquipo(String nombreEquipo) {
@@ -152,9 +153,11 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas {
         this.anotacionTotal = anotacionTotal;
     }
 
-    public void mostrarJugadores() {
-        for (int i = 1; i < JugadorBaloncesto.totalJugadores; i++) {
-            System.out.println(jugadorBaloncesto[i - 1]);
+    public void mostrarJugadores(JugadorBaloncesto[] jugadorBaloncesto) {
+        int cont = 0;
+        while (jugadorBaloncesto[cont] != null) {
+            System.out.println(this.jugadorBaloncesto[cont]);
+            cont++;
         }
     }
 
@@ -162,7 +165,7 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas {
     @Override
     public String toString() {
         System.out.println("------Equipo " + nombreEquipo + "------");
-        mostrarJugadores();
+        mostrarJugadores(getJugadorBaloncesto());
         return "";
     }
 }
