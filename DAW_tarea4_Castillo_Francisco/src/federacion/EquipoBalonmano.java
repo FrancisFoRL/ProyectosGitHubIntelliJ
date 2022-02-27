@@ -78,7 +78,6 @@ public class EquipoBalonmano extends Equipo implements Estadisticas {
             */
 
         }
-        System.out.println(JugadorBaloncesto.totalJugadores);
         return jugadorBalonmano;
     }
 
@@ -90,12 +89,12 @@ public class EquipoBalonmano extends Equipo implements Estadisticas {
         return jugadorBalonmano;
     }
 
-    private static void nuevoJugadorArray(JugadorBalonmano jugador, JugadorBalonmano[] jugador1) {
+    protected void nuevoJugadorArray(JugadorBalonmano jugador) {
         int cont = 0;
-        while (jugador1[cont] != null) {
+        while (getJugadorBalonmano()[cont] != null) {
             cont++;
         }
-        jugador1[cont] = jugador;
+        getJugadorBalonmano()[cont] = jugador;
     }
 
     //TODO JugadorBaloncesto con todos lo parametros necesarios para crear el objeto
@@ -106,13 +105,14 @@ public class EquipoBalonmano extends Equipo implements Estadisticas {
 
 
     private static boolean comprobarDorsal(int dorsal, JugadorBalonmano[] jugador) {
-        if (JugadorBalonmano.totalJugadores == 1) {
-            return true;
-        } else {
-            for (int array = 0; array < JugadorBalonmano.totalJugadores - 1; array++) {
-                if (jugador[array].getDorsal() == dorsal) {
-                    return false;
-                }
+        int cont=0;
+        while(jugador[cont]!=null)
+        {
+            cont++;
+        }
+        for (int x = 0; x < cont ; x++) {
+            if (jugador[x].getDorsal() == dorsal) {
+                return false;
             }
         }
         return true;
@@ -153,8 +153,12 @@ public class EquipoBalonmano extends Equipo implements Estadisticas {
     }
 
     public void mostrarJugadores() {
-        for (int i = 1; i < JugadorBaloncesto.totalJugadores; i++) {
-            System.out.println(jugadorBalonmano[i - 1]);
+        for (int x = 0; x < jugadorBalonmano.length; x++) {
+            if (jugadorBalonmano[x] != null) {
+                System.out.println(jugadorBalonmano[x]);
+            } else {
+                break;
+            }
         }
     }
 

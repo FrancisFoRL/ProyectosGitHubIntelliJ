@@ -88,7 +88,7 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas {
         return jugadorBaloncesto;
     }
 
-    public void nuevoJugadorArray(JugadorBaloncesto jugador) {
+    protected void nuevoJugadorArray(JugadorBaloncesto jugador) {
         int cont = 0;
         while (getJugadorBaloncesto()[cont] != null) {
             cont++;
@@ -104,19 +104,17 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas {
 
 
     private static boolean comprobarDorsal(int dorsal, JugadorBaloncesto[] jugador) {
-        int cont=0;
-        while(jugador[cont]!=null)
-        {
+        int cont = 0;
+        while (jugador[cont] != null) {
             cont++;
         }
-        for (int x = 0; x < cont ; x++) {
+        for (int x = 0; x < cont; x++) {
             if (jugador[x].getDorsal() == dorsal) {
                 return false;
             }
         }
         return true;
     }
-
 
 
     @Override
@@ -153,11 +151,13 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas {
         this.anotacionTotal = anotacionTotal;
     }
 
-    public void mostrarJugadores(JugadorBaloncesto[] jugadorBaloncesto) {
-        int cont = 0;
-        while (jugadorBaloncesto[cont] != null) {
-            System.out.println(this.jugadorBaloncesto[cont]);
-            cont++;
+    public void mostrarJugadores() {
+        for (int x = 0; x < jugadorBaloncesto.length; x++) {
+            if (jugadorBaloncesto[x] != null) {
+                System.out.println(jugadorBaloncesto[x]);
+            } else {
+                break;
+            }
         }
     }
 
@@ -165,7 +165,7 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas {
     @Override
     public String toString() {
         System.out.println("------Equipo " + nombreEquipo + "------");
-        mostrarJugadores(getJugadorBaloncesto());
+        mostrarJugadores();
         return "";
     }
 }

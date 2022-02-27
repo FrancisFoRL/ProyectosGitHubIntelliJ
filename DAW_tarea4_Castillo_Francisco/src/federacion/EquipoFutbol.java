@@ -50,13 +50,7 @@ public class EquipoFutbol extends Equipo implements Estadisticas{
             do {
             } while (!fecha.setFechaCompleta(PeticionDatos.pedirEntero("Dia: "), PeticionDatos.pedirEntero("Mes: "), PeticionDatos.pedirEntero("Año: ")));
             jugadorFutbol.setFechaNacimiento(fecha); //TODO Revisar fecha de nacimiento, primero se comprueba que con Fecha se valido y despues que la edad este en el rango
-            /*
-            jugadorBaloncesto.setPartidosJugados(PeticionDatos.pedirEntero("Partidos jugados: "));
-            jugadorBaloncesto.setMinutosJugados(PeticionDatos.pedirEntero("Minutos jugados: "));
-            jugadorBaloncesto.setPartidosGanados(PeticionDatos.pedirEntero("Partidos ganados: "));
-            jugadorBaloncesto.setPartidosPerdidos(PeticionDatos.pedirEntero("Partidos perdidos: "));
-            jugadorBaloncesto.setAnotacion(PeticionDatos.pedirEntero("Puntos anotados: "));
-             */
+
         } else {
             //TODO Cambiar a aleatorio
             jugadorFutbol.setNombre(Faker.nombres());
@@ -68,17 +62,7 @@ public class EquipoFutbol extends Equipo implements Estadisticas{
             jugadorFutbol.setFechaNacimiento(Faker.fechaAleatoria(year - 65, year - 8));
             jugadorFutbol.setPuesto(Faker.puestoBaloncesto());
             jugadorFutbol.setDorsal(dorsal);
-            /*
-            jugadorBaloncesto.setPartidosJugados(num.nextInt(0,40));
-            jugadorBaloncesto.setMinutosJugados(num.nextInt(0,1600));
-            jugadorBaloncesto.setPartidosGanados(num.nextInt(0,jugadorBaloncesto.partidosJugados));
-            jugadorBaloncesto.setPartidosPerdidos(jugadorBaloncesto.partidosJugados-jugadorBaloncesto.partidosGanados);
-            jugadorBaloncesto.setAnotacion(num.nextInt(0,jugadorBaloncesto.partidosJugados*20));
-
-            */
-
         }
-        System.out.println(JugadorBaloncesto.totalJugadores);
         return jugadorFutbol;
     }
 
@@ -90,12 +74,12 @@ public class EquipoFutbol extends Equipo implements Estadisticas{
         return jugadorFutbol;
     }
 
-    private static void nuevoJugadorArray(JugadorFutbol jugador, JugadorFutbol[] jugador1) {
+    protected void nuevoJugadorArray(JugadorFutbol jugador) {
         int cont = 0;
-        while (jugador1[cont] != null) {
+        while (getJugadorFutbol()[cont] != null) {
             cont++;
         }
-        jugador1[cont] = jugador;
+        getJugadorFutbol()[cont] = jugador;
     }
 
     //TODO JugadorBaloncesto con todos lo parametros necesarios para crear el objeto
@@ -106,13 +90,14 @@ public class EquipoFutbol extends Equipo implements Estadisticas{
 
 
     private static boolean comprobarDorsal(int dorsal, JugadorFutbol[] jugador) {
-        if (JugadorFutbol.totalJugadores == 1) {
-            return true;
-        } else {
-            for (int array = 0; array < JugadorFutbol.totalJugadores - 1; array++) {
-                if (jugador[array].getDorsal() == dorsal) {
-                    return false;
-                }
+        int cont=0;
+        while(jugador[cont]!=null)
+        {
+            cont++;
+        }
+        for (int x = 0; x < cont ; x++) {
+            if (jugador[x].getDorsal() == dorsal) {
+                return false;
             }
         }
         return true;
@@ -153,8 +138,12 @@ public class EquipoFutbol extends Equipo implements Estadisticas{
     }
 
     public void mostrarJugadores() {
-        for (int i = 1; i < JugadorBaloncesto.totalJugadores; i++) {
-            System.out.println(jugadorFutbol[i - 1]);
+        for (int x = 0; x < jugadorFutbol.length; x++) {
+            if (jugadorFutbol[x] != null) {
+                System.out.println(jugadorFutbol[x]);
+            } else {
+                break;
+            }
         }
     }
 
