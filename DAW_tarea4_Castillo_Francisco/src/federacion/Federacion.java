@@ -13,19 +13,27 @@ public class Federacion{
         int opcion;
         int nuevoEquipo = 9;
         Equipo[] equipos = new Equipo[12];
+        //Todo revisar comprobar dorsal de equipos futbol y balonmano
         //EquipoBaloncesto equipob = new EquipoBaloncesto(Faker.nombreEquipo());
         equipos[0] = new EquipoBaloncesto(Faker.nombreEquipo());
         añadirJugadorBalocesto((EquipoBaloncesto) equipos[0]);
-        EquipoBaloncesto equipob1 = new EquipoBaloncesto(Faker.nombreEquipo());
-        equipos[1] = equipob1;
-        añadirJugadorBalocesto(equipob1);
-        EquipoBaloncesto equipob2 = new EquipoBaloncesto(Faker.nombreEquipo());
-        EquipoFutbol equipof = new EquipoFutbol(Faker.nombreEquipo());
-        EquipoFutbol equipof1 = new EquipoFutbol(Faker.nombreEquipo());
-        EquipoFutbol equipof2 = new EquipoFutbol(Faker.nombreEquipo());
-        EquipoBalonmano equipoba = new EquipoBalonmano(Faker.nombreEquipo());
-        EquipoBalonmano equipoba1 = new EquipoBalonmano(Faker.nombreEquipo());
-        EquipoBalonmano equipoba2 = new EquipoBalonmano(Faker.nombreEquipo());
+        equipos[1] = new EquipoBaloncesto(Faker.nombreEquipo());
+        añadirJugadorBalocesto((EquipoBaloncesto) equipos[1]);
+        equipos[2] = new EquipoBaloncesto(Faker.nombreEquipo());
+        añadirJugadorBalocesto((EquipoBaloncesto) equipos[2]);
+        equipos[3] = new EquipoFutbol(Faker.nombreEquipo());
+        añadirJugadorFutbol((EquipoFutbol) equipos[3]);
+        equipos[4] = new EquipoFutbol(Faker.nombreEquipo());
+        añadirJugadorFutbol((EquipoFutbol) equipos[4]);
+        equipos[5] = new EquipoFutbol(Faker.nombreEquipo());
+        añadirJugadorFutbol((EquipoFutbol) equipos[5]);
+        equipos[6] = new EquipoBalonmano(Faker.nombreEquipo());
+        añadirJugadorBalonmano((EquipoBalonmano) equipos[6]);
+        equipos[7] = new EquipoBalonmano(Faker.nombreEquipo());
+        añadirJugadorBalonmano((EquipoBalonmano) equipos[7]);
+        equipos[8] = new EquipoBalonmano(Faker.nombreEquipo());
+        añadirJugadorBalonmano((EquipoBalonmano) equipos[8]);
+
 
         //Todo posible cambio a equipo[x] = new EquipoBaloncesto(Faker.nombreEquipo());
         /*
@@ -46,7 +54,6 @@ public class Federacion{
          */
         //Todo comprobar porque se incian todas la posiciones y las pone a null
         System.out.println(equipos[0]);
-        System.out.println(equipob1);
 
 
         do{
