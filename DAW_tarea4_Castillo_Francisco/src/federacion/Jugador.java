@@ -2,12 +2,29 @@ package federacion;
 
 import java.time.Year;
 
+/**
+ * Clase abstrata Jugador que contiene toda la informacion necesaria que hace falta para crear un
+ * nuevo jugador.
+ * @author Francisco Castillo
+ * @version 28/01/2022
+ */
 public abstract class Jugador {
+    //Atributos
+    /**
+     * Los atributos que son protected, se han elegido asi para que en las subclases sean
+     * visibles y puedan usarse.
+     */
     protected String nombre, apellido1, apellido2, puesto;
     protected Fecha fechaNacimiento;
     protected int dorsal, minutosJugados, partidosJugados, partidosGanados, partidosPerdidos;
-    private int year = Year.now().getValue();
+    private int year = Year.now().getValue();// Atributo que importa Year, este nos da la fecha actual del sistema.
+
+    //Constructores
     public Jugador() {
+        this.minutosJugados = 0;
+        this.partidosJugados = 0;
+        this.partidosGanados = 0;
+        this.partidosPerdidos = 0;
     }
 
     public Jugador(String nombre, String apellido1, String apellido2, String puesto, Fecha fechaNacimiento, int dorsal) {
@@ -23,11 +40,7 @@ public abstract class Jugador {
         this.partidosPerdidos = 0;
     }
 
-
-    abstract boolean validarPuesto(String puesto);
-
-    abstract boolean validarDorsal(int dorsal);
-
+    //Setters y Getters
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -44,14 +57,8 @@ public abstract class Jugador {
         this.puesto = puesto;
     }
 
-    public void setFechaNacimiento(Fecha fechaNacimiento) {
-        this.fechaNacimiento=fechaNacimiento;
-       /* if ((fechaNacimiento.getAnio() <= year - 8) && (fechaNacimiento.getAnio() >= year - 65)) {
-            this.fechaNacimiento = fechaNacimiento;
-        } else {
-            this.fechaNacimiento.setFechaCompleta(1, 1, 1);
-        }
-        */
+    public void setFechaNacimiento(Fecha fechaNacimiento){
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public void setDorsal(int dorsal) {
@@ -114,6 +121,12 @@ public abstract class Jugador {
         return partidosPerdidos;
     }
 
+    //Funciones
+    abstract boolean validarPuesto(String puesto);
+
+    abstract boolean validarDorsal(int dorsal);
+
+    //toString
     @Override
     public String toString() {
         return "- " + nombre + " " + apellido1 + " " + apellido2 +

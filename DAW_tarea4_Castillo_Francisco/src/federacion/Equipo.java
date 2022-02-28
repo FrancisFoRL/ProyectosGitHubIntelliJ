@@ -1,10 +1,24 @@
 package federacion;
 
+/**
+ * Clase Equipo que contiene toda la informacion necesaria que hace falta para crear un
+ * nuevo equipo.
+ * @author Francisco Castillo
+ * @version 28/01/2022
+ */
 public class Equipo implements Estadisticas {
+    //Atributos
+    /**
+     * Los atributos que son protected, se han elegido asi para que en las subclases sean
+     * visibles y puedan usarse.
+     */
     protected int partidosJugados, partidosGanados, partidosPerdidos;
     protected String nombreEquipo;
+
+    //Atributo de clase
     protected static int totalEquipos;
 
+    //Constructores
     public Equipo(){
         totalEquipos++;
     }
@@ -17,6 +31,7 @@ public class Equipo implements Estadisticas {
         totalEquipos++;
     }
 
+    //Setters y Getters
     public static int getTotalEquipos() {
         return totalEquipos;
     }
@@ -53,6 +68,7 @@ public class Equipo implements Estadisticas {
         this.partidosPerdidos = partidosPerdidos;
     }
 
+    //Funciones
     @Override
     public double porcentajeVictorias() {
         return 0;
