@@ -89,6 +89,15 @@ public class EquipoBalonmano extends Equipo implements Estadisticas {
         return jugadorBalonmano;
     }
 
+    public boolean arrayLleno(){
+        for(int x = 0; x < jugadorBalonmano.length; x++){
+            if(jugadorBalonmano[x] == null){
+                return false;
+            }
+        }
+        return true;
+    }
+
     protected void nuevoJugadorArray(JugadorBalonmano jugador) {
         int cont = 0;
         while (getJugadorBalonmano()[cont] != null) {
@@ -167,7 +176,6 @@ public class EquipoBalonmano extends Equipo implements Estadisticas {
     public String toString() {
         System.out.println("------Equipo " + nombreEquipo + "------");
         mostrarJugadores();
-        System.out.println();
         return "";
     }
 }

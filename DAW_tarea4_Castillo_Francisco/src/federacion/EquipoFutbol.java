@@ -74,6 +74,15 @@ public class EquipoFutbol extends Equipo implements Estadisticas{
         return jugadorFutbol;
     }
 
+    public boolean arrayLleno(){
+        for(int x = 0; x < jugadorFutbol.length; x++){
+            if(jugadorFutbol[x] == null){
+                return false;
+            }
+        }
+        return true;
+    }
+
     protected void nuevoJugadorArray(JugadorFutbol jugador) {
         int cont = 0;
         while (getJugadorFutbol()[cont] != null) {
@@ -152,7 +161,6 @@ public class EquipoFutbol extends Equipo implements Estadisticas{
     public String toString() {
         System.out.println("------Equipo " + nombreEquipo + "------");
         mostrarJugadores();
-        System.out.println();
         return "";
     }
 

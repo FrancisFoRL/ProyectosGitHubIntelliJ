@@ -3,8 +3,10 @@ package federacion;
 public class Equipo implements Estadisticas {
     protected int partidosJugados, partidosGanados, partidosPerdidos;
     protected String nombreEquipo;
+    protected static int totalEquipos;
 
     public Equipo(){
+        totalEquipos++;
     }
 
     public Equipo(String nombreEquipo) {
@@ -12,8 +14,12 @@ public class Equipo implements Estadisticas {
         partidosJugados = 0;
         partidosGanados = 0;
         partidosPerdidos = 0;
+        totalEquipos++;
     }
 
+    public static int getTotalEquipos() {
+        return totalEquipos;
+    }
 
     public String getNombreEquipo() {
         return nombreEquipo;

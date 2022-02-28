@@ -34,7 +34,6 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas {
         String puesto;
         Fecha fecha = new Fecha();
         JugadorBaloncesto jugadorBaloncesto = new JugadorBaloncesto();
-
         if (!aleatorio) {
             jugadorBaloncesto.setNombre(PeticionDatos.pedirCadena("Nombre del jugador: "));
             jugadorBaloncesto.setApellido1(PeticionDatos.pedirCadena("1ª apellido del jugador: "));
@@ -88,6 +87,15 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas {
         return jugadorBaloncesto;
     }
 
+    public boolean arrayLleno(){
+        for(int x = 0; x < jugadorBaloncesto.length; x++){
+            if(jugadorBaloncesto[x] == null){
+                return false;
+            }
+        }
+        return true;
+    }
+
     protected void nuevoJugadorArray(JugadorBaloncesto jugador) {
         int cont = 0;
         while (getJugadorBaloncesto()[cont] != null) {
@@ -95,6 +103,7 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas {
         }
         getJugadorBaloncesto()[cont] = jugador;
     }
+
 
     //TODO JugadorBaloncesto con todos lo parametros necesarios para crear el objeto
     //TODO Necesario crear constructor con parametros
