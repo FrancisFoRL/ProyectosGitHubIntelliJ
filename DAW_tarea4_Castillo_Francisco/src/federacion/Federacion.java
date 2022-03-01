@@ -76,7 +76,7 @@ public class Federacion implements Serializable {
                     }
                 }
                 case 2 -> {
-                    mostrarEquipos(equipos);
+                    mostrarSoloEquipos(equipos);
                     añadirJugador(equipos[PeticionDatos.pedirEnteroRango(1, Equipo.totalEquipos, 3, "Numero del equipo a elegir (1-" + Equipo.totalEquipos + "): ") - 1]
                             , PeticionDatos.pedirEnteroRango(0, 1, 3, "¿Quieres añadir los datos del jugador de forma aleatoria(0) o de forma manual(1)?"));
                 }
@@ -91,7 +91,7 @@ public class Federacion implements Serializable {
                             }
                         }
                         case 2 -> {
-                            mostrarEquipos(equipos);
+                            mostrarSoloEquipos(equipos);
                             ordenarEquipo(equipos[PeticionDatos.pedirEnteroRango(1, Equipo.totalEquipos, 3, "Numero del equipo a elegir (1-" + Equipo.totalEquipos + "): ") - 1],
                                     PeticionDatos.pedirEnteroRango(0, 1, 3, "Ordenar por dorsal(0) / Ordenar por 1er apellido(1): "));
                         }
@@ -276,7 +276,7 @@ public class Federacion implements Serializable {
      * @param equipos array que contiene la informacion de los jugadores de los equipos
      */
     private static void mostrarEstadisticasJug(Equipo[] equipos){
-        int opcion =PeticionDatos.pedirEnteroRango(1, 3, 3, "\nDame una opcion(1/"+Equipo.totalEquipos+"): ");
+        int opcion =PeticionDatos.pedirEnteroRango(1, 3, 3, "\nDame una opcion(1/"+Equipo.totalEquipos+"): ") -1;
         if(equipos[opcion] instanceof EquipoBaloncesto){
             System.out.println("\n---------"+equipos[opcion].nombreEquipo+"---------");
             ((EquipoBaloncesto) equipos[opcion]).mostrarValoracionJug();
@@ -392,9 +392,10 @@ public class Federacion implements Serializable {
     }
 
     /**
-     * Funcion que pasa a fichero externo los equipos de una especialidad
+     * Funcion que pasa a fichero externo los equipos de una especialidad. Anteriormente todas la clases que se van a pasar a fichero
+     * tiene que tener como interfaz Serializable, ya que asi luego nos permitira pasar el objeto a bytes.
      * @param equipos array que contiene la informacion de los equipos
-     * @throws IOException
+     * @throws IOException esta declaracion nos vale para arrojar cualquier excepcion que nos arroje la funcion
      */
     private static void pasarFichero(Equipo[] equipos) throws IOException {
         switch (PeticionDatos.pedirEnteroRango(1, 3, 3, "Dame una opcion(1/3): ")) {
@@ -403,6 +404,7 @@ public class Federacion implements Serializable {
                 ObjectOutputStream tuberiab = new ObjectOutputStream(ficherob);
                 for (Equipo equipo : equipos) {
                     if (equipo instanceof EquipoBaloncesto) {
+                        ordenarEquipo(equipo,1);
                         tuberiab.writeObject(equipo);
                     }
                 }
@@ -413,6 +415,7 @@ public class Federacion implements Serializable {
                 ObjectOutputStream tuberiaf = new ObjectOutputStream(ficherof);
                 for (Equipo equipo : equipos) {
                     if (equipo instanceof EquipoFutbol) {
+                        ordenarEquipo(equipo,1);
                         tuberiaf.writeObject(equipo);
                     }
                 }
@@ -423,6 +426,7 @@ public class Federacion implements Serializable {
                 ObjectOutputStream tuberiabal = new ObjectOutputStream(ficherobal);
                 for (Equipo equipo : equipos) {
                     if (equipo instanceof EquipoBaloncesto) {
+                        ordenarEquipo(equipo,1);
                         tuberiabal.writeObject(equipo);
                     }
                 }

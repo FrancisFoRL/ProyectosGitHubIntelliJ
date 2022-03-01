@@ -18,7 +18,8 @@ public class Faker {
     /**
      * Array privada y estatica que almacena varios apellidos.
      */
-    private static final String[] APELLIDOS = {"Castillo", "Muñoz", "Rodriguez", "Brull", "Garcia", "Ortiz"};
+    private static final String[] APELLIDOS = {"Castillo", "Muñoz", "Rodriguez", "Brull", "Garcia", "Ortiz", "González", "Martínez", "Jiménez", "Diaz", "Gil", "Iglesias", "Santos",
+            "Cano", "Vidal", "Flores"};
 
     /**
      * Array privada y estatica que almacena varios puestos de baloncesto.
@@ -38,7 +39,8 @@ public class Faker {
     /**
      * Array privada y estatica que almacena varios nombre de equipo.
      */
-    private static final String[] NOMBRE_EQUIPO = {"Troyanos","Real Boludos","Gandules Club","Messidores","Mochos Fútbol Club","Penaldos","Atletas de Mentiras FC","Todo Terreno", "Los jaja"};
+    private static final String[] NOMBRE_EQUIPO = {"Troyanos","La Rebambaramba","Gandules Club","Todo o Nada","Cero Empate","Los Intocables","Atletas de Mentiras","Los Gladiadores", "Fuego Ardiente",
+            "Volantes Cómicos","El Milagro","Liga Oro"};
 
     /**
      * Funcion que no recibe nada y que devuelve un nombre aleatorio del array de nombres.
