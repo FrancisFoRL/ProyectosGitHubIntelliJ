@@ -26,25 +26,14 @@ public class Federacion implements Serializable {
          * Se crear 3 array de cada especialidad y se rellenan de forma aleatoria con el minimo de
          * jugadores necesarios
          */
-        equipos[0] = new EquipoBaloncesto(asignarNombre(equipos));
-        añadirJugadorBalocesto((EquipoBaloncesto) equipos[0], 5, true);
-        equipos[1] = new EquipoBaloncesto(asignarNombre(equipos));
-        añadirJugadorBalocesto((EquipoBaloncesto) equipos[1], 5, true);
-        equipos[2] = new EquipoBaloncesto(asignarNombre(equipos));
-        añadirJugadorBalocesto((EquipoBaloncesto) equipos[2], 5, true);
-        equipos[3] = new EquipoFutbol(asignarNombre(equipos));
-        añadirJugadorFutbol((EquipoFutbol) equipos[3], 11, true);
-        equipos[4] = new EquipoFutbol(asignarNombre(equipos));
-        añadirJugadorFutbol((EquipoFutbol) equipos[4], 11, true);
-        equipos[5] = new EquipoFutbol(asignarNombre(equipos));
-        añadirJugadorFutbol((EquipoFutbol) equipos[5], 11, true);
-        equipos[6] = new EquipoBalonmano(asignarNombre(equipos));
-        añadirJugadorBalonmano((EquipoBalonmano) equipos[6], 7, true);
-        equipos[7] = new EquipoBalonmano(asignarNombre(equipos));
-        añadirJugadorBalonmano((EquipoBalonmano) equipos[7], 7, true);
-        equipos[8] = new EquipoBalonmano(asignarNombre(equipos));
-        añadirJugadorBalonmano((EquipoBalonmano) equipos[8], 7, true);
-
+        for (int i = 0; i < 9; i += 3) {
+            equipos[i] = new EquipoBaloncesto(asignarNombre(equipos));
+            añadirJugadorBalocesto((EquipoBaloncesto) equipos[i], 5, true);
+            equipos[i + 1] = new EquipoFutbol(asignarNombre(equipos));
+            añadirJugadorFutbol((EquipoFutbol) equipos[i + 1], 11, true);
+            equipos[i + 2] = new EquipoBalonmano(asignarNombre(equipos));
+            añadirJugadorBalonmano((EquipoBalonmano) equipos[i + 2], 7, true);
+        }
         /*
          * Se muestra un menu y se elige la accion que se quiere llevar acabo
          */
@@ -122,7 +111,8 @@ public class Federacion implements Serializable {
     /**
      * Funcion que crea un nuevo equipo de la especialidad que se desee. Este controla que no se supere el maximo de numero de
      * equipos de cada especialidad.
-     * @param equipos array de todos los equipos creados hasta ahora
+     *
+     * @param equipos  array de todos los equipos creados hasta ahora
      * @param posicion valor entero donde ira el nuevo equipo en el array principal
      */
     private static void nuevoEquipo(Equipo[] equipos, int posicion) {
@@ -174,9 +164,10 @@ public class Federacion implements Serializable {
     /**
      * Funcion que añade jugadores de tipo Baloncesto de forma aleatoria o no. Se controla que el array este lleno y no se
      * puedan añadir mas jugadores.
+     *
      * @param jugadores array al que se le añadira el nuevo jugador
-     * @param num numero de jugadores que se añadiran
-     * @param aletorio booleano que indica si el jugador se creara de forma aleatoria o no
+     * @param num       numero de jugadores que se añadiran
+     * @param aletorio  booleano que indica si el jugador se creara de forma aleatoria o no
      */
     private static void añadirJugadorBalocesto(EquipoBaloncesto jugadores, int num, boolean aletorio) {
         if (jugadores.arrayLleno()) {
@@ -191,9 +182,10 @@ public class Federacion implements Serializable {
     /**
      * Funcion que añade jugadores de tipo Futbol de forma aleatoria o no. Se controla que el array este lleno y no se
      * puedan añadir mas jugadores.
+     *
      * @param jugadores array al que se le añadira el nuevo jugador
-     * @param num numero de jugadores que se añadiran
-     * @param aletorio booleano que indica si el jugador se creara de forma aleatoria o no
+     * @param num       numero de jugadores que se añadiran
+     * @param aletorio  booleano que indica si el jugador se creara de forma aleatoria o no
      */
     private static void añadirJugadorFutbol(EquipoFutbol jugadores, int num, boolean aletorio) {
         if (jugadores.arrayLleno()) {
@@ -208,9 +200,10 @@ public class Federacion implements Serializable {
     /**
      * Funcion que añade jugadores de tipo Balonmano de forma aleatoria o no. Se controla que el array este lleno y no se
      * puedan añadir mas jugadores.
+     *
      * @param jugadores array al que se le añadira el nuevo jugador
-     * @param num numero de jugadores que se añadiran
-     * @param aletorio booleano que indica si el jugador se creara de forma aleatoria o no
+     * @param num       numero de jugadores que se añadiran
+     * @param aletorio  booleano que indica si el jugador se creara de forma aleatoria o no
      */
     private static void añadirJugadorBalonmano(EquipoBalonmano jugadores, int num, boolean aletorio) {
         if (jugadores.arrayLleno()) {
@@ -225,8 +218,9 @@ public class Federacion implements Serializable {
     /**
      * Funcion que añade un unico jugador al array que se pasa por parametro. Se vera que tipo de array es y
      * se añadira el jugador de forma aleatoria o manual.
+     *
      * @param equipo array al que se le añadira el nuevo jugador
-     * @param num indica si se añadira el jugador de forma aleatoria(0) o de forma manual(1)
+     * @param num    indica si se añadira el jugador de forma aleatoria(0) o de forma manual(1)
      */
     private static void añadirJugador(Equipo equipo, int num) {
         if (num == 0) {
@@ -250,10 +244,11 @@ public class Federacion implements Serializable {
 
     /**
      * Funcion que asigna nombres a los equipos y comprueba que no esten repetidos
+     *
      * @param equipos array que contiene los nombres de todos los equipos
      * @return devuelve el nombre del equipo
      */
-    private static String asignarNombre(Equipo[] equipos){
+    private static String asignarNombre(Equipo[] equipos) {
         String nombre;
         boolean comprobar;
         do {
@@ -267,36 +262,38 @@ public class Federacion implements Serializable {
                     }
                 }
             }
-        }while (!comprobar);
+        } while (!comprobar);
         return nombre;
     }
 
     /**
      * Funcion que muestra las estadisticas de los jugadores de un equipo
+     *
      * @param equipos array que contiene la informacion de los jugadores de los equipos
      */
-    private static void mostrarEstadisticasJug(Equipo[] equipos){
-        int opcion =PeticionDatos.pedirEnteroRango(1, 3, 3, "\nDame una opcion(1/"+Equipo.totalEquipos+"): ") -1;
-        if(equipos[opcion] instanceof EquipoBaloncesto){
-            System.out.println("\n---------"+equipos[opcion].nombreEquipo+"---------");
+    private static void mostrarEstadisticasJug(Equipo[] equipos) {
+        int opcion = PeticionDatos.pedirEnteroRango(1, 3, 3, "\nDame una opcion(1/" + Equipo.totalEquipos + "): ") - 1;
+        if (equipos[opcion] instanceof EquipoBaloncesto) {
+            System.out.println("\n---------" + equipos[opcion].nombreEquipo + "---------");
             ((EquipoBaloncesto) equipos[opcion]).mostrarValoracionJug();
-        }else if(equipos[opcion] instanceof EquipoFutbol){
-            System.out.println("\n---------"+equipos[opcion].nombreEquipo+"---------");
+        } else if (equipos[opcion] instanceof EquipoFutbol) {
+            System.out.println("\n---------" + equipos[opcion].nombreEquipo + "---------");
             ((EquipoFutbol) equipos[opcion]).mostrarValoracionJug();
-        }else if(equipos[opcion] instanceof EquipoBalonmano){
-            System.out.println("\n---------"+equipos[opcion].nombreEquipo+"---------");
+        } else if (equipos[opcion] instanceof EquipoBalonmano) {
+            System.out.println("\n---------" + equipos[opcion].nombreEquipo + "---------");
             ((EquipoBalonmano) equipos[opcion]).mostrarValoracionJug();
         }
     }
 
     /**
      * Funcion que muestra las estadisticas de un equipo
+     *
      * @param equipos array que contiene la informacion de los equipos
      */
-    private static void mostrarEstadisticas(Equipo[] equipos){
-        switch (PeticionDatos.pedirEnteroRango(1, 3, 3, "Dame un opcion: ")){
+    private static void mostrarEstadisticas(Equipo[] equipos) {
+        switch (PeticionDatos.pedirEnteroRango(1, 3, 3, "Dame un opcion: ")) {
             case 1:
-                for(int x=0; x < Equipo.totalEquipos;x++) {
+                for (int x = 0; x < Equipo.totalEquipos; x++) {
                     if (equipos[x] instanceof EquipoBaloncesto) {
                         System.out.println("\nEstadisticas " + equipos[x].nombreEquipo + ": " + (equipos[x]).valoracion());
                     }
@@ -304,7 +301,7 @@ public class Federacion implements Serializable {
                 break;
 
             case 2:
-                for(int x=0; x < Equipo.totalEquipos;x++) {
+                for (int x = 0; x < Equipo.totalEquipos; x++) {
                     if (equipos[x] instanceof EquipoFutbol) {
                         System.out.println("\nEstadisticas " + equipos[x].nombreEquipo + ": " + (equipos[x]).valoracion());
                     }
@@ -312,7 +309,7 @@ public class Federacion implements Serializable {
                 break;
 
             case 3:
-                for(int x=0; x < Equipo.totalEquipos;x++) {
+                for (int x = 0; x < Equipo.totalEquipos; x++) {
                     if (equipos[x] instanceof EquipoBalonmano) {
                         System.out.println("\nEstadisticas " + equipos[x].nombreEquipo + ": " + (equipos[x]).valoracion());
                     }
@@ -324,8 +321,9 @@ public class Federacion implements Serializable {
     /**
      * Funcion que ordena los array dependiendo del tipo que sea. Se pasa si se quiere que el array se ordene por
      * el dorsal o por el primer apellido.
+     *
      * @param equipo nos da la informacion del equipo a ordenar
-     * @param num valor que no indica si se quiere ordenar por dorsal(0) o por apellido(0)
+     * @param num    valor que no indica si se quiere ordenar por dorsal(0) o por apellido(0)
      */
     private static void ordenarEquipo(Equipo equipo, int num) {
         if (num == 0) {
@@ -349,6 +347,7 @@ public class Federacion implements Serializable {
 
     /**
      * Funcion que muestra el equipo con sus jugadores.
+     *
      * @param equipos array que contiene la informacion de los nombres de los equipos
      */
     private static void mostrarEquipos(Equipo[] equipos) {
@@ -364,12 +363,13 @@ public class Federacion implements Serializable {
 
     /**
      * Funcion que muestra los nombres de los equipos por pantalla
+     *
      * @param equipos array que contiene la informacion de los nombres de los equipos
      */
-    private static void mostrarSoloEquipos(Equipo[] equipos){
+    private static void mostrarSoloEquipos(Equipo[] equipos) {
         for (int x = 0; x < equipos.length; x++) {
             if (equipos[x] != null) {
-                System.out.println("Equipo " + (x + 1)+ ": "+equipos[x].nombreEquipo);
+                System.out.println("Equipo " + (x + 1) + ": " + equipos[x].nombreEquipo);
             } else {
                 break;
             }
@@ -378,6 +378,7 @@ public class Federacion implements Serializable {
 
     /**
      * Funcion que busca un hueco en el array, si no hay ninguno devolvera que no hay disponible ninguna posicion.
+     *
      * @param equipos Array donde se busca si hay un hueco libre.
      * @return devulve la posicion el array donde hay hueco y si no hay devuelve un -1
      */
@@ -394,43 +395,88 @@ public class Federacion implements Serializable {
     /**
      * Funcion que pasa a fichero externo los equipos de una especialidad. Anteriormente todas la clases que se van a pasar a fichero
      * tiene que tener como interfaz Serializable, ya que asi luego nos permitira pasar el objeto a bytes.
+     *
      * @param equipos array que contiene la informacion de los equipos
      * @throws IOException esta declaracion nos vale para arrojar cualquier excepcion que nos arroje la funcion
      */
     private static void pasarFichero(Equipo[] equipos) throws IOException {
         switch (PeticionDatos.pedirEnteroRango(1, 3, 3, "Dame una opcion(1/3): ")) {
             case 1 -> {
+                FileOutputStream ficherob = new FileOutputStream("EquipoBaloncesto.txt");
+                DataOutputStream oss = new DataOutputStream(ficherob);
+                for(Equipo equipo : equipos){
+                    if(equipo instanceof EquipoBaloncesto){
+                        ordenarEquipo(equipo, 1);
+                        oss.writeChars("-----"+equipo.getNombreEquipo()+"-----");
+                        oss.writeChars(((EquipoBaloncesto) equipo).mostrarJugadoresString());
+                        oss.writeChars("\n");
+                        oss.writeChars("\n");
+                    }
+                }
+                oss.close();
+                /*
                 FileOutputStream ficherob = new FileOutputStream("EquipoBaloncesto.ser");
                 ObjectOutputStream tuberiab = new ObjectOutputStream(ficherob);
                 for (Equipo equipo : equipos) {
                     if (equipo instanceof EquipoBaloncesto) {
-                        ordenarEquipo(equipo,1);
+                        ordenarEquipo(equipo, 1);
                         tuberiab.writeObject(equipo);
                     }
                 }
                 tuberiab.close();
+                 */
             }
             case 2 -> {
+                FileOutputStream ficherof = new FileOutputStream("EquipoFutbol.txt");
+                DataOutputStream oss = new DataOutputStream(ficherof);
+                for(Equipo equipo : equipos){
+                    if(equipo instanceof EquipoFutbol){
+                        ordenarEquipo(equipo, 1);
+                        oss.writeUTF("-----"+equipo.getNombreEquipo()+"-----");
+                        oss.writeUTF(((EquipoFutbol) equipo).mostrarJugadoresString());
+                        oss.writeUTF("\n");
+                        oss.writeUTF("\n");
+                    }
+                }
+                oss.close();
+
+                /*
                 FileOutputStream ficherof = new FileOutputStream("EquipoFutbol.ser");
                 ObjectOutputStream tuberiaf = new ObjectOutputStream(ficherof);
                 for (Equipo equipo : equipos) {
                     if (equipo instanceof EquipoFutbol) {
-                        ordenarEquipo(equipo,1);
+                        ordenarEquipo(equipo, 1);
                         tuberiaf.writeObject(equipo);
                     }
                 }
                 tuberiaf.close();
+                 */
             }
             case 3 -> {
+                FileOutputStream ficheroba = new FileOutputStream("EquipoBalonmano.txt");
+                DataOutputStream oss = new DataOutputStream(ficheroba);
+                for(Equipo equipo : equipos){
+                    if(equipo instanceof EquipoBalonmano){
+                        ordenarEquipo(equipo, 1);
+                        oss.writeChars("-----"+equipo.getNombreEquipo()+"-----");
+                        oss.writeChars(((EquipoBalonmano) equipo).mostrarJugadoresString());
+                        oss.writeChars("\n");
+                        oss.writeChars("\n");
+                    }
+                }
+                oss.close();
+
+                /*
                 FileOutputStream ficherobal = new FileOutputStream("EquipoBalonmano.ser");
                 ObjectOutputStream tuberiabal = new ObjectOutputStream(ficherobal);
                 for (Equipo equipo : equipos) {
                     if (equipo instanceof EquipoBaloncesto) {
-                        ordenarEquipo(equipo,1);
+                        ordenarEquipo(equipo, 1);
                         tuberiabal.writeObject(equipo);
                     }
                 }
                 tuberiabal.close();
+                 */
             }
         }
     }

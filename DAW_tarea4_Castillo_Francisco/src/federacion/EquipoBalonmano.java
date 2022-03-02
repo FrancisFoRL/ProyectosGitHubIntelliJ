@@ -231,6 +231,19 @@ public class EquipoBalonmano extends Equipo implements Estadisticas, Serializabl
         }
     }
 
+    public String mostrarJugadoresString() {
+        String jugador="";
+        for (JugadorBalonmano balonmano : jugadorBalonmano) {
+            if (balonmano != null) {
+                jugador += "\n"+balonmano.getNombre() + " " + balonmano.getApellido1() + " " + balonmano.getApellido2() +
+                        " // Posicion: "+balonmano.getPuesto();
+            } else {
+                break;
+            }
+        }
+        return jugador;
+    }
+
     //toString
     @Override
     public String toString() {

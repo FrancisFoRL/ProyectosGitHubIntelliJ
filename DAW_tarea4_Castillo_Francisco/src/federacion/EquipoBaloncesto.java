@@ -229,6 +229,20 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas, Serializab
         }
     }
 
+
+    public String mostrarJugadoresString() {
+        String jugador="";
+        for (JugadorBaloncesto baloncesto : jugadorBaloncesto) {
+            if (baloncesto != null) {
+                jugador += "\n"+baloncesto.getNombre() + " " + baloncesto.getApellido1() + " " + baloncesto.getApellido2() +
+                        " // Posicion: "+baloncesto.getPuesto();
+            } else {
+                break;
+            }
+        }
+        return jugador;
+    }
+
     //toString
     @Override
     public String toString() {

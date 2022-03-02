@@ -235,6 +235,18 @@ public class EquipoFutbol extends Equipo implements Estadisticas, Serializable {
         }
     }
 
+    public String mostrarJugadoresString() {
+        String jugador="";
+        for (JugadorFutbol futbol : jugadorFutbol) {
+            if (futbol != null) {
+                jugador += "\n"+futbol.getNombre() + " " + futbol.getApellido1() + " " + futbol.getApellido2() +
+                        " // Posicion: "+futbol.getPuesto();
+            } else {
+                break;
+            }
+        }
+        return jugador;
+    }
     //toString
     @Override
     public String toString() {
