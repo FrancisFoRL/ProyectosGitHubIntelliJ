@@ -32,6 +32,7 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas, Serializab
     //Constructores
     public EquipoBaloncesto(){
         totalEquipos++;
+        jugadorBaloncesto = new JugadorBaloncesto[18];
         this.partidosJugados = 0;
         this.partidosGanados = 0;
         this.anotacionTotal = 0;

@@ -32,6 +32,7 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas, Serializab
     //Constructores
     public EquipoBaloncesto(){
         totalEquipos++;
+        jugadorBaloncesto = new JugadorBaloncesto[18];
         this.partidosJugados = 0;
         this.partidosGanados = 0;
         this.anotacionTotal = 0;
@@ -147,11 +148,12 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas, Serializab
      * Funcion que le asigna una posicion null del array y lo asigna a esa posicion.
      */
     protected void nuevoJugadorArray(JugadorBaloncesto jugador) {
-        int cont = 0;
-        while (getJugadorBaloncesto()[cont] != null) {
-            cont++;
+        for(int i = 0; i < getJugadorBaloncesto().length; i++){
+            if(getJugadorBaloncesto()[i] == null){
+                getJugadorBaloncesto()[i] = jugador;
+                break;
+            }
         }
-        getJugadorBaloncesto()[cont] = jugador;
     }
 
     /**

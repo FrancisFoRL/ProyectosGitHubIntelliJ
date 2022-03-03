@@ -31,6 +31,7 @@ public class EquipoBalonmano extends Equipo implements Estadisticas, Serializabl
 
     public EquipoBalonmano(){
         totalEquipos++;
+        jugadorBalonmano = new JugadorBalonmano[14];
         this.partidosJugados = 0;
         this.partidosGanados = 0;
         this.partidosPerdidos = 0;
