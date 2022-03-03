@@ -32,6 +32,7 @@ public class EquipoFutbol extends Equipo implements Estadisticas, Serializable {
     //Constructores
     public EquipoFutbol(){
         this.golesTotal = 0;
+        jugadorFutbol = new JugadorFutbol[24];
         this.partidosJugados = 0;
         this.partidosGanados = 0;
         this.partidosPerdidos = 0;
@@ -105,7 +106,7 @@ public class EquipoFutbol extends Equipo implements Estadisticas, Serializable {
             jugadorFutbol.setApellido1(Faker.apellidos());
             jugadorFutbol.setApellido2(Faker.apellidos());
             do {
-                dorsal = num.nextInt(4, 24);
+                dorsal = num.nextInt(1, 24);
             } while (!comprobarDorsal(dorsal, getJugadorFutbol()));
             jugadorFutbol.setFechaNacimiento(Faker.fechaAleatoria(year - 65, year - 8));
             jugadorFutbol.setPuesto(Faker.puestoFutbol());
@@ -151,12 +152,13 @@ public class EquipoFutbol extends Equipo implements Estadisticas, Serializable {
     /**
      * Funcion que le asigna una posicion null del array y lo asigna a esa posicion.
      */
-    protected void nuevoJugadorArray(JugadorFutbol jugador) {
-        int cont = 0;
-        while (getJugadorFutbol()[cont] != null) {
-            cont++;
+    public void nuevoJugadorArray(JugadorFutbol jugador) {
+        for(int i = 0; i < getJugadorFutbol().length; i++){
+            if(getJugadorFutbol()[i] == null){
+                getJugadorFutbol()[i] = jugador;
+                break;
+            }
         }
-        getJugadorFutbol()[cont] = jugador;
     }
 
     /**

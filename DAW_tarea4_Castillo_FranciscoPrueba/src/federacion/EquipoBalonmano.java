@@ -31,6 +31,7 @@ public class EquipoBalonmano extends Equipo implements Estadisticas, Serializabl
 
     public EquipoBalonmano(){
         totalEquipos++;
+        jugadorBalonmano = new JugadorBalonmano[14];
         this.partidosJugados = 0;
         this.partidosGanados = 0;
         this.partidosPerdidos = 0;
@@ -110,7 +111,7 @@ public class EquipoBalonmano extends Equipo implements Estadisticas, Serializabl
             jugadorBalonmano.setApellido1(Faker.apellidos());
             jugadorBalonmano.setApellido2(Faker.apellidos());
             do {
-                dorsal = num.nextInt(4, 24);
+                dorsal = num.nextInt(1, 24);
             } while (!comprobarDorsal(dorsal, getJugadorBalonmano()));
             jugadorBalonmano.setFechaNacimiento(Faker.fechaAleatoria(year - 65, year - 8));
             jugadorBalonmano.setPuesto(Faker.puestoBalonmano());
@@ -157,11 +158,12 @@ public class EquipoBalonmano extends Equipo implements Estadisticas, Serializabl
      * Funcion que le asigna una posicion null del array y lo asigna a esa posicion.
      */
     protected void nuevoJugadorArray(JugadorBalonmano jugador) {
-        int cont = 0;
-        while (getJugadorBalonmano()[cont] != null) {
-            cont++;
+        for(int i = 0; i < getJugadorBalonmano().length; i++){
+            if(getJugadorBalonmano()[i] == null){
+                getJugadorBalonmano()[i] = jugador;
+                break;
+            }
         }
-        getJugadorBalonmano()[cont] = jugador;
     }
 
     /**

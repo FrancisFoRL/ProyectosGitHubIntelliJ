@@ -30,7 +30,7 @@ public class Federacion implements Serializable {
             equipos[i] = new EquipoBaloncesto(asignarNombre(equipos));
             añadirJugador(equipos[i], 5, 0);
             equipos[i + 1] = new EquipoFutbol(asignarNombre(equipos));
-            añadirJugador(equipos[i + 1], 11, 0);
+            añadirJugador(equipos[i + 1], 20, 0);
             equipos[i + 2] = new EquipoBalonmano(asignarNombre(equipos));
             añadirJugador(equipos[i + 2], 7, 0);
         }
@@ -161,6 +161,14 @@ public class Federacion implements Serializable {
         }
     }
 
+    /**
+     * Funcion que añade jugadores de cualquier tipo de forma aleatoria o no. Se controla que el array este lleno y no se
+     * puedan añadir mas jugadores.
+     *
+     * @param jugadores array al que se le añadira el nuevo jugador
+     * @param num       numero de jugadores que se añadiran
+     * @param aleatorio  int que indica si el jugador se creara de forma aleatoria o no
+     */
     private static void añadirJugador(Equipo jugadores, int num, int aleatorio){
         boolean ale;
         if(aleatorio == 0){
@@ -408,8 +416,12 @@ public class Federacion implements Serializable {
         boolean ordenado;
         Jugador aux;
         int cont = 0;
-        while (v[cont] != null) {
-            cont++;
+        for(int x = 0; x < v.length;x++){
+            if(v[x] != null){
+                cont++;
+            }else{
+                break;
+            }
         }
         int num_ele = cont;
         d = num_ele / 2;
@@ -433,11 +445,15 @@ public class Federacion implements Serializable {
      * Ordenacion por apellido
      */
     public static void shell_ascString(Jugador[] v) {
-        int d, i, cont = 0;
+        int d, i, cont=0;
         boolean ordenado;
         Jugador aux;
-        while (v[cont] != null) {
-            cont++;
+        for(int x = 0; x < v.length;x++){
+            if(v[x] != null){
+                cont++;
+            }else{
+                break;
+            }
         }
         int num_ele = cont;
         d = num_ele / 2;
@@ -451,6 +467,13 @@ public class Federacion implements Serializable {
                         v[i] = v[i + d];
                         v[i + d] = aux;
                         ordenado = false;
+                    }else if(v[i].getApellido1().compareTo(v[i + d].getApellido1()) == 0) {
+                        if (v[i].getApellido2().compareTo(v[i + d].getApellido2()) > 0) {
+                            aux = v[i];
+                            v[i] = v[i + d];
+                            v[i + d] = aux;
+                            ordenado = false;
+                        }
                     }
             }
             d = d / 2;

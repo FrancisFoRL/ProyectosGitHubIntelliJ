@@ -32,6 +32,7 @@ public class EquipoFutbol extends Equipo implements Estadisticas, Serializable {
     //Constructores
     public EquipoFutbol(){
         this.golesTotal = 0;
+        jugadorFutbol = new JugadorFutbol[24];
         this.partidosJugados = 0;
         this.partidosGanados = 0;
         this.partidosPerdidos = 0;
