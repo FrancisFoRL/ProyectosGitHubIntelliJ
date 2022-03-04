@@ -63,10 +63,6 @@ public class EquipoBalonmano extends Equipo implements Estadisticas, Serializabl
         super.setNombreEquipo(nombreEquipo);
     }
 
-    @Override
-    public double porcentajeVictorias() {
-        return (this.partidosGanados / 100.0) * this.partidosJugados ;
-    }
 
     public void setJugadorBalonmano(JugadorBalonmano[] jugadorBalonmano) {
         this.jugadorBalonmano = jugadorBalonmano;
@@ -203,6 +199,11 @@ public class EquipoBalonmano extends Equipo implements Estadisticas, Serializabl
             this.golesTotal += cociente;
         }
         return this.golesTotal;
+    }
+
+    @Override
+    public double porcentajeVictorias() {
+        return ((this.partidosGanados / 100.0) * this.partidosJugados)*100;
     }
 
     /**

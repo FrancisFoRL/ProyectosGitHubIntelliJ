@@ -233,7 +233,7 @@ public class Federacion implements Serializable {
      * @param equipos array que contiene la informacion de los jugadores de los equipos
      */
     private static void mostrarEstadisticasJug(Equipo[] equipos) {
-        int opcion = PeticionDatos.pedirEnteroRango(1, 3, 3, "\nDame una opcion(1/" + Equipo.totalEquipos + "): ") - 1;
+        int opcion = PeticionDatos.pedirEnteroRango(1,  Equipo.totalEquipos, 3, "\nDame una opcion(1/" + Equipo.totalEquipos + "): ") - 1;
         if (equipos[opcion] instanceof EquipoBaloncesto) {
             System.out.println("\n---------" + equipos[opcion].nombreEquipo + "---------");
             ((EquipoBaloncesto) equipos[opcion]).mostrarValoracionJug();
