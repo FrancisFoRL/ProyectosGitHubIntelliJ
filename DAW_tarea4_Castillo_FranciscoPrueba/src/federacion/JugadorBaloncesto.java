@@ -220,7 +220,7 @@ public class JugadorBaloncesto extends Jugador implements Estadisticas, Serializ
      */
     @Override
     public double porcentajeVictorias() {
-        return (this.partidosGanados / 100.0) * this.partidosJugados;
+        return ((this.partidosGanados / 100.0) * this.partidosJugados)*100;
     }
 
     /**
@@ -230,7 +230,7 @@ public class JugadorBaloncesto extends Jugador implements Estadisticas, Serializ
      */
     @Override
     public double valoracion() {
-        return (this.anotacion / 100.0) * this.minutosJugados;
+        return (this.anotacion * 40.0) / this.minutosJugados;
     }
 
     /**

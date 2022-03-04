@@ -200,7 +200,7 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas, Serializab
      */
     @Override
     public double porcentajeVictorias() {
-        return (this.partidosGanados / 100.0) * this.partidosJugados;
+        return ((this.partidosGanados / 100.0) * this.partidosJugados)*100;
     }
 
     /**
