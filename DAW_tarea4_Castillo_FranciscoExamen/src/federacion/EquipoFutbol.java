@@ -247,25 +247,12 @@ public class EquipoFutbol extends Equipo implements Estadisticas, Serializable {
      */
     @Override
     public double porcentajeVictorias() {
-        return ((this.partidosGanados / 100.0) * this.partidosJugados)*100;
+        return (this.partidosGanados * 100)/ this.partidosJugados;
     }
 
     @Override
     public int posicion() {
         return (this.partidosGanados*3)+(this.partidosEmpatados);
-    }
-    /**
-     * Funcion que muestra por pantalla las valoraciones de los jugadores de un equipo.
-     */
-    public void mostrarValoracionJug() {
-        for (JugadorFutbol futbol : jugadorFutbol) {
-            if (futbol != null) {
-                System.out.println("- " + futbol.getNombre() + " " + futbol.getApellido1() + " " + futbol.getApellido2() + " : " + futbol.valoracion() + " goles/minutos jugados // "
-                        +futbol.porcentajeVictorias()+"% Victorias " + posicion());
-            } else {
-                break;
-            }
-        }
     }
 
     /**

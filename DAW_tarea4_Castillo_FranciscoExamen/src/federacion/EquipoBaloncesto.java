@@ -201,21 +201,7 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas, Serializab
      */
     @Override
     public double porcentajeVictorias() {
-        return ((this.partidosGanados / 100.0) * this.partidosJugados)*100;
-    }
-
-    /**
-     * Funcion que muestra por pantalla las valoraciones de los jugadores de un equipo.
-     */
-    public void mostrarValoracionJug(){
-        for (JugadorBaloncesto baloncesto : jugadorBaloncesto) {
-            if (baloncesto != null) {
-                System.out.println("- " + baloncesto.getNombre() + " " + baloncesto.getApellido1() + " " + baloncesto.getApellido2() + " : " + baloncesto.valoracion() + " anotaciones/minutos jugados // "
-                        +baloncesto.porcentajeVictorias()+"% Victorias");
-            } else {
-                break;
-            }
-        }
+        return (this.partidosGanados * 100)/ this.partidosJugados;
     }
 
     @Override
@@ -249,6 +235,7 @@ public class EquipoBaloncesto extends Equipo implements Estadisticas, Serializab
             }
         }
     }
+
 
     public String mostrarJugadoresString() {
         String jugador="";

@@ -205,25 +205,12 @@ public class EquipoBalonmano extends Equipo implements Estadisticas, Serializabl
 
     @Override
     public double porcentajeVictorias() {
-        return ((this.partidosGanados / 100.0) * this.partidosJugados)*100;
+        return (this.partidosGanados * 100)/ this.partidosJugados;
     }
 
     @Override
     public int posicion() {
         return (this.partidosGanados*3)+(this.partidosEmpatados);
-    }
-    /**
-     * Funcion que muestra por pantalla las valoraciones de los jugadores de un equipo.
-     */
-    public void mostrarValoracionJug(){
-        for (JugadorBalonmano balonmano : jugadorBalonmano) {
-            if (balonmano != null) {
-                System.out.println("- " + balonmano.getNombre() + " " + balonmano.getApellido1() + " " + balonmano.getApellido2() + " : " + balonmano.valoracion() + " goles/minutos jugados // "
-                + balonmano.porcentajeVictorias()+"% Victorias"+ "Valoracion "+valoracion());
-            } else {
-                break;
-            }
-        }
     }
 
     /**

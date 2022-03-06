@@ -229,7 +229,7 @@ public class JugadorFutbol extends Jugador implements Estadisticas, Serializable
      */
     @Override
     public double porcentajeVictorias() {
-        return ((this.partidosGanados / 100.0) * this.partidosJugados)*100;
+        return (this.partidosGanados * 100)/ this.partidosJugados;
     }
 
     /**

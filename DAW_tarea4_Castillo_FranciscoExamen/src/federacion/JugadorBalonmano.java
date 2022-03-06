@@ -230,7 +230,7 @@ public class JugadorBalonmano extends Jugador implements Estadisticas, Serializa
      */
     @Override
     public double porcentajeVictorias() {
-        return ((getPartidosGanados() / 100.0) * getPartidosJugados())*100;
+        return (this.partidosGanados * 100)/ this.partidosJugados;
     }
 
     /**
