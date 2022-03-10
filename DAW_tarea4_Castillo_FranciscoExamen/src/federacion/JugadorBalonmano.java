@@ -240,7 +240,7 @@ public class JugadorBalonmano extends Jugador implements Estadisticas, Serializa
      */
     @Override
     public double valoracion() {
-        return (getGolesMarcados() * 60.0) / getMinutosJugados();
+        return (getGolesMarcados() * 60) / getMinutosJugados();
     }
 
     /**

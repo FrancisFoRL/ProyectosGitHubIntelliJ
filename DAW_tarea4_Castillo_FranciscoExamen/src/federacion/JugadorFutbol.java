@@ -239,7 +239,7 @@ public class JugadorFutbol extends Jugador implements Estadisticas, Serializable
      */
     @Override
     public double valoracion() {
-        return (this.golesMarcados * 60.0) / this.minutosJugados;
+        return (this.golesMarcados * 60) / this.minutosJugados;
     }
 
     @Override

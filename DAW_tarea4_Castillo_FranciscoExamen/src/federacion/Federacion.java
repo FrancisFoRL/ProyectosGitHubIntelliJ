@@ -315,7 +315,6 @@ public class Federacion implements Serializable {
     /**
      * Funcion que asigna nombres a los equipos y comprueba que no esten repetidos
      *
-     * @param equipos array que contiene los nombres de todos los equipos
      * @return devuelve el nombre del equipo
      */
     /*
