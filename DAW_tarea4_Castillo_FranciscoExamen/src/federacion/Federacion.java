@@ -14,6 +14,10 @@ import java.util.Random;
 public class Federacion implements Serializable {
     private static Random r1 = new Random();
 
+    public Federacion() {
+
+    }
+
     //Main
     public static void main(String[] args) throws IOException {
         //Atributos
@@ -205,7 +209,7 @@ public class Federacion implements Serializable {
                     addEstadisticas(equipos[posicion]);
                     opcion = PeticionDatos.pedirEnteroRango(0, 1, 3, "¿Desea añadir los jugadores de forma aleatoria(0) o manual(1)?: ");
                     if (opcion == 0) {
-                        añadirJugador(equipos[posicion], PeticionDatos.pedirEnteroRango(1, ((EquipoBaloncesto) equipos[posicion]).getJugadorBaloncesto().length, 3, "¿Cuantos jugadores desea añadir?: "), 0);
+                        añadirJugador(equipos[posicion], PeticionDatos.pedirEnteroRango(5, ((EquipoBaloncesto) equipos[posicion]).getJugadorBaloncesto().length, 3, "¿Cuantos jugadores desea añadir?(5/18): "), 0);
                         ((EquipoBaloncesto) equipos[posicion]).iniciarJugador();
                     } else {
                         añadirJugador(equipos[posicion], 5, 1);
@@ -221,7 +225,7 @@ public class Federacion implements Serializable {
                     addEstadisticas(equipos[posicion]);
                     opcion = PeticionDatos.pedirEnteroRango(0, 1, 3, "¿Desea añadir los jugadores de forma aleatoria(0) o manual(1)?: ");
                     if (opcion == 0) {
-                        añadirJugador(equipos[posicion], PeticionDatos.pedirEnteroRango(1, ((EquipoFutbol) equipos[posicion]).getJugadorFutbol().length, 3, "¿Cuantos jugadores desea añadir?: "), 0);
+                        añadirJugador(equipos[posicion], PeticionDatos.pedirEnteroRango(11, ((EquipoFutbol) equipos[posicion]).getJugadorFutbol().length, 3, "¿Cuantos jugadores desea añadir?(11/24): "), 0);
                         ((EquipoFutbol) equipos[posicion]).iniciarJugador();
                     } else {
                         añadirJugador(equipos[posicion], 11, 1);
@@ -238,7 +242,7 @@ public class Federacion implements Serializable {
                     addEstadisticas(equipos[posicion]);
                     opcion = PeticionDatos.pedirEnteroRango(0, 1, 3, "¿Desea añadir los jugadores de forma aleatoria(0) o manual(1)?: ");
                     if (opcion == 0) {
-                        añadirJugador(equipos[posicion], PeticionDatos.pedirEnteroRango(1, ((EquipoBalonmano) equipos[posicion]).getJugadorBalonmano().length, 3, "¿Cuantos jugadores desea añadir?: "), 0);
+                        añadirJugador(equipos[posicion], PeticionDatos.pedirEnteroRango(7, ((EquipoBalonmano) equipos[posicion]).getJugadorBalonmano().length, 3, "¿Cuantos jugadores desea añadir?(7/14): "), 0);
                         ((EquipoBalonmano) equipos[posicion]).iniciarJugador();
                     } else {
                         añadirJugador(equipos[posicion], 7, 1);

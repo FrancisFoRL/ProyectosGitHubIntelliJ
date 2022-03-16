@@ -6,7 +6,7 @@ package federacion;
  * @author Francisco Castillo
  * @version 28/01/2022
  */
-public class Equipo implements Estadisticas {
+public abstract class Equipo implements Estadisticas {
     //Atributos
     /**
      * Los atributos que son protected, se han elegido asi para que en las subclases sean

@@ -8,7 +8,7 @@ import java.time.Year;
  * @author Francisco Castillo
  * @version 28/01/2022
  */
-public abstract class Jugador {
+public abstract class Jugador implements Estadisticas {
     //Atributos
     /**
      * Los atributos que son protected, se han elegido asi para que en las subclases sean
