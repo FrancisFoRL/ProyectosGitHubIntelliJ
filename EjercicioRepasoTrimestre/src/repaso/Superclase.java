@@ -35,4 +35,13 @@ public class Superclase {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "Superclase{" +
+                "atributo1='" + atributo1 + '\'' +
+                ", atributo2=" + atributo2 +
+                ", atributo3=" + atributo3 +
+                '}';
+    }
 }
