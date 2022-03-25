@@ -1,5 +1,7 @@
 package librerias;
 
+import java.time.Year;
+
 /**
  * Clase de Fecha que gestiona y almacenada dia, mes y año deseado. Esta tambien gestiona que la fecha sea correcta
  * @author Francisco Castillo
@@ -8,7 +10,7 @@ package librerias;
 public class Fecha {
     //Atributos
     private int dia, mes, anio;
-
+    private final int year = Year.now().getValue();
     //Constructores
     public Fecha(){
         anio = 1;
@@ -174,6 +176,10 @@ public class Fecha {
         return true;
     }
 
+    public boolean comprobarFechaValida(int rangoAnio){
+
+    }
+
     /**
      * Funcion que comprueba si el año pasado por parametro es bisiesto.
      * @param anio Valor de año
@@ -187,6 +193,8 @@ public class Fecha {
         }
         return false;
     }
+
+
 
     //toString
     @Override
