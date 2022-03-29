@@ -1,9 +1,10 @@
 package daw_tarea5;
 
 import librerias.Fecha;
+
 import java.time.Year;
 
-public abstract class Persona implements Estadisticas{
+public abstract class Persona implements Estadisticas {
     private String dni, nombre, apellido1, apellido2, genero;
     private int indentificador;
     private Fecha fechaNacimiento;
@@ -69,11 +70,11 @@ public abstract class Persona implements Estadisticas{
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    private boolean validarFechaNacimiento(Fecha fNacimiento){
+    public boolean validarFechaNacimiento(Fecha fNacimiento){
         return fNacimiento.getAnio() < year - 120;
     }
 
-    private boolean validarGenero(String genero){
+    public boolean validarGenero(String genero){
         return genero.equalsIgnoreCase("Masculino") || genero.equalsIgnoreCase("Femenino") || genero.equalsIgnoreCase("Sin definir");
     }
 

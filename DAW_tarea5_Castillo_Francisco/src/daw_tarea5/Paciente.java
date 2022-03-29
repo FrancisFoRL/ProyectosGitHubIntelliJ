@@ -3,6 +3,7 @@ package daw_tarea5;
 import librerias.Fecha;
 
 import java.time.Year;
+import java.util.Arrays;
 
 public class Paciente extends Persona {
     private Fecha[] visitasMedicas;
@@ -18,26 +19,21 @@ public class Paciente extends Persona {
     }
 
     //Funciones
-    public boolean addVisita(Fecha visita){
-        if(!visita.comprobarFechaValida(year-50)){
+    public boolean addVisita(Fecha visita) {
+        if (!visita.comprobarFechaValida(year - 50)) {
             return false;
-        }else{
-            for(int x=0; x < visitasMedicas.length; x++){
-                if(visitasMedicas[x] == null){
+        } else {
+            for (int x = 0; x < visitasMedicas.length; x++) {
+                if (visitasMedicas[x] == null) {
                     break;
-                }else if (visita.getDia() == visitasMedicas[x].getDia() && visita.getMes() == visitasMedicas[x].getMes() && visita.getAnio() == visitasMedicas[x].getAnio()){
+                } else if (visita.getDia() == visitasMedicas[x].getDia() && visita.getMes() == visitasMedicas[x].getMes() && visita.getAnio() == visitasMedicas[x].getAnio()) {
                     return false;
                 }
             }
         }
-
-
-
-
-        for(int x=0; x < visitasMedicas.length;x++){
-            if(visitasMedicas[x] == null){
-                visitasMedicas[x] = visita;
-            }
+        aumentarArray();
+        for (int x = 0; x < visitasMedicas.length; x++) {
+            if (visitasMedicas[x] == null) visitasMedicas[x] = visita;
         }
         return true;
     }
@@ -52,9 +48,12 @@ public class Paciente extends Persona {
         return null;
     }
 
-    private void aumentarArray(){
-        for(int x=0; x< visitasMedicas.length;x++){
-
+    private void aumentarArray() {
+        if (Arrays.asList(visitasMedicas).contains(null)) ;
+        else {
+            Fecha[] aux = visitasMedicas;
+            visitasMedicas = new Fecha[aux.length * 2];
+            visitasMedicas = aux;
         }
     }
 
