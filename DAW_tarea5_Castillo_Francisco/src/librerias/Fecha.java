@@ -10,7 +10,7 @@ import java.time.Year;
 public class Fecha {
     //Atributos
     private int dia, mes, anio;
-    private final int year = Year.now().getValue();
+    private static final int year = Year.now().getValue();
     //Constructores
     public Fecha(){
         anio = 1;
@@ -123,10 +123,16 @@ public class Fecha {
     /**
      * Funcion que se le pasa un valor entero que sera un año y comprueba que este dentro de un
      * rango de 0 y 2100.
-     * @param anio Valor de año
      * @return dara un true si año pasado es correcto, si no, devolvera false.
      */
-    private static boolean comprobarAnio(int anio) {
+    private boolean comprobarAnio(int rango) {
+        if (anio < rango || anio > year) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean comprobarAnioCompleto(int anio) {
         if (anio < 0 || anio > 2100) {
             return false;
         }
@@ -136,9 +142,15 @@ public class Fecha {
     /**
      * Funcion que se le pasa un valor entero que sera un mes y comprueba que este dentro de un
      * rango de 1 y 12.
-     * @param mes Valor de mes
      * @return dara un true si el mes pasado es correcto, si no, devolvera false.
      */
+    private boolean comprobarMes() {
+        if (mes < 1 || mes > 12) {
+            return false;
+        }
+        return true;
+    }
+
     private boolean comprobarMes(int mes) {
         if (mes < 1 || mes > 12) {
             return false;
@@ -150,34 +162,45 @@ public class Fecha {
      * Funcion que se le pasa un valor entero que de dia, mes y año. Este compruba que los dias
      * corresponde al mes que se le paso por parametro y con año se comprueba si al ser bisiesto se le añade
      * el dia 29 al mes de Febrero.
-     * @param dia Valor de dia
-     * @param mes Valor de mes
-     * @param anio Valor de año
      * @return dara un true si el dia pasado es correcto, si no, devolvera false.
      */
+    private boolean comprobarDia() {
+        if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) {
+            return dia >= 1 && dia <= 31;
+        } else if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {
+            return dia >= 1 && dia <= 30;
+        } else if (mes == 2 && anioBisiesto(anio)) {
+            return dia >= 1 && dia <= 29;
+        } else if (mes == 2) {
+            return dia >= 1 && dia <= 28;
+        }
+        return true;
+    }
+
     public boolean comprobarDia(int dia, int mes, int anio) {
         if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) {
-            if (dia < 1 || dia > 31) {
-                return false;
-            }
+            return dia >= 1 && dia <= 31;
         } else if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {
-            if (dia < 1 || dia > 30) {
-                return false;
-            }
+            return dia >= 1 && dia <= 30;
         } else if (mes == 2 && anioBisiesto(anio)) {
-            if (dia < 1 || dia > 29) {
-                return false;
-            }
+            return dia >= 1 && dia <= 29;
         } else if (mes == 2) {
-            if (dia < 1 || dia > 28) {
-                return false;
-            }
+            return dia >= 1 && dia <= 28;
         }
         return true;
     }
 
     public boolean comprobarFechaValida(int rangoAnio){
-
+        if(!comprobarAnio(rangoAnio)){
+            return false;
+        }
+        if(!comprobarMes()){
+            return false;
+        }
+        if(!comprobarDia()){
+            return false;
+        }
+        return true;
     }
 
     /**

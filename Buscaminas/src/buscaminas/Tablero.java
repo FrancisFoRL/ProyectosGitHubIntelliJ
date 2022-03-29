@@ -9,16 +9,19 @@ public class Tablero {
     private int minas, min, max;
     private int[][] tablero;
 
-    public Tablero() {
-        filas = 10;
-        columnas = 10;
-        minas = 10;
-        tablero = new int[filas][columnas];
-        asignarPosiciones();
-        comprobarPosiciones();
+    public Tablero(){
     }
 
-    private void asignarPosiciones() {
+    public Tablero(int filas, int columnas, int minas) {
+        this.filas = filas;
+        this.columnas = columnas;
+        this.minas = minas;
+        tablero = new int[filas][columnas];
+        colocarMinas();
+        colocarPista();
+    }
+
+    private void colocarMinas() {
         Random ale = new Random();
         int contMinas = 0, fila, columna;
         do {
@@ -31,10 +34,47 @@ public class Tablero {
         } while (contMinas != minas);
     }
 
-    private void comprobarPosiciones() {
-        for (int x = 0; x < tablero.length; x++) {
-            for (int y = 0; y < tablero[x].length; y++) {
+    private void colocarPista(){
+        for(int x = 0; x < filas; x++){
+            for(int y = 0; y < columnas; y++){
+                if(tablero[x][y] != 9){
+                    tablero[x][y]=rellena(x,y);
+                }
             }
         }
+    }
+
+    public int rellena(int filas, int columnas){
+        int cont = 0;
+        for(int x = max(0, filas); x<=min(filas+1, this.filas-1); x++){
+            for(int y = max(0, columnas - 1); y<=min(columnas+1, this.columnas-1); y++){
+                if(x==filas && y==columnas)continue;
+                if(tablero[x][y]==9)cont++;
+            }
+        }
+        return cont;
+    }
+
+    private int min(int a, int b){
+        return Math.min(a, b);
+    }
+
+    private int max(int a, int b){
+        return Math.max(a, b);
+    }
+
+    public void pintarTablero(){
+        System.out.println("Tablero");
+        for(int x=0; x<filas; x++){
+            for(int y=0; y<columnas; y++){
+                if(tablero[x][y]!=9){
+                    System.out.print("  "+tablero[x][y]+"\t");
+                }else {
+                    System.out.print("  "+tablero[x][y]+"\t");
+                }
+            }
+            System.out.println();
+        }
+        System.out.println("Fin tablero");
     }
 }

@@ -2,8 +2,11 @@ package daw_tarea5;
 
 import librerias.Fecha;
 
+import java.time.Year;
+
 public class Paciente extends Persona {
     private Fecha[] visitasMedicas;
+    private final int year = Year.now().getValue();
 
     public Paciente() {
         visitasMedicas = new Fecha[5];
@@ -16,8 +19,29 @@ public class Paciente extends Persona {
 
     //Funciones
     public boolean addVisita(Fecha visita){
+        if(!visita.comprobarFechaValida(year-50)){
+            return false;
+        }else{
+            for(int x=0; x < visitasMedicas.length; x++){
+                if(visitasMedicas[x] == null){
+                    break;
+                }else if (visita.getDia() == visitasMedicas[x].getDia() && visita.getMes() == visitasMedicas[x].getMes() && visita.getAnio() == visitasMedicas[x].getAnio()){
+                    return false;
+                }
+            }
+        }
 
+
+
+
+        for(int x=0; x < visitasMedicas.length;x++){
+            if(visitasMedicas[x] == null){
+                visitasMedicas[x] = visita;
+            }
+        }
+        return true;
     }
+    //Todo Crear funcion para agrandar array visitasMedicas.
 
     private String ultimaVisita() {
         for (int x = 0; x < visitasMedicas.length; x++) {
@@ -26,6 +50,12 @@ public class Paciente extends Persona {
             }
         }
         return null;
+    }
+
+    private void aumentarArray(){
+        for(int x=0; x< visitasMedicas.length;x++){
+
+        }
     }
 
     @Override
