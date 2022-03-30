@@ -31,6 +31,16 @@ public class Medico extends Persona{
         this.especialidad = especialidad;
     }
 
+    //Getters y Setters
+
+    public String getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
+    }
+
 
     //Funciones
     /**
@@ -63,9 +73,14 @@ public class Medico extends Persona{
      */
     private void aumentarArray() {
         if (!Arrays.asList(diasTrabajados).contains(null)){//Arrays.asList nos permite buscar en el array el valor que deseemos, en este caso un null
-            Fecha[] aux = diasTrabajados;
+            Fecha[] aux = new Fecha[diasTrabajados.length];
+            for(int x=0; x< aux.length;x++){
+                aux[x] = diasTrabajados[x];
+            }
             diasTrabajados = new Fecha[aux.length * 2];
-            diasTrabajados = aux;
+            for(int x=0; x< aux.length;x++){
+                diasTrabajados[x] = aux[x];
+            }
         }
     }
 

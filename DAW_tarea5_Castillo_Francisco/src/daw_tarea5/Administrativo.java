@@ -18,6 +18,16 @@ public class Administrativo extends Persona{
         this.area = area;
     }
 
+    //Getters y Setters
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    //Funcion
     public boolean addDiasTrabajados(Fecha trabajo){
         if (!trabajo.comprobarFechaValida(year - 50)) {
             return false;
@@ -38,11 +48,15 @@ public class Administrativo extends Persona{
     }
 
     private void aumentarArray() {
-        if (Arrays.asList(diasTrabajados).contains(null));//Arrays.asList nos permite buscar en el array el valor que deseemos, en este caso un null
-        else {
-            Fecha[] aux = diasTrabajados;
+        if (!Arrays.asList(diasTrabajados).contains(null)){//Arrays.asList nos permite buscar en el array el valor que deseemos, en este caso un null
+            Fecha[] aux = new Fecha[diasTrabajados.length];
+            for(int x=0; x< aux.length;x++){
+                aux[x] = diasTrabajados[x];
+            }
             diasTrabajados = new Fecha[aux.length * 2];
-            diasTrabajados = aux;
+            for(int x=0; x< aux.length;x++){
+                diasTrabajados[x] = aux[x];
+            }
         }
     }
 
@@ -51,7 +65,6 @@ public class Administrativo extends Persona{
     }
 
     private int contDiasTrabajados(){
-        //TODO mostrar dias trabajados o numero de dias trabajados?
         int cont=0;
         for(int x = 0; x < diasTrabajados.length;x++){
             if(diasTrabajados[x] == null)break;

@@ -51,9 +51,14 @@ public class Paciente extends Persona {
 
     private void aumentarArray() {
         if (!Arrays.asList(visitasMedicas).contains(null)){
-            Fecha[] aux = visitasMedicas;
+            Fecha[] aux = new Fecha[visitasMedicas.length];
+            for(int x=0; x< aux.length;x++){
+                aux[x] = visitasMedicas[x];
+            }
             visitasMedicas = new Fecha[aux.length * 2];
-            visitasMedicas = aux;
+            for(int x=0; x< aux.length;x++){
+                visitasMedicas[x] = aux[x];
+            }
         }
     }
 
