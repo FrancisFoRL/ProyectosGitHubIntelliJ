@@ -4,13 +4,19 @@ import librerias.Fecha;
 
 import java.time.Year;
 import java.util.Arrays;
-//todo comprobar todos los breaks en if, ya que si se despide un trabajador, este quedaria null y los siguientes no se mostrarian
+//todo comprobar todos los breaks en if, ya que si se despide un trabajador, este quedaria null(este se guardaria en un fichero) y los siguientes no se mostrarian
 
 
 public class Administrativo extends Persona{
     private Fecha[] diasTrabajados;
     private String area;
     private final int year = Year.now().getValue();
+
+    public Administrativo(String dni, String nombre, String apellido1, String apellido2, String genero, Fecha fechaNacimiento, String area) {
+        super(dni, nombre, apellido1, apellido2, genero, fechaNacimiento);
+        this.diasTrabajados = new Fecha[5];
+        this.area = area;
+    }
 
     public boolean addDiasTrabajados(Fecha trabajo){
         if (!trabajo.comprobarFechaValida(year - 50)) {

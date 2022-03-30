@@ -9,8 +9,9 @@ public class Paciente extends Persona {
     private Fecha[] visitasMedicas;
     private final int year = Year.now().getValue();
 
-    public Paciente() {
-        visitasMedicas = new Fecha[5];
+    public Paciente(String dni, String nombre, String apellido1, String apellido2, String genero, Fecha fechaNacimiento) {
+        super(dni, nombre, apellido1, apellido2, genero, fechaNacimiento);
+        this.visitasMedicas = new Fecha[5];
     }
 
     //Getters y Setters
@@ -49,8 +50,7 @@ public class Paciente extends Persona {
     }
 
     private void aumentarArray() {
-        if (Arrays.asList(visitasMedicas).contains(null)) ;
-        else {
+        if (!Arrays.asList(visitasMedicas).contains(null)){
             Fecha[] aux = visitasMedicas;
             visitasMedicas = new Fecha[aux.length * 2];
             visitasMedicas = aux;

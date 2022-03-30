@@ -3,17 +3,30 @@ package daw_tarea5;
 import librerias.Fecha;
 
 import java.time.Year;
+import java.util.Arrays;
 
 public abstract class Persona implements Estadisticas {
     private String dni, nombre, apellido1, apellido2, genero;
-    private int indentificador;
+    private static int identificador;
     private Fecha fechaNacimiento;
     private final int year = Year.now().getValue();
 
+    //Constructores
     public Persona(){
-        //todo Comprobar si en el futuro hace falta definir valores a los atributos de constructor.
+        identificador++;
     }
 
+    public Persona(String dni, String nombre, String apellido1, String apellido2, String genero, Fecha fechaNacimiento) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellido1 = apellido1;
+        this.apellido2 = apellido2;
+        this.genero = genero;
+        this.fechaNacimiento = fechaNacimiento;
+        identificador++;
+    }
+
+    //Getters y Setters
     public String getDni() {
         return dni;
     }
@@ -54,12 +67,8 @@ public abstract class Persona implements Estadisticas {
         this.genero = genero;
     }
 
-    public int getIndentificador() {
-        return indentificador;
-    }
-
-    public void setIndentificador(int indentificador) {
-        this.indentificador = indentificador;
+    public int getIdentificador() {
+        return identificador;
     }
 
     public Fecha getFechaNacimiento() {
@@ -76,6 +85,24 @@ public abstract class Persona implements Estadisticas {
 
     public boolean validarGenero(String genero){
         return genero.equalsIgnoreCase("Masculino") || genero.equalsIgnoreCase("Femenino") || genero.equalsIgnoreCase("Sin definir");
+    }
+
+    /**
+     * Funcion que comprueba los DNI de un array de tipo Persona. Comprueba que el Dni pasado por parametro no este usado ya en el array.
+     * @param persona Array donde se comprobaran los array ya asignados.
+     * @param dni Dni que se comprobara que no este en el array.
+     * @return devuelve true si el DNI no se encuentra en le array y false si ya esta usado por otra persona.
+     */
+    //todo comprobar funcion comprobar Dni, por tema de cosultas y hospitales
+    public boolean comprobarDNI(Persona[] persona, String dni){
+        for (Persona persona1 : persona) {
+            if(persona1 == null){
+                break;
+            }else if (persona1.getDni().equals(dni)) {
+                return false;
+            }
+        }
+        return false;
     }
 
     @Override
