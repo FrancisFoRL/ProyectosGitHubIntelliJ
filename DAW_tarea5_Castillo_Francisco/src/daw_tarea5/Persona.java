@@ -6,15 +6,15 @@ import java.io.Serializable;
 import java.time.Year;
 import java.util.Arrays;
 
-public abstract class Persona implements Estadisticas, Serializable{
+public abstract class Persona implements Estadisticas, Serializable {
     private String dni, nombre, apellido1, apellido2, genero;
     private static int identificador, contID;
     private Fecha fechaNacimiento;
-    private final int year = Year.now().getValue();
+    int year = Year.now().getValue();
 
     //Constructores
-    public Persona(){
-        identificador++;
+    public Persona() {
+        identificador = contID++;
     }
 
     public Persona(String dni, String nombre, String apellido1, String apellido2, String genero, Fecha fechaNacimiento) {
@@ -80,30 +80,12 @@ public abstract class Persona implements Estadisticas, Serializable{
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public boolean validarFechaNacimiento(Fecha fNacimiento){
+    public boolean validarFechaNacimiento(Fecha fNacimiento) {
         return fNacimiento.getAnio() < year - 120;
     }
 
-    public static boolean validarGenero(String genero){
+    public static boolean validarGenero(String genero) {
         return genero.equalsIgnoreCase("Masculino") || genero.equalsIgnoreCase("Femenino") || genero.equalsIgnoreCase("Sin definir");
-    }
-
-    /**
-     * Funcion que comprueba los DNI de un array de tipo Persona. Comprueba que el Dni pasado por parametro no este usado ya en el array.
-     * @param persona Array donde se comprobaran los array ya asignados.
-     * @param dni Dni que se comprobara que no este en el array.
-     * @return devuelve true si el DNI no se encuentra en le array y false si ya esta usado por otra persona.
-     */
-    //todo comprobar funcion comprobar Dni, por tema de cosultas y hospitales
-    public static boolean comprobarDNI(Persona[] persona, String dni){
-        for (Persona persona1 : persona) {
-            if(persona1 == null){
-                break;
-            }else if (persona1.getDni().equals(dni)) {
-                return false;
-            }
-        }
-        return false;
     }
 
     @Override

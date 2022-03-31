@@ -38,7 +38,7 @@ public class Clinica extends Centro{
     public int diaporMes(int mes) {
         int cont = 0;
         for (int x = 0; x < getConsultas().length; x++) {
-            if (getConsultas()[x] == null) ;
+            if (getConsultas()[x] == null);
             else {
                 for (int y = 0; y < getConsultas()[x].getVisitasMedicas().length; y++) {
                     if (getConsultas()[x].getVisitasMedicas()[y] == null) break;

@@ -147,9 +147,5 @@ public class Medico extends Persona{
      * @return devuelve un true si la fecha esta dentro del rango y un false si esta fuera de este.
      * @see Estadisticas
      */
-    @Override
-    public boolean validarFechaNacimiento(Fecha fNacimiento) {
-        return fNacimiento.getAnio() > YEAR - 70 && fNacimiento.getAnio() < YEAR - 20;
-    }
 
 }//Fin Medico
