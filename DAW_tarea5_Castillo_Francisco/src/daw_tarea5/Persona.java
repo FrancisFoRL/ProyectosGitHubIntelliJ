@@ -2,12 +2,13 @@ package daw_tarea5;
 
 import librerias.Fecha;
 
+import java.io.Serializable;
 import java.time.Year;
 import java.util.Arrays;
 
-public abstract class Persona implements Estadisticas {
+public abstract class Persona implements Estadisticas, Serializable{
     private String dni, nombre, apellido1, apellido2, genero;
-    private static int identificador;
+    private static int identificador, contID;
     private Fecha fechaNacimiento;
     private final int year = Year.now().getValue();
 
@@ -23,7 +24,7 @@ public abstract class Persona implements Estadisticas {
         this.apellido2 = apellido2;
         this.genero = genero;
         this.fechaNacimiento = fechaNacimiento;
-        identificador++;
+        identificador = contID++;
     }
 
     //Getters y Setters
@@ -83,7 +84,7 @@ public abstract class Persona implements Estadisticas {
         return fNacimiento.getAnio() < year - 120;
     }
 
-    public boolean validarGenero(String genero){
+    public static boolean validarGenero(String genero){
         return genero.equalsIgnoreCase("Masculino") || genero.equalsIgnoreCase("Femenino") || genero.equalsIgnoreCase("Sin definir");
     }
 
@@ -94,7 +95,7 @@ public abstract class Persona implements Estadisticas {
      * @return devuelve true si el DNI no se encuentra en le array y false si ya esta usado por otra persona.
      */
     //todo comprobar funcion comprobar Dni, por tema de cosultas y hospitales
-    public boolean comprobarDNI(Persona[] persona, String dni){
+    public static boolean comprobarDNI(Persona[] persona, String dni){
         for (Persona persona1 : persona) {
             if(persona1 == null){
                 break;

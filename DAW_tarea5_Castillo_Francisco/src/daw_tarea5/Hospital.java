@@ -52,18 +52,16 @@ public class Hospital extends Centro {
         for (int x = 0; x < habitaciones.length; x++) {
             for (int y = 0; y < habitaciones[x].length; y++) {
                 if (habitaciones[x][y].getDni().equals(enf.getDni())) {
-                    for (; y < habitaciones[x].length - 1; y++) {
-                        habitaciones[y] = habitaciones[y + 1];
-                    }
+                    //Todo añadir que se guarde en el fichero el paciente eliminado
+                    habitaciones[x][y] = null;
                     return true;
                 }
             }
         }
         for (int x = 0; x < getConsultas().length; x++) {
                 if (getConsultas()[x].getDni().equals(enf.getDni())) {
-                    for (; x < getConsultas().length - 1; x++) {
-                        getConsultas()[x] = getConsultas()[x + 1];
-                    }
+                    //Todo añadir que se guarde en el fichero el paciente eliminado
+                    getConsultas()[x] = null;
                     return true;
                 }
         }

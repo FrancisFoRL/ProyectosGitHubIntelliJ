@@ -26,9 +26,8 @@ public class Clinica extends Centro{
     private boolean removePaciente(Paciente enf) {
         for (int x = 0; x < getConsultas().length; x++) {
             if (getConsultas()[x].getDni().equals(enf.getDni())) {
-                for (; x < getConsultas().length - 1; x++) {
-                    getConsultas()[x] = getConsultas()[x + 1];
-                }
+                //todo hacer para que el paciente se pase fichero antes de eliminar
+                getConsultas()[x] = null;
                 return true;
             }
         }

@@ -1,9 +1,11 @@
 package daw_tarea5;
 
-public abstract class Centro implements Estadisticas{
+import java.io.Serializable;
+
+public abstract class Centro implements Estadisticas, Serializable{
     private String nombreCentro, direccionCentro;
-    private int limiteConsultas, identificador;
-    protected static int contMedicos, contAdministrativos, contID; //todo contmedicos es el numero maximo de medicos o el numero de medicos creados?
+    private int limiteConsultas, identificador, contMedicos, contAdministrativos;
+    protected static int contID; //todo contmedicos es el numero maximo de medicos o el numero de medicos creados?
     private Paciente[] consultas;
     private Persona[] trabajadores;
     public Centro(String nombreCentro, String direccionCentro, int limiteConsultas) {
@@ -45,14 +47,8 @@ public abstract class Centro implements Estadisticas{
         if(trabajador instanceof Medico){
             for (int x = 0; x < trabajadores.length; x++) {
                 if (trabajadores[x] == null){
-                    trabajadores[x].setNombre(trabajador.getNombre());
-                    trabajadores[x].setApellido1(trabajador.getApellido1());
-                    trabajadores[x].setApellido2(trabajador.getApellido2());
-                    trabajadores[x].setDni(trabajador.getDni());
-                    trabajadores[x].setFechaNacimiento(trabajador.getFechaNacimiento());
-                    trabajadores[x].setGenero(trabajador.getGenero());
-                    ((Medico)trabajadores[x]).setEspecialidad(((Medico)trabajador).getEspecialidad());
-                    //todo en caso de que contMedico sea para el numero de medicos, añadir incremento de contMedico contMedico++
+                    trabajadores[x] = trabajador;
+                    contMedicos++;
                     break;
                 }
             }
@@ -66,7 +62,7 @@ public abstract class Centro implements Estadisticas{
                     trabajadores[x].setFechaNacimiento(trabajador.getFechaNacimiento());
                     trabajadores[x].setGenero(trabajador.getGenero());
                     ((Administrativo)trabajadores[x]).setArea(((Administrativo)trabajador).getArea());
-                    //todo en caso de que contAd sea para el numero de medicos, añadir incremento de contAd contAd++
+                    contAdministrativos++;
                     break;
                 }
             }

@@ -20,6 +20,7 @@ public class Paciente extends Persona {
     }
 
     //Funciones
+    //todo comprobar que la fecha no sea antes de que la paciente naciera y que la fecha no sea mayor a la actual
     public boolean addVisita(Fecha visita) {
         if (!visita.comprobarFechaValida(year - 50)) {
             return false;
