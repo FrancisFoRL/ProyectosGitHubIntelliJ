@@ -16,6 +16,7 @@ public class GestionMedica {
     }
 
     public static void main(String[] args) {
+        GestionMedica gestion = new GestionMedica(5);
         int opcion;
         do {
             System.out.println("0. Salir aplicacion");
@@ -59,7 +60,12 @@ public class GestionMedica {
         } while (opcion != 0);
     }
 
-    private Persona crearPersona(int numTipo) {
+    /**
+     *
+     * @param numTipo 0=Persona, 1=Medico, 2=Administrativo
+     * @return devuelve un objeto con la informacion necesaria de tipo Persona
+     */
+    private static Persona crearPersona(int numTipo) {
         String dni, nombre, apellido1, apellido2, genero, posicion;
         int dia, mes, anio;
         Fecha fecha;
@@ -74,7 +80,7 @@ public class GestionMedica {
         apellido2 = PeticionDatos.pedirCadena("2o apellido: ");
         do {
             genero = PeticionDatos.pedirCadena("Genero (Masculino/Femenino/Sin Definir): ");
-            if (!Persona.validarGenero(genero)) {
+            if (!Medico.validarGenero(genero)) {
                 System.out.println("Genero no valido");
             }
         } while (!Persona.validarGenero(genero));
@@ -88,14 +94,16 @@ public class GestionMedica {
 
     /**
      * Funcion que comprueba los DNI de un array de tipo Persona. Comprueba que el Dni pasado por parametro no este usado ya en el array.
-     *
-     * @param num
+     * @param num 0=Persona, 1=Medico, 2=Administrativo.
      * @param dni Dni que se comprobara que no este en el array.
      * @return devuelve true si el DNI no se encuentra en le array y false si ya esta usado por otra persona.
      */
-    //todo comprobar funcion comprobar Dni, por tema de cosultas y hospitales
+
+    //todo funcion que busca el dni.
+    //todo comprobar funcion comprobar Dni, por a nivel de consultas y hospitales
     //todo añadir comprobar dni de los objetos guardados en ficheros
-    private boolean comprobarDNI(String dni, int num) {
+    /*
+    private static boolean comprobarDNI(Centro centrosMedicos,String dni, int num) {
         if (num == 0) {
             for (Centro centro : centrosMedicos) {
                 if (centro instanceof Hospital) {
@@ -145,4 +153,5 @@ public class GestionMedica {
         }
         return true;
     }
+     */
 }

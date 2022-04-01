@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class Administrativo extends Persona{
     private Fecha[] diasTrabajados;
     private String area;
-    private final int year = Year.now().getValue();
+    private static int year = Year.now().getValue();
 
     public Administrativo(String dni, String nombre, String apellido1, String apellido2, String genero, Fecha fechaNacimiento, String area) {
         super(dni, nombre, apellido1, apellido2, genero, fechaNacimiento);
@@ -75,6 +75,11 @@ public class Administrativo extends Persona{
         return cont;
     }
 
+    public static boolean validarFechaNacimiento(Fecha fNacimiento) {
+        return fNacimiento.getAnio() > year - 65 && fNacimiento.getAnio() < year - 18;
+    }
+
+
     @Override
     public int diaporMes(int mes) {
         int cont = 0;
@@ -94,10 +99,5 @@ public class Administrativo extends Persona{
     public void mostrarEstado() {
         System.out.print("Dni Medico: " + getDni() + " || Nombre: " + getNombre() + " || Apellidos: " + getApellido1() + " " + getApellido2() +
                 " || Dias Trabajados: "+ contDiasTrabajados());
-    }
-
-    @Override
-    public boolean validarFechaNacimiento(Fecha fNacimiento) {
-        return fNacimiento.getAnio() > year - 65 && fNacimiento.getAnio() < year - 18;
     }
 }//Fin Administrativo

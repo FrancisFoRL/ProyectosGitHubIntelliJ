@@ -2,12 +2,12 @@ package daw_tarea5;
 
 import librerias.Fecha;
 
-import java.time.Year;
 import java.util.Arrays;
 
 public class Paciente extends Persona {
     private Fecha[] visitasMedicas;
-    private final int year = Year.now().getValue();
+    //Atributos que indican donde esta el paciente;
+    private int planta, habitacion, consulta;
 
     public Paciente(String dni, String nombre, String apellido1, String apellido2, String genero, Fecha fechaNacimiento) {
         super(dni, nombre, apellido1, apellido2, genero, fechaNacimiento);
@@ -19,10 +19,34 @@ public class Paciente extends Persona {
         return visitasMedicas;
     }
 
+    public int getPlanta() {
+        return planta;
+    }
+
+    public void setPlanta(int planta) {
+        this.planta = planta;
+    }
+
+    public int getHabitacion() {
+        return habitacion;
+    }
+
+    public void setHabitacion(int habitacion) {
+        this.habitacion = habitacion;
+    }
+
+    public int getConsulta() {
+        return consulta;
+    }
+
+    public void setConsulta(int consulta) {
+        this.consulta = consulta;
+    }
+
     //Funciones
     //todo comprobar que la fecha no sea antes de que la paciente naciera y que la fecha no sea mayor a la actual
     public boolean addVisita(Fecha visita) {
-        if (!visita.comprobarFechaValida(year - 50)) {
+        if (!visita.comprobarFechaValida(YEAR - 50)) {
             return false;
         } else {
             for (int x = 0; x < visitasMedicas.length; x++) {
@@ -61,6 +85,10 @@ public class Paciente extends Persona {
                 visitasMedicas[x] = aux[x];
             }
         }
+    }
+
+    public  boolean validarFechaNacimiento(Fecha fNacimiento) {
+        return fNacimiento.getAnio() > YEAR - 120 && fNacimiento.getAnio() < YEAR;
     }
 
     @Override

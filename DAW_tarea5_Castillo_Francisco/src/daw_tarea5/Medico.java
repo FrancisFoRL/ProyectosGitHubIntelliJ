@@ -2,7 +2,6 @@ package daw_tarea5;
 
 import librerias.Fecha;
 
-import java.time.Year;
 import java.util.Arrays;
 //todo comprobar todos los breaks en if, ya que si se despide un trabajador, este quedaria null y los siguientes no se mostrarian
 
@@ -21,7 +20,7 @@ public class Medico extends Persona{
     /**
      * Atributo constante de tipo entero que almacena el año actual.
      */
-    private final int YEAR = Year.now().getValue();
+
 
     //Constructor
 
@@ -101,13 +100,17 @@ public class Medico extends Persona{
      */
     private int contDiasTrabajados(){
         int cont=0;
-        for(int x = 0; x < diasTrabajados.length;x++){
-            if(diasTrabajados[x] == null)break;
-            else{
+        for (Fecha diasTrabajado : diasTrabajados) {
+            if (diasTrabajado == null) break;
+            else {
                 cont++;
             }
         }
         return cont;
+    }
+
+    public  boolean validarFechaNacimiento(Fecha fNacimiento) {
+        return fNacimiento.getAnio() > YEAR - 70 && fNacimiento.getAnio() < YEAR - 18;
     }
 
     /**
@@ -134,18 +137,12 @@ public class Medico extends Persona{
 
     /**
      * Funcion implementada de la interfaz Estadisticas. Esta funcion muestra la informacion de un medico.
+     * @see Persona
      */
     @Override
     public void mostrarEstado() {
         System.out.print("Dni Medico: " + getDni() + " || Nombre: " + getNombre() + " || Apellidos: " + getApellido1() + " " + getApellido2() +
                 " || Dias Trabajados: "+ contDiasTrabajados());
     }
-
-    /**
-     * Funcion heredada de la clase Persona. Con esta funcion se comprueba que la fecha de nacimiento del medico este dentro del rango.
-     * @param fNacimiento atributo de tipo Fecha que contiene la fecha de nacimiento.
-     * @return devuelve un true si la fecha esta dentro del rango y un false si esta fuera de este.
-     * @see Estadisticas
-     */
 
 }//Fin Medico

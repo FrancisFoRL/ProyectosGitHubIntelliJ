@@ -4,13 +4,12 @@ import librerias.Fecha;
 
 import java.io.Serializable;
 import java.time.Year;
-import java.util.Arrays;
 
 public abstract class Persona implements Estadisticas, Serializable {
     private String dni, nombre, apellido1, apellido2, genero;
     private static int identificador, contID;
     private Fecha fechaNacimiento;
-    int year = Year.now().getValue();
+    protected static final int YEAR = Year.now().getValue();
 
     //Constructores
     public Persona() {
@@ -80,9 +79,26 @@ public abstract class Persona implements Estadisticas, Serializable {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public boolean validarFechaNacimiento(Fecha fNacimiento) {
-        return fNacimiento.getAnio() < year - 120;
+    public static Persona existePers(Centro[] centro, String dni, int tipoPers) {
+        if (tipoPers == 0) {
+            for (int x = 0; x < centro.length; x++) {
+                for(int i =0; i < centro[x].getConsultas().length;i++){
+                    if(centro[x].getConsultas()[i].getDni().equals(dni)){
+                        return centro[x].getConsultas()[i];
+                    }
+                }
+                for (int j = 0; j < ((Hospital)centro[j]).getHabitaciones().length; x++){
+                    for(int y = 0; y < ((Hospital)centro[j]).getHabitaciones()[j].length){
+
+                    }
+                }
+
+            }
+        }
+
+        return null;
     }
+
 
     public static boolean validarGenero(String genero) {
         return genero.equalsIgnoreCase("Masculino") || genero.equalsIgnoreCase("Femenino") || genero.equalsIgnoreCase("Sin definir");
