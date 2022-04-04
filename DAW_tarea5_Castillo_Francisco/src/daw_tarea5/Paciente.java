@@ -87,7 +87,7 @@ public class Paciente extends Persona {
         }
     }
 
-    public  boolean validarFechaNacimiento(Fecha fNacimiento) {
+    public static boolean validarFechaNacimiento(Fecha fNacimiento) {
         return fNacimiento.getAnio() > YEAR - 120 && fNacimiento.getAnio() < YEAR;
     }
 

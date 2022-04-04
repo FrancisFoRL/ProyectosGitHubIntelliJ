@@ -83,19 +83,31 @@ public abstract class Persona implements Estadisticas, Serializable {
         if (tipoPers == 0) {
             for (int x = 0; x < centro.length; x++) {
                 for(int i =0; i < centro[x].getConsultas().length;i++){
-                    if(centro[x].getConsultas()[i].getDni().equals(dni)){
+                    if(centro[x].getConsultas()[i] == null);
+                    else if(centro[x].getConsultas()[i].getDni().equals(dni)){
                         return centro[x].getConsultas()[i];
                     }
                 }
-                for (int j = 0; j < ((Hospital)centro[j]).getHabitaciones().length; x++){
-                    for(int y = 0; y < ((Hospital)centro[j]).getHabitaciones()[j].length){
-
+                for (int j = 0; j < ((Hospital)centro[x]).getHabitaciones().length; x++){
+                    for(int y = 0; y < ((Hospital)centro[x]).getHabitaciones()[j].length; y++){
+                        if(((Hospital) centro[x]).getHabitaciones()[j][y] == null);
+                        else if(((Hospital) centro[x]).getHabitaciones()[j][y].getDni().equals(dni)){
+                            return ((Hospital) centro[x]).getHabitaciones()[j][y];
+                        }
                     }
                 }
 
             }
+        }else if(tipoPers == 1){
+            for (int x = 0; x < centro.length; x++){
+                for(int y = 0; y < centro[x].getTrabajadores().length; y++){
+                    if(centro[x].getTrabajadores()[y] == null);
+                    else if(centro[x].getTrabajadores()[y].getDni().equals(dni)){
+                        return centro[x].getTrabajadores()[y];
+                    }
+                }
+            }
         }
-
         return null;
     }
 

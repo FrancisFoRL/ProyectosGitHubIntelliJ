@@ -55,13 +55,7 @@ public abstract class Centro implements Estadisticas, Serializable{
         }else if(trabajador instanceof Administrativo){
             for (int x = 0; x < trabajadores.length; x++) {
                 if (trabajadores[x] == null){
-                    trabajadores[x].setNombre(trabajador.getNombre());
-                    trabajadores[x].setApellido1(trabajador.getApellido1());
-                    trabajadores[x].setApellido2(trabajador.getApellido2());
-                    trabajadores[x].setDni(trabajador.getDni());
-                    trabajadores[x].setFechaNacimiento(trabajador.getFechaNacimiento());
-                    trabajadores[x].setGenero(trabajador.getGenero());
-                    ((Administrativo)trabajadores[x]).setArea(((Administrativo)trabajador).getArea());
+                    trabajadores[x] = trabajador;
                     contAdministrativos++;
                     break;
                 }
@@ -69,4 +63,6 @@ public abstract class Centro implements Estadisticas, Serializable{
         }
     }
     //todo Crear removeEmpleado para eliminarlo de array
+
+
 }//Fin de Centro

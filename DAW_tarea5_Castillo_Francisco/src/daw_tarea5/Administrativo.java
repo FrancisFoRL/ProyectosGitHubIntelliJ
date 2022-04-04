@@ -60,7 +60,7 @@ public class Administrativo extends Persona{
         }
     }
 
-    private boolean comprobarEspecialidad(String especialidad){
+    public static boolean comprobarEspecialidad(String especialidad){
         return especialidad.equalsIgnoreCase("Urgencias") || especialidad.equalsIgnoreCase("Quirofano") || especialidad.equalsIgnoreCase("Administracion");
     }
 

@@ -88,7 +88,7 @@ public class Medico extends Persona{
      * @param especialidad datos de tipo cadena que contiene la especialidad del medico.
      * @return devuelve un true si la especialidad es correcta y false si no lo es.
      */
-    private boolean comprobarEspecialidad(String especialidad){
+    public static boolean comprobarEspecialidad(String especialidad){
         return especialidad.equalsIgnoreCase("Traumatologia") || especialidad.equalsIgnoreCase("Dermatologia") || especialidad.equalsIgnoreCase("Oftalmologia") ||
                 especialidad.equalsIgnoreCase("Alergologia") || especialidad.equalsIgnoreCase("Geriatria") || especialidad.equalsIgnoreCase("Psiquiatria");
     }
@@ -109,7 +109,7 @@ public class Medico extends Persona{
         return cont;
     }
 
-    public  boolean validarFechaNacimiento(Fecha fNacimiento) {
+    public static boolean validarFechaNacimiento(Fecha fNacimiento) {
         return fNacimiento.getAnio() > YEAR - 70 && fNacimiento.getAnio() < YEAR - 18;
     }
 

@@ -17,6 +17,8 @@ public class Hospital extends Centro {
         return habitaciones;
     }
 
+
+
     //Funciones
     //todo añadir comprobaciones para que los DNI no esten repetidos
     private boolean addPaciente(Paciente enf, int consulta) {

@@ -177,7 +177,7 @@ public class Fecha {
         return true;
     }
 
-    public boolean comprobarDia(int dia, int mes, int anio) {
+    public static boolean comprobarDia(int dia, int mes, int anio) {
         if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) {
             return dia >= 1 && dia <= 31;
         } else if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {
@@ -190,7 +190,7 @@ public class Fecha {
         return true;
     }
 
-    public int rangoDia(int mes, int anio) {
+    public static int rangoDia(int mes, int anio) {
         if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) {
             return 31;
         } else if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {
@@ -221,7 +221,7 @@ public class Fecha {
      * @param anio Valor de año
      * @return dara un true si el año es bisiesto, si no, devolvera false.
      */
-    private boolean anioBisiesto(int anio){
+    private static boolean anioBisiesto(int anio){
         if(anio % 4 == 0){
             return anio % 100 != 0;
         }else if(anio % 100 == 0){

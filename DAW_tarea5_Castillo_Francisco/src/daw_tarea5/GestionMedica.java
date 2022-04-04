@@ -15,7 +15,12 @@ public class GestionMedica {
         centrosMedicos = new Centro[tamanio];
     }
 
+    public Centro[] getCentrosMedicos() {
+        return centrosMedicos;
+    }
+
     public static void main(String[] args) {
+        String dni;
         GestionMedica gestion = new GestionMedica(5);
         int opcion;
         do {
@@ -36,7 +41,14 @@ public class GestionMedica {
 
                     switch (opcion = PeticionDatos.pedirEnteroRango(1, 3, 3, "Dame una opcion: ")) {
                         case 1: {
-
+                            //todo tengo la informacion y enseño la informacion de donde guardar
+                            //1. Asignar a consulta/habitación
+                            //2. Modificar datos del paciente
+                            //3. Dar el alta
+                            dni = PeticionDatos.pedirNIF_NIE();
+                            if(Persona.existePers(gestion.getCentrosMedicos(), dni,1) == null){
+                                crearPersona(3, dni);
+                            }
                         }
 
                     }
@@ -60,21 +72,22 @@ public class GestionMedica {
         } while (opcion != 0);
     }
 
+        private static void mostrarHosCli(GestionMedica gestion){
+        for(int x = 0; x < gestion.getCentrosMedicos().length; x++){
+            System.out.println(x+".- "+gestion.getCentrosMedicos()[x].getNombreCentro());
+        }
+    }
+
     /**
      *
      * @param numTipo 0=Persona, 1=Medico, 2=Administrativo
      * @return devuelve un objeto con la informacion necesaria de tipo Persona
      */
-    private static Persona crearPersona(int numTipo) {
-        String dni, nombre, apellido1, apellido2, genero, posicion;
+
+    private static Persona crearPersona(int numTipo, String dni) {
+        String nombre, apellido1, apellido2, genero, posicion="";
         int dia, mes, anio;
-        Fecha fecha;
-        do {
-            dni = PeticionDatos.pedirNIF_NIE();
-            if (!comprobarDNI(dni, numTipo)) {
-                System.out.println("DNI en uso");
-            }
-        } while (!comprobarDNI(dni, numTipo));
+        Fecha fecha = new Fecha();
         nombre = PeticionDatos.pedirCadena("Nombre: ");
         apellido1 = PeticionDatos.pedirCadena("1er apellido: ");
         apellido2 = PeticionDatos.pedirCadena("2o apellido: ");
@@ -85,10 +98,45 @@ public class GestionMedica {
             }
         } while (!Persona.validarGenero(genero));
         if (numTipo == 0) {
-            //TODO como usar el validar Fecha naciento de Persona?
+            do{
+                anio = PeticionDatos.pedirEntero("Año de nacimiento: ");
+                mes = PeticionDatos.pedirEntero("Mes de nacimiento: ");
+                dia = PeticionDatos.pedirEnteroRango(1,Fecha.rangoDia(mes,anio),3,"Dia de nacimiento: ");
+                fecha.setFechaCompleta(dia,mes,anio);
+            }while (!Paciente.validarFechaNacimiento(fecha));
+        }else if(numTipo == 1){
+            do{
+                anio = PeticionDatos.pedirEntero("Año de nacimiento: ");
+                mes = PeticionDatos.pedirEntero("Mes de nacimiento: ");
+                dia = PeticionDatos.pedirEnteroRango(1,Fecha.rangoDia(mes,anio),3,"Dia de nacimiento: ");
+                fecha.setFechaCompleta(dia,mes,anio);
+            }while (!Medico.validarFechaNacimiento(fecha));
+        }else if(numTipo == 2){
+            do{
+                anio = PeticionDatos.pedirEntero("Año de nacimiento: ");
+                mes = PeticionDatos.pedirEntero("Mes de nacimiento: ");
+                dia = PeticionDatos.pedirEnteroRango(1,Fecha.rangoDia(mes,anio),3,"Dia de nacimiento: ");
+                fecha.setFechaCompleta(dia,mes,anio);
+            }while (!Administrativo.validarFechaNacimiento(fecha));
         }
 
-        //Todo No puedo hacer Persona persona = new Persona();
+        if(numTipo == 1){
+            do{
+                posicion = PeticionDatos.pedirCadena("Especialidad de medico: ");
+            }while (!Medico.comprobarEspecialidad(posicion));
+        }else if(numTipo == 2){
+            do{
+                posicion = PeticionDatos.pedirCadena("Especialidad de medico: ");
+            }while (!Administrativo.comprobarEspecialidad(posicion));
+        }
+
+        if(numTipo == 0){
+            return new Paciente(dni,nombre,apellido1,apellido2,genero,fecha);
+        }else if(numTipo == 1){
+            return new Medico(dni,nombre,apellido1,apellido2,genero,fecha,posicion);
+        }else if(numTipo == 2){
+            return new Administrativo(dni,nombre,apellido1,apellido2,genero,fecha,posicion);
+        }
         return null;
     }
 
