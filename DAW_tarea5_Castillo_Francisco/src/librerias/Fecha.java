@@ -61,7 +61,7 @@ public class Fecha {
      * @return dara un true si la fecha pasada es correcta, si hay algun error, devolvera false.
      */
     public boolean setFechaCompleta(int dia, int mes, int anio){
-        if (comprobarAnio(anio)) {
+        if (comprobarAnioCompleto(anio)) {
             this.anio = anio;
         } else {
             return false;

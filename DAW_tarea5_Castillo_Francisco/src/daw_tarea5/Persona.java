@@ -100,7 +100,9 @@ public abstract class Persona implements Estadisticas, Serializable {
             }
         }else if(tipoPers == 1){
             for (int x = 0; x < centro.length; x++){
+                if(centro[x] == null)continue;
                 for(int y = 0; y < centro[x].getTrabajadores().length; y++){
+                    if(centro[x].getTrabajadores()[y] == null);
                     if(centro[x].getTrabajadores()[y] == null);
                     else if(centro[x].getTrabajadores()[y].getDni().equals(dni)){
                         return centro[x].getTrabajadores()[y];

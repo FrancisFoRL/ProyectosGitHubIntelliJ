@@ -20,6 +20,7 @@ public class Medico extends Persona{
     /**
      * Atributo constante de tipo entero que almacena el año actual.
      */
+    protected int lugar;
 
 
     //Constructor
@@ -39,7 +40,6 @@ public class Medico extends Persona{
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
     }
-
 
     //Funciones
     /**
