@@ -41,7 +41,6 @@ public class GestionMedica {
             System.out.println("5. Sacar estadisticas Centros Medicos");
             System.out.println("6. Sacar estadisticas Personal");
 
-
             switch (opcion = PeticionDatos.pedirEnteroRango(0, 6, 3, "Dame una opcion: ")) {
 
 
@@ -75,6 +74,7 @@ public class GestionMedica {
                                     System.out.println(persona);//todo cambiar String persona para mostrarlo bien
                                 }
                                 //todo al crear uno nuevo mostrar este menu o asignar directamente en la creacion?
+                                //todo hacer peticion de donde asignar y luego volver al menu principal
                                 //todo comprobar que el array no este lleno de trajadores, crear funcion que aumente
                                 System.out.println("1. Asignar a hospital/clinica");
                                 System.out.println("2. Modificar datos del medico");
