@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class Administrativo extends Persona{
     private Fecha[] diasTrabajados;
     private String area;
-    private static int year = Year.now().getValue();
+    protected int lugar;
 
     public Administrativo(String dni, String nombre, String apellido1, String apellido2, String genero, Fecha fechaNacimiento, String area) {
         super(dni, nombre, apellido1, apellido2, genero, fechaNacimiento);
@@ -29,7 +29,7 @@ public class Administrativo extends Persona{
 
     //Funcion
     public boolean addDiasTrabajados(Fecha trabajo){
-        if (!trabajo.comprobarFechaValida(year - 50)) {
+        if (!trabajo.comprobarFechaValida(YEAR - 50)) {
             return false;
         } else {
             for (int x = 0; x < diasTrabajados.length; x++) {
@@ -76,7 +76,7 @@ public class Administrativo extends Persona{
     }
 
     public static boolean validarFechaNacimiento(Fecha fNacimiento) {
-        return fNacimiento.getAnio() > year - 65 && fNacimiento.getAnio() < year - 18;
+        return fNacimiento.getAnio() > YEAR - 65 && fNacimiento.getAnio() < YEAR - 18;
     }
 
 

@@ -10,6 +10,7 @@ public abstract class Persona implements Estadisticas, Serializable {
     private static int identificador, contID;
     private Fecha fechaNacimiento;
     protected static final int YEAR = Year.now().getValue();
+    protected int lugar;
 
     //Constructores
     public Persona() {
@@ -82,21 +83,25 @@ public abstract class Persona implements Estadisticas, Serializable {
     public static Persona existePers(Centro[] centro, String dni, int tipoPers) {
         if (tipoPers == 0) {
             for (int x = 0; x < centro.length; x++) {
-                for(int i =0; i < centro[x].getConsultas().length;i++){
-                    if(centro[x].getConsultas()[i] == null);
-                    else if(centro[x].getConsultas()[i].getDni().equals(dni)){
-                        return centro[x].getConsultas()[i];
+                if (centro[x] == null);
+                else {
+                    if (centro[x] instanceof Hospital) {
+                        for (int j = 0; j < ((Hospital) centro[x]).getHabitaciones().length; j++) {
+                            for (int y = 0; y < ((Hospital) centro[x]).getHabitaciones()[j].length; y++) {
+                                if (((Hospital) centro[x]).getHabitaciones()[j][y] == null) ;
+                                else if (((Hospital) centro[x]).getHabitaciones()[j][y].getDni().equals(dni)) {
+                                    return ((Hospital) centro[x]).getHabitaciones()[j][y];
+                                }
+                            }
+                        }
                     }
-                }
-                for (int j = 0; j < ((Hospital)centro[x]).getHabitaciones().length; x++){
-                    for(int y = 0; y < ((Hospital)centro[x]).getHabitaciones()[j].length; y++){
-                        if(((Hospital) centro[x]).getHabitaciones()[j][y] == null);
-                        else if(((Hospital) centro[x]).getHabitaciones()[j][y].getDni().equals(dni)){
-                            return ((Hospital) centro[x]).getHabitaciones()[j][y];
+                    for (int i = 0; i < centro[x].getConsultas().length; i++) {
+                        if (centro[x].getConsultas()[i] == null) ;
+                        else if (centro[x].getConsultas()[i].getDni().equals(dni)) {
+                            return centro[x].getConsultas()[i];
                         }
                     }
                 }
-
             }
         }else if(tipoPers == 1){
             for (int x = 0; x < centro.length; x++){

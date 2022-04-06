@@ -17,10 +17,6 @@ public class Medico extends Persona{
      */
     private String especialidad;
 
-    /**
-     * Atributo constante de tipo entero que almacena el año actual.
-     */
-    protected int lugar;
 
 
     //Constructor

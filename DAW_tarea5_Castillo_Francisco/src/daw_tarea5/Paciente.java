@@ -7,7 +7,7 @@ import java.util.Arrays;
 public class Paciente extends Persona {
     private Fecha[] visitasMedicas;
     //Atributos que indican donde esta el paciente;
-    private int planta, habitacion, consulta;
+    protected int planta, habitacion, consulta, hospital;
 
     public Paciente(String dni, String nombre, String apellido1, String apellido2, String genero, Fecha fechaNacimiento) {
         super(dni, nombre, apellido1, apellido2, genero, fechaNacimiento);

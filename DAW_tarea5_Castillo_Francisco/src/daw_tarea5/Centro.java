@@ -4,7 +4,8 @@ import java.io.Serializable;
 
 public abstract class Centro implements Estadisticas, Serializable {
     private String nombreCentro, direccionCentro;
-    private int limiteConsultas, identificador, contMedicos, contAdministrativos;
+    private int identificador, contMedicos, contAdministrativos;
+    protected int limiteConsultas;
     protected static int contID; //todo contmedicos es el numero maximo de medicos o el numero de medicos creados?
     protected static int contCentros;
     private Paciente[] consultas;
@@ -14,6 +15,7 @@ public abstract class Centro implements Estadisticas, Serializable {
         this.nombreCentro = nombreCentro;
         this.direccionCentro = direccionCentro;
         this.consultas = new Paciente[limiteConsultas];//todo limiteconsultas el numero de consultas que tendra?
+        this.limiteConsultas = limiteConsultas;
         this.trabajadores = new Persona[5];
         identificador = contID++;
         contCentros++;

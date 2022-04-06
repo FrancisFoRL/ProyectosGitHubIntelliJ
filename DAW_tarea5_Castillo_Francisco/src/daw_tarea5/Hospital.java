@@ -3,7 +3,7 @@ package daw_tarea5;
 import librerias.Fecha;
 
 public class Hospital extends Centro {
-    private int plantas, habitacionesPorPlanta;
+    protected int plantas, habitacionesPorPlanta;
     private Paciente[][] habitaciones;
 
     //Constructor
@@ -18,21 +18,25 @@ public class Hospital extends Centro {
     }
 
     //Funciones
-    private boolean addPaciente(Paciente enf, int consulta) {
+    public boolean addPaciente(Paciente enf, int consulta) {
         if (getConsultas()[consulta - 1] != null) {
             return false;
         } else {
+            getConsultas()[consulta - 1] = enf;
+            /*
             getConsultas()[consulta - 1].setDni(enf.getDni());
             getConsultas()[consulta - 1].setNombre(enf.getNombre());
             getConsultas()[consulta - 1].setApellido1(enf.getApellido1());
             getConsultas()[consulta - 1].setApellido2(enf.getApellido2());
             getConsultas()[consulta - 1].setFechaNacimiento(enf.getFechaNacimiento());
             getConsultas()[consulta - 1].setGenero(enf.getGenero());
+
+             */
         }
         return true;
     }
 
-    private boolean addPaciente(Paciente enf, int planta, int habitacion) {
+    public boolean addPaciente(Paciente enf, int planta, int habitacion) {
         if (habitaciones[planta - 1][habitacion - 1] != null) {
             return false;
         } else {
@@ -110,8 +114,8 @@ public class Hospital extends Centro {
             if (getConsultas()[x] == null) {
                 System.out.println("Consulta " + (x + 1) + " libre");
             } else {
-                System.out.println("Consulta " + (x + 1) + " tiene un paciente ( DNI: " + getConsultas()[x].getDni() + "|| Nombre: "
-                        + getConsultas()[x].getNombre() + " || Apellidos: " + getConsultas()[x].getApellido1() + " " + getConsultas()[x].getApellido2());
+                System.out.println("Consulta " + (x + 1) + " tiene un paciente // DNI: " + getConsultas()[x].getDni() + "|| Nombre: "
+                        + getConsultas()[x].getNombre() + " || Apellidos: " + getConsultas()[x].getApellido1() + " " + getConsultas()[x].getApellido2()) ;
             }
         }
         System.out.println("---------Plantas Hospital---------");
@@ -119,7 +123,7 @@ public class Hospital extends Centro {
             for (int y = 0; y < habitaciones[x].length; y++) {
                 if (habitaciones[x][y] == null) break;
                 else {
-                    System.out.println("Planta " + (x + 1) + " /Habitacion " + (y + 1) + " ( DNI: " + habitaciones[x][y].getDni() + "|| Nombre: "
+                    System.out.println("Planta " + (x + 1) + " /Habitacion " + (y + 1) + "|| DNI: " + habitaciones[x][y].getDni() + "|| Nombre: "
                             + habitaciones[x][y].getNombre() + " || Apellidos: " + habitaciones[x][y].getApellido1() + " " + habitaciones[x][y].getApellido2());
                 }
             }

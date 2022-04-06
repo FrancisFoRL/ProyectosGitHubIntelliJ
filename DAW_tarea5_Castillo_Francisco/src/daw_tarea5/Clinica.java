@@ -8,7 +8,7 @@ public class Clinica extends Centro{
     }
 
     //Funciones
-    private boolean addPaciente(Paciente enf, int consulta) {
+    public boolean addPaciente(Paciente enf, int consulta) {
         if (getConsultas()[consulta - 1] != null) {
             return false;
         } else {
