@@ -29,7 +29,7 @@ public class GestionMedica {
         Centro centro;
         GestionMedica gestion = new GestionMedica(5);
         int opcion, peticion, z;
-        for (int x = 0; x < 4; x+=2) {
+        for (int x = 0; x < 4; x += 2) {
             gestion.getCentrosMedicos()[x] = new Hospital("VIA", "VIA", 5, 5, 5);
             gestion.getCentrosMedicos()[x + 1] = new Clinica("CLI", "CLI", 4);
 
@@ -51,21 +51,21 @@ public class GestionMedica {
                     System.out.println("3. Eliminar Hospital");
                     System.out.println("4. Volver al menu principal");
 
-                    switch (opcion = PeticionDatos.pedirEnteroRango(1, 4, 3, "Dame una opcion: ")){
+                    switch (opcion = PeticionDatos.pedirEnteroRango(1, 4, 3, "Dame una opcion: ")) {
                         case 1 -> {
 
-                            z = PeticionDatos.pedirEnteroRango(1,mostrarHosCli(gestion.centrosMedicos, 1),3,"Dame una opcion: ");
+                            z = PeticionDatos.pedirEnteroRango(1, mostrarHosCli(gestion.centrosMedicos, 1), 3, "Dame una opcion: ");
 
                             System.out.println("1. Mostrar informacion del Hospital seleccionado");
                             System.out.println("2. Modificar datos del hospital seleccionado");
                             System.out.println("3. Volver al menu principal");
 
-                            switch (peticion = PeticionDatos.pedirEnteroRango(1,3,3,"Dame una opcion: ")){
+                            switch (peticion = PeticionDatos.pedirEnteroRango(1, 3, 3, "Dame una opcion: ")) {
                                 case 1 -> {
-                                    gestion.getCentrosMedicos()[z-1].mostrarEstado();
+                                    gestion.getCentrosMedicos()[z - 1].mostrarEstado();
                                 }
                                 case 2 -> {
-
+                                    editarCentro(gestion.getCentrosMedicos()[z - 1]);
                                 }
                             }
                         }
@@ -73,82 +73,108 @@ public class GestionMedica {
                             nuevoCentro(crearCentro(0), gestion.getCentrosMedicos());
                         }
                         case 3 -> {
-                            //todo me quede por aqui
+                            //todo hacer la eliminacion del hospital, si hay personas no se puede eliminar, si esta vacio se podra eliminar
                         }
                     }
 
                 }
 
                 case 2 -> {
+                    System.out.println("1. Mostrar Clinicas existentes");
+                    System.out.println("2. Crear nueva Clinica");
+                    System.out.println("3. Eliminar Clinica");
+                    System.out.println("4. Volver al menu principal");
+
+                    switch (opcion = PeticionDatos.pedirEnteroRango(1, 4, 3, "Dame una opcion: ")) {
+                        case 1 -> {
+
+                            z = PeticionDatos.pedirEnteroRango(1, mostrarHosCli(gestion.centrosMedicos, 2), 3, "Dame una opcion: ");
+
+                            System.out.println("1. Mostrar informacion de la Clinica seleccionado");
+                            System.out.println("2. Modificar datos de la Clinica seleccionado");
+                            System.out.println("3. Volver al menu principal");
+
+                            switch (peticion = PeticionDatos.pedirEnteroRango(1, 3, 3, "Dame una opcion: ")) {
+                                case 1 -> {
+                                    gestion.getCentrosMedicos()[z - 1].mostrarEstado();
+                                }
+                                case 2 -> {
+                                    editarCentro(gestion.getCentrosMedicos()[z - 1]);
+                                }
+                            }
+                        }
+                        case 2 -> {
+                            nuevoCentro(crearCentro(1), gestion.getCentrosMedicos());
+                        }
+                        case 3 -> {
+                            //todo hacer la eliminacion del hospital, si hay personas no se puede eliminar, si esta vacio se podra eliminar
+                        }
+                    }
 
                 }
                 case 3 -> {
-                    do {
-                        System.out.println("1. Crear nuevo trabajador");
-                        System.out.println("2. Modificar datos de un trabajador");
-                        System.out.println("3. Volver al menu principal");
 
-                        switch (opcion = PeticionDatos.pedirEnteroRango(1, 3, 3, "Dame una opcion: ")) {
-                            case 1 -> {
-                                dni = PeticionDatos.pedirNIF_NIE();
-                                if (Persona.existePers(gestion.getCentrosMedicos(), dni, 1) == null) {
-                                    System.out.println("¿El nuevo trabajador sera Medico(1) o Administrativo(2)?");
-                                    persona = crearPersona(PeticionDatos.pedirEnteroRango(1, 2, 3, "Dame un opcion: "), dni);
-                                    añadirPersona(gestion.getCentrosMedicos(), persona, 1);
-                                } else {
-                                    if (Persona.existePers(gestion.getCentrosMedicos(), dni, 1) instanceof Medico) {
-                                        numPers = 1;
-                                    } else {
-                                        numPers = 2;
-                                    }
-                                    persona = Persona.existePers(gestion.getCentrosMedicos(), dni, numPers);
-                                    //todo al crear uno nuevo mostrar este menu o asignar directamente en la creacion?
-                                    //todo hacer peticion de donde asignar y luego volver al menu principal
-                                    //todo comprobar que el array no este lleno de trajadores, crear funcion que aumente
-                                    System.out.println("La persona con DNI "+persona.getDni() + " existe: ");
-                                    System.out.println(persona);//todo cambiar String persona para mostrarlo bien
-                                    System.out.println("1. Asignar a hospital/clinica");
-                                    System.out.println("2. Modificar datos del medico");
-                                    System.out.println("3. Despedir");
+                    System.out.println("1. Crear nuevo trabajador");
+                    System.out.println("2. Modificar datos de un trabajador");
+                    System.out.println("3. Volver al menu principal");
 
-                                    switch (PeticionDatos.pedirEnteroRango(1, 3, 3, "Dame una opcion: ")) {
-                                        case 1 -> {
-                                            mostrarHosCli(gestion.getCentrosMedicos(), 3);
-                                            peticion = PeticionDatos.pedirEnteroRango(1, Centro.contCentros, 3, "Dame una opcion: ");
-                                            ((Medico) persona).lugar = peticion - 1;
-                                            gestion.getCentrosMedicos()[peticion - 1].addTrabajador(persona);
-
-                                        }
-                                        case 2 -> {
-                                            if (Persona.existePers(gestion.getCentrosMedicos(), dni, 1) instanceof Medico) {
-                                                numPers = 1;
-                                            } else {
-                                                numPers = 2;
-                                            }
-                                            persona = Persona.existePers(gestion.getCentrosMedicos(), dni, numPers);
-                                            //persona = crearPersona(3, dni);
-                                        }
-                                        case 3 -> {
-
-                                            gestion.getCentrosMedicos()[((Medico) persona).lugar].removeTrabajador(persona.getDni());
-                                        }
-                                    }
-                                }
-                            }
-                            case 2 -> {
-                                dni = PeticionDatos.pedirNIF_NIE();
+                    switch (opcion = PeticionDatos.pedirEnteroRango(1, 3, 3, "Dame una opcion: ")) {
+                        case 1 -> {
+                            dni = PeticionDatos.pedirNIF_NIE();
+                            if (Persona.existePers(gestion.getCentrosMedicos(), dni, 1) == null) {
+                                System.out.println("¿El nuevo trabajador sera Medico(1) o Administrativo(2)?");
+                                persona = crearPersona(PeticionDatos.pedirEnteroRango(1, 2, 3, "Dame un opcion: "), dni);
+                                añadirPersona(gestion.getCentrosMedicos(), persona, 1);
+                            } else {
                                 if (Persona.existePers(gestion.getCentrosMedicos(), dni, 1) instanceof Medico) {
                                     numPers = 1;
-                                } else if(Persona.existePers(gestion.getCentrosMedicos(), dni, 1) instanceof Administrativo) {
+                                } else {
                                     numPers = 2;
                                 }
-                                //todo hacer algo para saber posicion en la que esta guardada el medico o administrativa
-                                //persona = Persona.existePers(gestion.getCentrosMedicos(), dni, numPers);
-                                //persona = crearPersona(numPers,dni);
-                            }
+                                persona = Persona.existePers(gestion.getCentrosMedicos(), dni, numPers);
+                                //todo al crear uno nuevo mostrar este menu o asignar directamente en la creacion?
+                                //todo comprobar que el array no este lleno de trajadores, crear funcion que aumente
+                                System.out.println("La persona con DNI " + persona.getDni() + " existe: ");
+                                System.out.println(persona);//todo cambiar String persona para mostrarlo bien
+                                System.out.println("1. Asignar a hospital/clinica");
+                                System.out.println("2. Modificar datos del medico");
+                                System.out.println("3. Despedir");
 
+                                switch (PeticionDatos.pedirEnteroRango(1, 3, 3, "Dame una opcion: ")) {
+                                    case 1 -> {
+                                        mostrarHosCli(gestion.getCentrosMedicos(), 3);
+                                        peticion = PeticionDatos.pedirEnteroRango(1, Centro.contCentros, 3, "Dame una opcion: ");
+                                        persona.lugar = peticion - 1;
+                                        gestion.getCentrosMedicos()[peticion - 1].addTrabajador(persona);
+                                    }
+                                    case 2 -> {
+                                        if (Persona.existePers(gestion.getCentrosMedicos(), dni, 1) instanceof Medico) {
+                                            numPers = 1;
+                                        } else {
+                                            numPers = 2;
+                                        }
+                                        editarPersona(persona, numPers);
+                                    }
+                                    case 3 -> {
+
+                                        gestion.getCentrosMedicos()[((Medico) persona).lugar].removeTrabajador(persona.getDni());
+                                    }
+                                }
+                            }
                         }
-                    } while (opcion != 3);
+                        case 2 -> {
+                            dni = PeticionDatos.pedirNIF_NIE();
+                            if (Persona.existePers(gestion.getCentrosMedicos(), dni, 1) instanceof Medico) {
+                                numPers = 1;
+                            } else if (Persona.existePers(gestion.getCentrosMedicos(), dni, 1) instanceof Administrativo) {
+                                numPers = 2;
+                            }
+                            //todo hacer algo para saber posicion en la que esta guardada el medico o administrativa
+                            //persona = Persona.existePers(gestion.getCentrosMedicos(), dni, numPers);
+                            //persona = crearPersona(numPers,dni);
+                        }
+
+                    }
                 }
                 case 4 -> {
                     do {
@@ -173,7 +199,7 @@ public class GestionMedica {
                                     //todo al crear uno nuevo mostrar este menu o asignar directamente en la creacion?
                                     //todo hacer peticion de donde asignar y luego volver al menu principal
                                     //todo comprobar que el array no este lleno de trajadores, crear funcion que aumente
-                                    System.out.println("La persona con DNI "+persona.getDni() + " existe: ");
+                                    System.out.println("La persona con DNI " + persona.getDni() + " existe: ");
                                     System.out.println(persona);//todo cambiar String persona para mostrarlo bien
                                     System.out.println("1. Asignar a hospital/clinica");
                                     System.out.println("2. Modificar datos del medico");
@@ -182,7 +208,7 @@ public class GestionMedica {
                                     switch (PeticionDatos.pedirEnteroRango(1, 3, 3, "Dame una opcion: ")) {
                                         case 1: {
                                             peticion = PeticionDatos.pedirEnteroRango(1, mostrarHosCli(gestion.getCentrosMedicos(), 3), 3, "Dame una opcion: ");
-                                            ((Medico) persona).lugar = peticion-1;
+                                            ((Medico) persona).lugar = peticion - 1;
                                             gestion.getCentrosMedicos()[peticion - 1].addTrabajador(persona);
                                             break;
                                         }
@@ -207,7 +233,7 @@ public class GestionMedica {
                                 dni = PeticionDatos.pedirNIF_NIE();
                                 if (Persona.existePers(gestion.getCentrosMedicos(), dni, 1) instanceof Medico) {
                                     numPers = 1;
-                                } else if(Persona.existePers(gestion.getCentrosMedicos(), dni, 1) instanceof Administrativo) {
+                                } else if (Persona.existePers(gestion.getCentrosMedicos(), dni, 1) instanceof Administrativo) {
                                     numPers = 2;
                                 }
                                 //todo hacer algo para saber posicion en la que esta guardada el medico o administrativa
@@ -232,17 +258,17 @@ public class GestionMedica {
     private static int mostrarHosCli(Centro[] centro, int mostrar) {
         int cont = 0;
         for (int x = 1; x <= Centro.contCentros; x++) {
-            if(mostrar == 1 && centro[x-1] instanceof Hospital) {
-                System.out.println(cont+1 + ".- ID " + centro[x - 1].getIdentificador() + " Hospital " + centro[x - 1].getNombreCentro());
+            if (mostrar == 1 && centro[x - 1] instanceof Hospital) {
+                System.out.println(cont + 1 + ".- ID " + centro[x - 1].getIdentificador() + " Hospital " + centro[x - 1].getNombreCentro());
                 cont++;
-            }else if(mostrar == 2 && centro[x-1] instanceof Clinica){
-                System.out.println(cont+1 + ".- ID " + centro[x - 1].getIdentificador() + " Clinica " + centro[x - 1].getNombreCentro());
+            } else if (mostrar == 2 && centro[x - 1] instanceof Clinica) {
+                System.out.println(cont + 1 + ".- ID " + centro[x - 1].getIdentificador() + " Clinica " + centro[x - 1].getNombreCentro());
                 cont++;
-            }else if(mostrar == 3){
-                if(centro[x-1] instanceof Hospital){
+            } else if (mostrar == 3) {
+                if (centro[x - 1] instanceof Hospital) {
                     System.out.println(x + ".- ID " + centro[x - 1].getIdentificador() + " Hospital " + centro[x - 1].getNombreCentro());
                     cont++;
-                }else if(centro[x-1] instanceof Clinica){
+                } else if (centro[x - 1] instanceof Clinica) {
                     System.out.println(x + ".- ID " + centro[x - 1].getIdentificador() + " Clinica " + centro[x - 1].getNombreCentro());
                     cont++;
                 }
@@ -251,23 +277,23 @@ public class GestionMedica {
         return cont;
     }
 
-    private static void nuevoCentro(Centro centro, Centro[] gestion){
+    private static void nuevoCentro(Centro centro, Centro[] gestion) {
         aumentarArray(gestion);
-        for(int x = 0; x < gestion.length; x++){
-            if(gestion[x] == null){
+        for (int x = 0; x < gestion.length; x++) {
+            if (gestion[x] == null) {
                 gestion[x] = centro;
             }
         }
     }
 
-    private static void aumentarArray(Centro[] centro){
-        if (!Arrays.asList(centro).contains(null)){//Arrays.asList nos permite buscar en el array el valor que deseemos, en este caso un null
+    private static void aumentarArray(Centro[] centro) {
+        if (!Arrays.asList(centro).contains(null)) {//Arrays.asList nos permite buscar en el array el valor que deseemos, en este caso un null
             Centro[] aux = new Centro[centro.length];
-            for(int x=0; x< aux.length;x++){
+            for (int x = 0; x < aux.length; x++) {
                 aux[x] = centro[x];
             }
             centro = new Centro[aux.length * 2];
-            for(int x=0; x< aux.length;x++){
+            for (int x = 0; x < aux.length; x++) {
                 centro[x] = aux[x];
             }
         }
@@ -288,6 +314,12 @@ public class GestionMedica {
             return new Clinica(nombre, direccion, limiteConsultas);
         }
         return null;
+    }
+
+    private static void editarCentro(Centro centro) {
+        //todo comprobar que el nombre no esta repetido
+        centro.setNombreCentro(PeticionDatos.pedirCadena("Nombre del centro:"));
+        centro.setDireccionCentro(PeticionDatos.pedirCadena("Direccion del centro: "));//todo cambiar para permitir numeros
     }
 
     /**
@@ -351,40 +383,92 @@ public class GestionMedica {
         return null;
     }
 
-    private static void añadirPersona(Centro[] centro, Persona persona, int numTipo){
+    //todo en caso de que el campo se deje vacio el valor se quedara como el antiguo
+    private static void editarPersona(Persona persona, int numTipo) {
+        String genero, posicion;
+        int dia, mes, anio;
+        Fecha fecha = new Fecha();
+        persona.setNombre(PeticionDatos.pedirCadena("Nombre[" + persona.getNombre() + "]: "));
+        persona.setApellido1(PeticionDatos.pedirCadena("1e apellido[" + persona.getApellido1() + "]: "));
+        persona.setApellido2(PeticionDatos.pedirCadena("2o apellido[" + persona.getApellido2() + "]: "));
+        do {
+            genero = PeticionDatos.pedirCadena("Genero " + persona.getGenero() + "(Masculino/Femenino/Sin Definir): ");
+            if (!Medico.validarGenero(genero)) {
+                System.out.println("Genero no valido");
+            }
+        } while (!Persona.validarGenero(genero));
+
+        if (numTipo == 0) {
+            do {
+                anio = PeticionDatos.pedirEntero("Año de nacimiento: ");
+                mes = PeticionDatos.pedirEnteroRango(1, 12, 3, "Mes de nacimiento: ");
+                dia = PeticionDatos.pedirEnteroRango(1, Fecha.rangoDia(mes, anio), 3, "Dia de nacimiento: ");
+                fecha.setFechaCompleta(dia, mes, anio);
+            } while (!Paciente.validarFechaNacimiento(fecha));
+        } else if (numTipo == 1) {
+            do {
+                anio = PeticionDatos.pedirEntero("Año de nacimiento: ");
+                mes = PeticionDatos.pedirEnteroRango(1, 12, 3, "Mes de nacimiento: ");
+                dia = PeticionDatos.pedirEnteroRango(1, Fecha.rangoDia(mes, anio), 3, "Dia de nacimiento: ");
+                fecha.setFechaCompleta(dia, mes, anio);
+            } while (!Medico.validarFechaNacimiento(fecha));
+        } else if (numTipo == 2) {
+            do {
+                anio = PeticionDatos.pedirEntero("Año de nacimiento: ");
+                mes = PeticionDatos.pedirEnteroRango(1, 12, 3, "Mes de nacimiento: ");
+                dia = PeticionDatos.pedirEnteroRango(1, Fecha.rangoDia(mes, anio), 3, "Dia de nacimiento: ");
+                fecha.setFechaCompleta(dia, mes, anio);
+            } while (!Administrativo.validarFechaNacimiento(fecha));
+            persona.setFechaNacimiento(fecha);
+        }
+
+        if (numTipo == 1) {
+            do {
+                posicion = PeticionDatos.pedirCadena("Especialidad de medico: ");
+            } while (!Medico.comprobarEspecialidad(posicion));
+            ((Medico) persona).setEspecialidad(posicion);
+        } else if (numTipo == 2) {
+            do {
+                posicion = PeticionDatos.pedirCadena("Especialidad de medico: ");
+            } while (!Administrativo.comprobarEspecialidad(posicion));
+            ((Administrativo) persona).setArea(posicion);
+        }
+    }
+
+    private static void añadirPersona(Centro[] centro, Persona persona, int numTipo) {
         int x, planta, habitacion;
         boolean ocupado;
         System.out.println("\n¿A que hospital o clinica se asignara la persona?");
-        x = PeticionDatos.pedirEnteroRango(1, mostrarHosCli(centro, 3), 3, "Dame una opcion: ")-1;
-        if(numTipo == 0){
+        x = PeticionDatos.pedirEnteroRango(1, mostrarHosCli(centro, 3), 3, "Dame una opcion: ") - 1;
+        if (numTipo == 0) {
             System.out.println("Los quieres añadir a la consulta(1) o una habitacion en planta(2)");
-            if(PeticionDatos.pedirEnteroRango(1,2,3,"Dame una opcion: ") == 1){
-                if(centro[x] instanceof Hospital){
-                    do{
-                        ocupado = ((Hospital)centro[x]).addPaciente((Paciente)persona, PeticionDatos.pedirEnteroRango(1,centro[x].limiteConsultas,3,"Dame un numero de consulta(1/"+centro[x].limiteConsultas+"): "));
-                        if(!ocupado){
+            if (PeticionDatos.pedirEnteroRango(1, 2, 3, "Dame una opcion: ") == 1) {
+                if (centro[x] instanceof Hospital) {
+                    do {
+                        ocupado = ((Hospital) centro[x]).addPaciente((Paciente) persona, PeticionDatos.pedirEnteroRango(1, centro[x].limiteConsultas, 3, "Dame un numero de consulta(1/" + centro[x].limiteConsultas + "): "));
+                        if (!ocupado) {
                             System.out.println("Consulta ocupada");
                         }
-                    }while (!ocupado);
-                }else{
-                    do{
-                        ocupado = !((Clinica)centro[x]).addPaciente((Paciente)persona, PeticionDatos.pedirEnteroRango(1,centro[x].limiteConsultas,3,"Dame un numero de consulta(1/"+centro[x].limiteConsultas+"): "));
-                        if(!ocupado){
+                    } while (!ocupado);
+                } else {
+                    do {
+                        ocupado = !((Clinica) centro[x]).addPaciente((Paciente) persona, PeticionDatos.pedirEnteroRango(1, centro[x].limiteConsultas, 3, "Dame un numero de consulta(1/" + centro[x].limiteConsultas + "): "));
+                        if (!ocupado) {
                             System.out.println("Consulta ocupada");
                         }
-                    }while (!ocupado);
+                    } while (!ocupado);
                 }
-            }else{
-                do{
-                    planta = PeticionDatos.pedirEnteroRango(1,((Hospital)centro[x-1]).plantas,3,"Numero de planta: ");
-                    habitacion = PeticionDatos.pedirEnteroRango(1,((Hospital)centro[x-1]).habitacionesPorPlanta,3,"Numero de planta: ");
-                    ocupado = ((Hospital)centro[x]).addPaciente((Paciente)persona, planta, habitacion);
-                    if(!ocupado){
+            } else {
+                do {
+                    planta = PeticionDatos.pedirEnteroRango(1, ((Hospital) centro[x - 1]).plantas, 3, "Numero de planta: ");
+                    habitacion = PeticionDatos.pedirEnteroRango(1, ((Hospital) centro[x - 1]).habitacionesPorPlanta, 3, "Numero de planta: ");
+                    ocupado = ((Hospital) centro[x]).addPaciente((Paciente) persona, planta, habitacion);
+                    if (!ocupado) {
                         System.out.println("Habitacion ocupada");
                     }
-                }while (!ocupado);
+                } while (!ocupado);
             }
-        }else{
+        } else {
             persona.lugar = x;
             centro[x].addTrabajador(persona);
         }

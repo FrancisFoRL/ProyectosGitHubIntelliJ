@@ -66,12 +66,21 @@ public class Paciente extends Persona {
     //Todo Crear funcion para agrandar array visitasMedicas.
 
     private String ultimaVisita() {
-        for (int x = 0; x < visitasMedicas.length; x++) {
-            if (x + 1 == visitasMedicas.length || visitasMedicas[x + 1] == null) {
-                return visitasMedicas[x].toString();
+        Fecha fecha = new Fecha(0,0,0);
+        for (Fecha visitasMedica : visitasMedicas) {
+            if (visitasMedica == null);
+            else if (visitasMedica.getAnio() > fecha.getAnio()) {
+                fecha.setFechaCompleta(visitasMedica.getDia(), visitasMedica.getMes(), visitasMedica.getAnio());
+            } else if (visitasMedica.getAnio() == fecha.getAnio()) {
+                if (visitasMedica.getMes() > fecha.getMes()) {
+                    fecha.setFechaCompleta(visitasMedica.getDia(), visitasMedica.getMes(), visitasMedica.getAnio());
+                } else if (visitasMedica.getMes() == fecha.getMes()) {
+                    if (visitasMedica.getDia() > fecha.getDia())
+                        fecha.setFechaCompleta(visitasMedica.getDia(), visitasMedica.getMes(), visitasMedica.getAnio());
+                }
             }
         }
-        return null;
+        return fecha.toString();
     }
 
     private void aumentarArray() {

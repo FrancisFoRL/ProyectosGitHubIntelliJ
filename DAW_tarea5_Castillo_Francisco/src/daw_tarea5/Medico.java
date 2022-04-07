@@ -44,14 +44,14 @@ public class Medico extends Persona{
      * @param trabajo atributo de tipo fecha que contendra la fecha nueva a introducir.
      * @return devuelve true si se añadio correctamente la fecha, en el caso de que haya algun fallo, se devolvera un false.
      */
+    //todo contralar que la fecha sea entre hoy y la fecha de nacimiente mas mayoria de edad
     public boolean addDiasTrabajados(Fecha trabajo){
         if (!trabajo.comprobarFechaValida(YEAR - 50)) {
             return false;
         } else {
             for (int x = 0; x < diasTrabajados.length; x++) {
-                if (diasTrabajados[x] == null) {
-                    break;
-                } else if (trabajo.getDia() == diasTrabajados[x].getDia() && trabajo.getMes() == diasTrabajados[x].getMes() && trabajo.getAnio() == diasTrabajados[x].getAnio()) {
+                if (diasTrabajados[x] == null);
+                    else if (trabajo.getDia() == diasTrabajados[x].getDia() && trabajo.getMes() == diasTrabajados[x].getMes() && trabajo.getAnio() == diasTrabajados[x].getAnio()) {
                     return false;
                 }
             }

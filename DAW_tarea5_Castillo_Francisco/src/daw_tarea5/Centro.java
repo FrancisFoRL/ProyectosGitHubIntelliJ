@@ -81,5 +81,15 @@ public abstract class Centro implements Estadisticas, Serializable {
         }
     }
 
+    public static Centro existeCentro(Centro[] centros, String nombre){
+        for(int x = 0; x < centros.length; x++){
+            if(centros[x] == null);
+            else if(centros[x].getNombreCentro().equalsIgnoreCase(nombre)){
+                return centros[x];
+            }
+        }
+        return null;
+    }
+
 
 }//Fin de Centro

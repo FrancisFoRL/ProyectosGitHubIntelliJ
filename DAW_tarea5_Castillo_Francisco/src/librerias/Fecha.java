@@ -1,5 +1,6 @@
 package librerias;
 
+import java.time.LocalDate;
 import java.time.Year;
 
 /**
@@ -10,6 +11,7 @@ import java.time.Year;
 public class Fecha {
     //Atributos
     private int dia, mes, anio;
+    protected static final LocalDate DIAHOY = LocalDate.now();
     private static final int year = Year.now().getValue();
     //Constructores
     public Fecha(){
@@ -214,6 +216,13 @@ public class Fecha {
             return false;
         }
         return true;
+    }
+
+    public boolean comprobarFechaValida(Fecha persona){
+        if(anio > DIAHOY.getYear() || anio < persona.getAnio() && mes > DIAHOY.getMonth() ||){
+            return false;
+        }
+        if()
     }
 
     /**
