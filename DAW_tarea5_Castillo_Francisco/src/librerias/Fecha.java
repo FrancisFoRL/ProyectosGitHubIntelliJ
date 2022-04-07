@@ -218,11 +218,19 @@ public class Fecha {
         return true;
     }
 
-    public boolean comprobarFechaValida(Fecha persona){
-        if(anio > DIAHOY.getYear() || anio < persona.getAnio() && mes > DIAHOY.getMonth() ||){
+    public boolean comprobarFechaValida(Fecha persona, int rango){
+        if(anio > DIAHOY.getYear() || anio < persona.getAnio() + rango){
+            return false;
+        }else if(mes > DIAHOY.getMonthValue() && anio == DIAHOY.getYear()){
+            return false;
+        }else if(dia > DIAHOY.getDayOfMonth() && mes == DIAHOY.getMonthValue() && anio == DIAHOY.getYear()){
+            return false;
+        }else if(mes < persona.getMes() && anio == persona.getAnio() + rango){
+            return false;
+        }else if(dia > persona.getDia() && mes == persona.getMes() && anio == persona.getAnio() + rango){
             return false;
         }
-        if()
+        return true;
     }
 
     /**

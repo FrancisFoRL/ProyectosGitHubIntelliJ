@@ -12,12 +12,8 @@ public class Clinica extends Centro{
         if (getConsultas()[consulta - 1] != null) {
             return false;
         } else {
-            getConsultas()[consulta - 1].setDni(enf.getDni());
-            getConsultas()[consulta - 1].setNombre(enf.getNombre());
-            getConsultas()[consulta - 1].setApellido1(enf.getApellido1());
-            getConsultas()[consulta - 1].setApellido2(enf.getApellido2());
-            getConsultas()[consulta - 1].setFechaNacimiento(enf.getFechaNacimiento());
-            getConsultas()[consulta - 1].setGenero(enf.getGenero());
+            getConsultas()[consulta - 1] = enf;
+            enf.consulta = consulta - 1;
         }
         return true;
     }

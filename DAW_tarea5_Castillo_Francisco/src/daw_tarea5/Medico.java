@@ -18,7 +18,6 @@ public class Medico extends Persona{
     private String especialidad;
 
 
-
     //Constructor
 
     public Medico(String dni, String nombre, String apellido1, String apellido2, String genero, Fecha fechaNacimiento, String especialidad) {
@@ -46,7 +45,7 @@ public class Medico extends Persona{
      */
     //todo contralar que la fecha sea entre hoy y la fecha de nacimiente mas mayoria de edad
     public boolean addDiasTrabajados(Fecha trabajo){
-        if (!trabajo.comprobarFechaValida(YEAR - 50)) {
+        if (!trabajo.comprobarFechaValida(getFechaNacimiento(), 22)) {
             return false;
         } else {
             for (int x = 0; x < diasTrabajados.length; x++) {
@@ -105,8 +104,9 @@ public class Medico extends Persona{
         return cont;
     }
 
+    //todo controlar tambien dia y mes
     public static boolean validarFechaNacimiento(Fecha fNacimiento) {
-        return fNacimiento.getAnio() > YEAR - 70 && fNacimiento.getAnio() < YEAR - 18;
+        return fNacimiento.getAnio() >= YEAR - 70 && fNacimiento.getAnio() <= YEAR - 22;
     }
 
     /**

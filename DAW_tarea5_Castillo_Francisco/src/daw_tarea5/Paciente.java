@@ -7,7 +7,7 @@ import java.util.Arrays;
 public class Paciente extends Persona {
     private Fecha[] visitasMedicas;
     //Atributos que indican donde esta el paciente;
-    protected int planta, habitacion, consulta, hospital;
+    protected int planta=-1, habitacion=-1, consulta=-1;
 
     public Paciente(String dni, String nombre, String apellido1, String apellido2, String genero, Fecha fechaNacimiento) {
         super(dni, nombre, apellido1, apellido2, genero, fechaNacimiento);
@@ -46,7 +46,7 @@ public class Paciente extends Persona {
     //Funciones
     //todo comprobar que la fecha no sea antes de que la paciente naciera y que la fecha no sea mayor a la actual
     public boolean addVisita(Fecha visita) {
-        if (!visita.comprobarFechaValida(YEAR - 50)) {
+        if (!visita.comprobarFechaValida(getFechaNacimiento(),0)) {
             return false;
         } else {
             for (int x = 0; x < visitasMedicas.length; x++) {
@@ -97,7 +97,7 @@ public class Paciente extends Persona {
     }
 
     public static boolean validarFechaNacimiento(Fecha fNacimiento) {
-        return fNacimiento.getAnio() > YEAR - 120 && fNacimiento.getAnio() < YEAR;
+        return fNacimiento.getAnio() >= YEAR - 120 && fNacimiento.getAnio() <= YEAR;
     }
 
     @Override

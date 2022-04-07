@@ -3,7 +3,6 @@ package daw_tarea5;
 import librerias.Fecha;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.Year;
 
 public abstract class Persona implements Estadisticas, Serializable {
@@ -11,8 +10,8 @@ public abstract class Persona implements Estadisticas, Serializable {
     private static int identificador, contID;
     private Fecha fechaNacimiento;
     protected static final int YEAR = Year.now().getValue();
-    protected static final LocalDate DIAHOY = LocalDate.now();
-    protected int lugar;
+    protected int lugar = -1;
+    protected int posArray = -1;
 
     //Constructores
     public Persona() {

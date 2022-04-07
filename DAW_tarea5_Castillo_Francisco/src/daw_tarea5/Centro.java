@@ -1,6 +1,9 @@
 package daw_tarea5;
 
+import librerias.Fecha;
+
 import java.io.Serializable;
+import java.util.Arrays;
 
 public abstract class Centro implements Estadisticas, Serializable {
     private String nombreCentro, direccionCentro;
@@ -53,13 +56,16 @@ public abstract class Centro implements Estadisticas, Serializable {
     //Funciones
     //todo si contMedico es para el numero de medicos, hacer funcion booleana que devuelva falta si todos los puestos ya estan ocupados
     public void addTrabajador(Persona trabajador) {
+        aumentarArray();
         for (int x = 0; x < trabajadores.length; x++) {
             if (trabajadores[x] == null) {
                 trabajadores[x] = trabajador;
                 if (trabajador instanceof Medico) {
                     contMedicos++;
+                    trabajador.posArray = x;
                 } else if (trabajador instanceof Administrativo) {
                     contAdministrativos++;
+                    trabajador.posArray = x;
                 }
                 break;
             }
@@ -77,6 +83,22 @@ public abstract class Centro implements Estadisticas, Serializable {
                 } else if (trabajadores[x] instanceof Administrativo) {
                     contAdministrativos--;
                 }
+            }
+        }
+    }
+
+    /**
+     * Funcion que analiza si el array esta lleno y en el caso de que este lleno, aumenta el espacio del array.
+     */
+    private void aumentarArray() {
+        if (!Arrays.asList(trabajadores).contains(null)){//Arrays.asList nos permite buscar en el array el valor que deseemos, en este caso un null
+            Persona[] aux = new Persona[trabajadores.length];
+            for(int x=0; x< aux.length;x++){
+                aux[x] = trabajadores[x];
+            }
+            trabajadores = new Persona[aux.length * 2];
+            for(int x=0; x< aux.length;x++){
+                trabajadores[x] = aux[x];
             }
         }
     }

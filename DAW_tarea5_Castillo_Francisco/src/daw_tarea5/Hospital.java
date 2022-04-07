@@ -10,6 +10,8 @@ public class Hospital extends Centro {
     public Hospital(String nombreCentro, String direccionCentro, int limiteConsultas, int plantas, int habitacionesPorPlanta) {
         super(nombreCentro, direccionCentro, limiteConsultas);
         habitaciones = new Paciente[plantas][habitacionesPorPlanta];
+        this.plantas = plantas;
+        this.habitacionesPorPlanta = habitacionesPorPlanta;
     }
 
     //Getters y Setters
@@ -23,15 +25,7 @@ public class Hospital extends Centro {
             return false;
         } else {
             getConsultas()[consulta - 1] = enf;
-            /*
-            getConsultas()[consulta - 1].setDni(enf.getDni());
-            getConsultas()[consulta - 1].setNombre(enf.getNombre());
-            getConsultas()[consulta - 1].setApellido1(enf.getApellido1());
-            getConsultas()[consulta - 1].setApellido2(enf.getApellido2());
-            getConsultas()[consulta - 1].setFechaNacimiento(enf.getFechaNacimiento());
-            getConsultas()[consulta - 1].setGenero(enf.getGenero());
-
-             */
+            enf.consulta = consulta - 1;
         }
         return true;
     }
@@ -40,12 +34,9 @@ public class Hospital extends Centro {
         if (habitaciones[planta - 1][habitacion - 1] != null) {
             return false;
         } else {
-            habitaciones[planta - 1][habitacion - 1].setDni(enf.getDni());
-            habitaciones[planta - 1][habitacion - 1].setNombre(enf.getNombre());
-            habitaciones[planta - 1][habitacion - 1].setApellido1(enf.getApellido1());
-            habitaciones[planta - 1][habitacion - 1].setApellido2(enf.getApellido2());
-            habitaciones[planta - 1][habitacion - 1].setFechaNacimiento(enf.getFechaNacimiento());
-            habitaciones[planta - 1][habitacion - 1].setGenero(enf.getGenero());
+            habitaciones[planta - 1][habitacion - 1] = enf;
+            enf.planta = planta - 1;
+            enf.habitacion = habitacion - 1;
         }
         return true;
     }
@@ -121,9 +112,9 @@ public class Hospital extends Centro {
         System.out.println("---------Plantas Hospital---------");
         for (int x = 0; x < habitaciones.length; x++) {
             for (int y = 0; y < habitaciones[x].length; y++) {
-                if (habitaciones[x][y] == null) break;
+                if (habitaciones[x][y] == null);
                 else {
-                    System.out.println("Planta " + (x + 1) + " /Habitacion " + (y + 1) + "|| DNI: " + habitaciones[x][y].getDni() + "|| Nombre: "
+                    System.out.println("Planta " + (x + 1) + " / Habitacion " + (y + 1) + " || DNI: " + habitaciones[x][y].getDni() + "|| Nombre: "
                             + habitaciones[x][y].getNombre() + " || Apellidos: " + habitaciones[x][y].getApellido1() + " " + habitaciones[x][y].getApellido2());
                 }
             }
