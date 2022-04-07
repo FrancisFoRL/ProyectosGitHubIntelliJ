@@ -134,6 +134,7 @@ public class GestionMedica {
                                 System.out.println("1. Asignar a hospital/clinica");
                                 System.out.println("2. Modificar datos del medico");
                                 System.out.println("3. Despedir");
+                                System.out.println("4. Añadir dia trabajado");//todo añadir lo necesario para que se pueda añadir dia trabajado
 
                                 switch (PeticionDatos.pedirEnteroRango(1, 3, 3, "Dame una opcion: ")) {
                                     case 1 -> {
@@ -150,6 +151,9 @@ public class GestionMedica {
                                     case 3 -> {
                                         gestion.getCentrosMedicos()[persona.lugar].removeTrabajador(persona.getDni());
                                     }
+                                    case 4 -> {
+
+                                    }
                                 }
                             }
                         }
@@ -163,6 +167,9 @@ public class GestionMedica {
                             } else if (Persona.existePers(gestion.getCentrosMedicos(), dni, 1) instanceof Administrativo) {
                                 editarPersona(Persona.existePers(gestion.getCentrosMedicos(), dni, 1), 2);
                             }
+                        }
+                        case 3 -> {
+
                         }
                     }
                 }
@@ -185,6 +192,7 @@ public class GestionMedica {
                                 System.out.println("1. Asignar a hospital/clinica");
                                 System.out.println("2. Modificar datos del paciente");
                                 System.out.println("3. Dar alta");
+                                System.out.println("4. Añadir visita medica");//todo añadir lo necesario para añadir visita medica
 
                                 switch (PeticionDatos.pedirEnteroRango(1, 3, 3, "Dame una opcion: ")) {
                                     case 1 -> {
@@ -196,6 +204,9 @@ public class GestionMedica {
                                     case 3 -> {
                                         //Cambiar lo de dar el alta
                                         gestion.getCentrosMedicos()[persona.lugar].removeTrabajador(persona.getDni());
+                                    }
+                                    case 4 -> {
+
                                     }
                                 }
                             }
