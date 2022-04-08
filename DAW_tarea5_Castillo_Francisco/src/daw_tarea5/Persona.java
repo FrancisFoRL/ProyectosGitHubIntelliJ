@@ -7,7 +7,8 @@ import java.time.Year;
 
 public abstract class Persona implements Estadisticas, Serializable {
     private String dni, nombre, apellido1, apellido2, genero;
-    private static int identificador, contID;
+    protected static int contID;
+    private int identificador;
     private Fecha fechaNacimiento;
     protected static final int YEAR = Year.now().getValue();
     protected int lugar = -1;

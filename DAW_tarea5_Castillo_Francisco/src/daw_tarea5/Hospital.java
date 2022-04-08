@@ -70,7 +70,7 @@ public class Hospital extends Centro {
                 if (habitaciones[x][y] == null) ;
                 else {
                     for (int i = 0; i < habitaciones[x][y].getVisitasMedicas().length; i++) {
-                        if (habitaciones[x][y].getVisitasMedicas()[i] == null) break;
+                        if (habitaciones[x][y].getVisitasMedicas()[i] == null);
                         else {
                             if (habitaciones[x][y].getVisitasMedicas()[i].getMes() == mes) {
                                 cont++;
@@ -85,7 +85,7 @@ public class Hospital extends Centro {
             if (getConsultas()[x] == null) ;
             else {
                 for (int y = 0; y < getConsultas()[x].getVisitasMedicas().length; y++) {
-                    if (getConsultas()[x].getVisitasMedicas()[y] == null) break;
+                    if (getConsultas()[x].getVisitasMedicas()[y] == null);
                     else {
                         if (getConsultas()[x].getVisitasMedicas()[y].getMes() == mes) {
                             cont++;

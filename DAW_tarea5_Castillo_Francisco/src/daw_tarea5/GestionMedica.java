@@ -3,11 +3,12 @@ package daw_tarea5;
 import libreria.PeticionDatos;
 import librerias.Fecha;
 
+import java.io.*;
 import java.time.Year;
 import java.util.Arrays;
 
 //todo Hacer funcion de busqueda de DNI y otra que compruebe que los DNI no esten repetidos
-public class GestionMedica {
+public class GestionMedica implements Serializable {
     private Centro[] centrosMedicos;
     private final int TAMANIO = 5;
     private final int year = Year.now().getValue();
@@ -20,20 +21,59 @@ public class GestionMedica {
         return centrosMedicos;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         //todo añadir bucle que añada dos hospitales y dos clinicas a el array principal
-        //todo añadir funcio que añada y elimine hospitales
+        //todo añadir funcion que añada y elimine hospitales
+        //todo hace metodo con ordenacion a la hora de mostrar pacientes de un hospital, habra que crear un array auxiliar
         String dni;
         int numPers;
         Persona persona;
-        Centro centro;
-        GestionMedica gestion = new GestionMedica(5);
+        File fichero = new File("objetos.dat");
+        GestionMedica gestion;
+        int[] array;
         int opcion, peticion, z;
-        for (int x = 0; x < 4; x += 2) {
-            gestion.getCentrosMedicos()[x] = new Hospital("VIA", "VIA", 5, 5, 5);
-            gestion.getCentrosMedicos()[x + 1] = new Clinica("CLI", "CLI", 4);
+        boolean control=fichero.exists();
 
+        if(control){
+            ObjectInputStream escribir = new ObjectInputStream(new FileInputStream("objetos.dat"));
+            ObjectInputStream arrayescribir = new ObjectInputStream(new FileInputStream("AtributosStatic.dat"));
+            gestion = (GestionMedica) escribir.readObject();
+            array = (int[]) arrayescribir.readObject();
+            Persona.contID = array[0];
+            Centro.contID = array[1];
+            Centro.contCentros = array[2];
+            escribir.close();
+            arrayescribir.close();
         }
+        else{
+            gestion = new GestionMedica(5);
+            for (int x = 0; x < 4; x += 2) {
+                gestion.getCentrosMedicos()[x] = new Hospital("Hola", "VIA", 5, 5, 5);
+                gestion.getCentrosMedicos()[x + 1] = new Clinica("CLI", "CLI", 4);
+            }
+        }
+
+        /*
+        if (control) {
+            if (PeticionDatos.pedirEnteroRango(1, 2, 3, "¿Quiere cargar el estado anterior del programa? Si(1)/No(2)") == 1) {
+                ObjectInputStream escribir = new ObjectInputStream(new FileInputStream("objetos.dat"));
+                gestion = (GestionMedica) escribir.readObject();
+                escribir.close();
+            }
+            else
+                control = false;
+        }
+        if (!control)
+        {
+            gestion = new GestionMedica(5);
+            for (int x = 0; x < 4; x += 2) {
+                gestion.getCentrosMedicos()[x] = new Hospital("Hola", "VIA", 5, 5, 5);
+                gestion.getCentrosMedicos()[x + 1] = new Clinica("CLI", "CLI", 4);
+            }
+        }
+
+         */
+
         do {
             System.out.println("0. Salir aplicacion");
             System.out.println("1. Gestion Hospital");
@@ -134,9 +174,11 @@ public class GestionMedica {
                                 System.out.println("1. Asignar a hospital/clinica");
                                 System.out.println("2. Modificar datos del medico");
                                 System.out.println("3. Despedir");
-                                System.out.println("4. Añadir dia trabajado");//todo añadir lo necesario para que se pueda añadir dia trabajado
+                                System.out.println("4. Añadir dia trabajado");
+                                System.out.println("5. Volver al menu principal");
 
-                                switch (PeticionDatos.pedirEnteroRango(1, 3, 3, "Dame una opcion: ")) {
+
+                                switch (PeticionDatos.pedirEnteroRango(1, 5, 3, "Dame una opcion: ")) {
                                     case 1 -> {
                                         añadirPersona(gestion.getCentrosMedicos(), persona, 1);
                                     }
@@ -152,7 +194,7 @@ public class GestionMedica {
                                         gestion.getCentrosMedicos()[persona.lugar].removeTrabajador(persona.getDni());
                                     }
                                     case 4 -> {
-
+                                        añadirDia(persona);
                                     }
                                 }
                             }
@@ -167,9 +209,6 @@ public class GestionMedica {
                             } else if (Persona.existePers(gestion.getCentrosMedicos(), dni, 1) instanceof Administrativo) {
                                 editarPersona(Persona.existePers(gestion.getCentrosMedicos(), dni, 1), 2);
                             }
-                        }
-                        case 3 -> {
-
                         }
                     }
                 }
@@ -194,7 +233,7 @@ public class GestionMedica {
                                 System.out.println("3. Dar alta");
                                 System.out.println("4. Añadir visita medica");//todo añadir lo necesario para añadir visita medica
 
-                                switch (PeticionDatos.pedirEnteroRango(1, 3, 3, "Dame una opcion: ")) {
+                                switch (PeticionDatos.pedirEnteroRango(1, 4, 3, "Dame una opcion: ")) {
                                     case 1 -> {
                                         añadirPersona(gestion.getCentrosMedicos(), persona, 0);
                                     }
@@ -206,7 +245,7 @@ public class GestionMedica {
                                         gestion.getCentrosMedicos()[persona.lugar].removeTrabajador(persona.getDni());
                                     }
                                     case 4 -> {
-
+                                        añadirDia(persona);
                                     }
                                 }
                             }
@@ -233,6 +272,43 @@ public class GestionMedica {
                 }
             }
         } while (opcion != 0);
+        if(PeticionDatos.pedirEnteroRango(1,2,3,"¿Desea guardar la informacion creada?Si(1)/No(2): ") == 1){
+            int[] guardar = {Persona.contID,Centro.contID,Centro.contCentros};
+            ObjectOutputStream escribiendoFichero = new ObjectOutputStream(new FileOutputStream("objetos.dat"));
+            ObjectOutputStream atributos = new ObjectOutputStream(new FileOutputStream("AtributosStatic.dat"));
+            escribiendoFichero.writeObject(gestion);
+            atributos.writeObject(guardar);
+            escribiendoFichero.close();
+            atributos.close();
+        }
+    }
+
+
+    private static void añadirDia(Persona persona){
+        Fecha fecha = new Fecha();
+        int anio, mes, dia;
+        if(persona instanceof Medico){
+            do{
+                anio = PeticionDatos.pedirEntero("Año: ");
+                mes = PeticionDatos.pedirEnteroRango(1, 12, 3, "Mes: ");
+                dia = PeticionDatos.pedirEnteroRango(1, Fecha.rangoDia(mes, anio), 3, "Dia: ");
+                fecha.setFechaCompleta(dia, mes, anio);
+            }while (!((Medico) persona).addDiasTrabajados(fecha));
+        }else if(persona instanceof Administrativo){
+            do{
+                anio = PeticionDatos.pedirEntero("Año: ");
+                mes = PeticionDatos.pedirEnteroRango(1, 12, 3, "Mes: ");
+                dia = PeticionDatos.pedirEnteroRango(1, Fecha.rangoDia(mes, anio), 3, "Dia: ");
+                fecha.setFechaCompleta(dia, mes, anio);
+            }while (!((Administrativo) persona).addDiasTrabajados(fecha));
+        }else if(persona instanceof Paciente){
+            do{
+                anio = PeticionDatos.pedirEntero("Año: ");
+                mes = PeticionDatos.pedirEnteroRango(1, 12, 3, "Mes: ");
+                dia = PeticionDatos.pedirEnteroRango(1, Fecha.rangoDia(mes, anio), 3, "Dia: ");
+                fecha.setFechaCompleta(dia, mes, anio);
+            }while (!((Paciente) persona).addVisita(fecha));
+        }
     }
 
     private static int mostrarHosCli(Centro[] centro, int mostrar) {
@@ -258,15 +334,16 @@ public class GestionMedica {
     }
 
     private static void nuevoCentro(Centro centro, Centro[] gestion) {
-        aumentarArray(gestion);
+        gestion = aumentarArray(gestion);
         for (int x = 0; x < gestion.length; x++) {
             if (gestion[x] == null) {
                 gestion[x] = centro;
+                break;
             }
         }
     }
 
-    private static void aumentarArray(Centro[] centro) {
+    private static Centro[] aumentarArray(Centro[] centro) {
         if (!Arrays.asList(centro).contains(null)) {//Arrays.asList nos permite buscar en el array el valor que deseemos, en este caso un null
             Centro[] aux = new Centro[centro.length];
             for (int x = 0; x < aux.length; x++) {
@@ -277,6 +354,7 @@ public class GestionMedica {
                 centro[x] = aux[x];
             }
         }
+        return centro;
     }
 
     private static Centro crearCentro(int tipo) {

@@ -41,7 +41,10 @@ public class Administrativo extends Persona{
         }
         aumentarArray();
         for (int x = 0; x < diasTrabajados.length; x++) {
-            if (diasTrabajados[x] == null) diasTrabajados[x] = trabajo;
+            if (diasTrabajados[x] == null){
+                diasTrabajados[x] = trabajo;
+                break;
+            }
         }
         return true;
     }

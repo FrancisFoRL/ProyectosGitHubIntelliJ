@@ -59,7 +59,10 @@ public class Paciente extends Persona {
         }
         aumentarArray();
         for (int x = 0; x < visitasMedicas.length; x++) {
-            if (visitasMedicas[x] == null) visitasMedicas[x] = visita;
+            if (visitasMedicas[x] == null){
+                visitasMedicas[x] = visita;
+                break;
+            }
         }
         return true;
     }
@@ -82,7 +85,7 @@ public class Paciente extends Persona {
         }
         return fecha.toString();
     }
-
+//todo en caso de que no aumente seria devolver el array
     private void aumentarArray() {
         if (!Arrays.asList(visitasMedicas).contains(null)){
             Fecha[] aux = new Fecha[visitasMedicas.length];

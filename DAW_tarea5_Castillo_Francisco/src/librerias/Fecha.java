@@ -227,7 +227,7 @@ public class Fecha {
             return false;
         }else if(mes < persona.getMes() && anio == persona.getAnio() + rango){
             return false;
-        }else if(dia > persona.getDia() && mes == persona.getMes() && anio == persona.getAnio() + rango){
+        }else if(dia < persona.getDia() && mes == persona.getMes() && anio == persona.getAnio() + rango){
             return false;
         }
         return true;
