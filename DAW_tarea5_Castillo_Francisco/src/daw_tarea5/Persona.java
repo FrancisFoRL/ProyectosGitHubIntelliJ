@@ -2,7 +2,7 @@ package daw_tarea5;
 
 import librerias.Fecha;
 
-import java.io.Serializable;
+import java.io.*;
 import java.time.Year;
 
 public abstract class Persona implements Estadisticas, Serializable {
@@ -82,8 +82,20 @@ public abstract class Persona implements Estadisticas, Serializable {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public static Persona existePers(Centro[] centro, String dni, int tipoPers) {
+    //todo comprobar que funcione bien
+    public static Persona existePers(Centro[] centro, String dni, int tipoPers) throws IOException, ClassNotFoundException {
         if (tipoPers == 0) {
+            File fichero = new File("pacientes.dat");
+            if(fichero.exists()){
+                ObjectInputStream lectura = new ObjectInputStream(new FileInputStream("pacientes.dat"));
+                Paciente[] aux = (Paciente[]) lectura.readObject();
+                for(int x = 0; x < aux.length; x++){
+                    if(aux[x].getDni().equalsIgnoreCase(dni)){
+                        return aux[x];
+                    }
+                }
+            }
+
             for (int x = 0; x < centro.length; x++) {
                 if (centro[x] == null);
                 else {
@@ -91,7 +103,7 @@ public abstract class Persona implements Estadisticas, Serializable {
                         for (int j = 0; j < ((Hospital) centro[x]).getHabitaciones().length; j++) {
                             for (int y = 0; y < ((Hospital) centro[x]).getHabitaciones()[j].length; y++) {
                                 if (((Hospital) centro[x]).getHabitaciones()[j][y] == null) ;
-                                else if (((Hospital) centro[x]).getHabitaciones()[j][y].getDni().equals(dni)) {
+                                else if (((Hospital) centro[x]).getHabitaciones()[j][y].getDni().equalsIgnoreCase(dni)) {
                                     return ((Hospital) centro[x]).getHabitaciones()[j][y];
                                 }
                             }
@@ -99,19 +111,29 @@ public abstract class Persona implements Estadisticas, Serializable {
                     }
                     for (int i = 0; i < centro[x].getConsultas().length; i++) {
                         if (centro[x].getConsultas()[i] == null) ;
-                        else if (centro[x].getConsultas()[i].getDni().equals(dni)) {
+                        else if (centro[x].getConsultas()[i].getDni().equalsIgnoreCase(dni)) {
                             return centro[x].getConsultas()[i];
                         }
                     }
                 }
             }
         }else if(tipoPers == 1){
+            File fichero = new File("trabajadores.dat");
+            if(fichero.exists()){
+                ObjectInputStream lectura = new ObjectInputStream(new FileInputStream("trabajadores.dat"));
+                Persona[] aux = (Persona[]) lectura.readObject();
+                for(int x = 0; x < aux.length; x++){
+                    if(aux[x].getDni().equalsIgnoreCase(dni)){
+                        return aux[x];
+                    }
+                }
+            }
             for (int x = 0; x < centro.length; x++){
                 if(centro[x] == null)continue;
                 for(int y = 0; y < centro[x].getTrabajadores().length; y++){
                     if(centro[x].getTrabajadores()[y] == null);
                     if(centro[x].getTrabajadores()[y] == null);
-                    else if(centro[x].getTrabajadores()[y].getDni().equals(dni)){
+                    else if(centro[x].getTrabajadores()[y].getDni().equalsIgnoreCase(dni)){
                         return centro[x].getTrabajadores()[y];
                     }
                 }

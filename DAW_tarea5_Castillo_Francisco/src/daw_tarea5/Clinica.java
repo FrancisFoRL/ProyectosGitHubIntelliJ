@@ -1,5 +1,7 @@
 package daw_tarea5;
 
+import java.io.*;
+
 public class Clinica extends Centro{
 
     //Constructor
@@ -19,15 +21,47 @@ public class Clinica extends Centro{
     }
 
     //todo añadir que al eliminar lo guarde en un fichero
-    private boolean removePaciente(Paciente enf) {
-        for (int x = 0; x < getConsultas().length; x++) {
-            if (getConsultas()[x].getDni().equals(enf.getDni())) {
-                //todo hacer para que el paciente se pase fichero antes de eliminar
-                getConsultas()[x] = null;
-                return true;
-            }
+    public boolean removePaciente(Paciente enf) throws IOException, ClassNotFoundException {
+        if (enf.consulta == -1) ;
+        else if (getConsultas()[enf.consulta].getDni().equals(enf.getDni())) {
+            getConsultas()[enf.consulta] = null;
+            enf.consulta = -1;
+            arrayRemovePaciente(enf);
+            return true;
         }
         return false;
+    }
+
+    //todo si da tiempo hacer funcion de aumentar el array que se guarda en fichero
+    private static void arrayRemovePaciente(Paciente enf) throws IOException, ClassNotFoundException {
+        File fichero = new File("pacientes.dat");
+        if(fichero.exists()){
+            ObjectInputStream leerFichero = new ObjectInputStream(new FileInputStream("pacientes.dat"));
+            ObjectOutputStream escribiendoFichero = new ObjectOutputStream(new FileOutputStream("pacientes.dat"));
+            Paciente[] aux = (Paciente[]) leerFichero.readObject();
+            for(int x = 0; x < aux.length; x++){
+                if(aux[x] == null){
+                    aux[x] = enf;
+                    break;
+                }else if(aux[x].getDni().equalsIgnoreCase(enf.getDni())){
+                    aux[x] = enf;
+                    break;
+                }
+            }
+            escribiendoFichero.writeObject(aux);
+            escribiendoFichero.close();
+        }else{
+            Paciente[] aux = new Paciente[50];
+            for(int x = 0; x < aux.length; x++){
+                if(aux[x] == null){
+                    aux[x] = enf;
+                    break;
+                }
+            }
+            ObjectOutputStream escribiendoFichero = new ObjectOutputStream(new FileOutputStream("pacientes.dat"));
+            escribiendoFichero.writeObject(aux);
+            escribiendoFichero.close();
+        }
     }
 
     @Override

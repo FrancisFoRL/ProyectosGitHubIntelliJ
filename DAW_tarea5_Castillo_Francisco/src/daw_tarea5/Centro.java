@@ -2,7 +2,7 @@ package daw_tarea5;
 
 import librerias.Fecha;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.Arrays;
 
 public abstract class Centro implements Estadisticas, Serializable {
@@ -73,10 +73,11 @@ public abstract class Centro implements Estadisticas, Serializable {
     }
 
     //todo Crear removeEmpleado para eliminarlo de array
-    public void removeTrabajador(String dni) {
+    public void removeTrabajador(String dni) throws IOException {
         for (int x = 0; x < trabajadores.length; x++) {
             if (trabajadores[x].getDni().equals(dni)) {
                 //todo añadir lo de guardar en el fichero antes de eliminar
+                ObjectOutputStream escribiendoFichero = new ObjectOutputStream(new FileOutputStream(".dat"));
                 trabajadores[x] = null;
                 if (trabajadores[x] instanceof Medico) {
                     contMedicos--;

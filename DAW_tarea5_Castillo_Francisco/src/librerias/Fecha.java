@@ -1,5 +1,6 @@
 package librerias;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Year;
 
@@ -8,7 +9,7 @@ import java.time.Year;
  * @author Francisco Castillo
  * @version 28/01/2022
  */
-public class Fecha {
+public class Fecha implements Serializable {
     //Atributos
     private int dia, mes, anio;
     protected static final LocalDate DIAHOY = LocalDate.now();

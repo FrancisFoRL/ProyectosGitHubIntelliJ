@@ -35,14 +35,14 @@ public class GestionMedica implements Serializable {
         boolean control=fichero.exists();
 
         if(control){
-            ObjectInputStream escribir = new ObjectInputStream(new FileInputStream("objetos.dat"));
+            ObjectInputStream lectura = new ObjectInputStream(new FileInputStream("objetos.dat"));
             ObjectInputStream arrayescribir = new ObjectInputStream(new FileInputStream("AtributosStatic.dat"));
-            gestion = (GestionMedica) escribir.readObject();
+            gestion = (GestionMedica) lectura.readObject();
             array = (int[]) arrayescribir.readObject();
             Persona.contID = array[0];
             Centro.contID = array[1];
             Centro.contCentros = array[2];
-            escribir.close();
+            lectura.close();
             arrayescribir.close();
         }
         else{
@@ -223,7 +223,6 @@ public class GestionMedica implements Serializable {
                             if (Persona.existePers(gestion.getCentrosMedicos(), dni, 0) == null) {
                                 persona = crearPersona(0, dni);
                                 añadirPersona(gestion.getCentrosMedicos(), persona, 0);
-                                break;
                             } else {
                                 persona = Persona.existePers(gestion.getCentrosMedicos(), dni, 0);
                                 System.out.println("La persona con DNI " + persona.getDni() + " existe: ");
@@ -241,8 +240,19 @@ public class GestionMedica implements Serializable {
                                         editarPersona(persona, 0);
                                     }
                                     case 3 -> {
-                                        //Cambiar lo de dar el alta
-                                        gestion.getCentrosMedicos()[persona.lugar].removeTrabajador(persona.getDni());
+                                        if(gestion.getCentrosMedicos()[persona.lugar] instanceof Hospital){
+                                            if(((Hospital) gestion.getCentrosMedicos()[persona.lugar]).removePaciente((Paciente) persona)){
+                                                System.out.println("Se le dio de alta al paciente");
+                                            }else {
+                                                System.out.println("El paciente no esta asingnado a ningun sitio");
+                                            }
+                                        }else if(gestion.getCentrosMedicos()[persona.lugar] instanceof Clinica){
+                                            if(((Clinica) gestion.getCentrosMedicos()[persona.lugar]).removePaciente((Paciente) persona)){
+                                                System.out.println("Se le dio de alta al paciente");
+                                            }else {
+                                                System.out.println("El paciente no esta asingnado a ningun sitio");
+                                            }
+                                        }
                                     }
                                     case 4 -> {
                                         añadirDia(persona);
