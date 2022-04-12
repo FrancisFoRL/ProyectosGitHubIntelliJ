@@ -32,9 +32,9 @@ public class GestionMedica implements Serializable {
         GestionMedica gestion;
         int[] array;
         int opcion, peticion, z;
-        boolean control=fichero.exists();
+        boolean control = fichero.exists();
 
-        if(control){
+        if (control) {
             ObjectInputStream lectura = new ObjectInputStream(new FileInputStream("objetos.dat"));
             ObjectInputStream arrayescribir = new ObjectInputStream(new FileInputStream("AtributosStatic.dat"));
             gestion = (GestionMedica) lectura.readObject();
@@ -44,8 +44,7 @@ public class GestionMedica implements Serializable {
             Centro.contCentros = array[2];
             lectura.close();
             arrayescribir.close();
-        }
-        else{
+        } else {
             gestion = new GestionMedica(5);
             for (int x = 0; x < 4; x += 2) {
                 gestion.getCentrosMedicos()[x] = new Hospital("Hola", "VIA", 5, 5, 5);
@@ -191,7 +190,12 @@ public class GestionMedica implements Serializable {
                                         editarPersona(persona, numPers);
                                     }
                                     case 3 -> {
-                                        gestion.getCentrosMedicos()[persona.lugar].removeTrabajador(persona.getDni());
+                                        if (gestion.getCentrosMedicos()[persona.lugar].removeTrabajador(persona)) {
+                                            System.out.println("Se despidio al trabajador");
+                                        } else {
+                                            System.out.println("El trabajador no esta asingnado a ningun sitio");
+                                        }
+
                                     }
                                     case 4 -> {
                                         añadirDia(persona);
@@ -240,16 +244,16 @@ public class GestionMedica implements Serializable {
                                         editarPersona(persona, 0);
                                     }
                                     case 3 -> {
-                                        if(gestion.getCentrosMedicos()[persona.lugar] instanceof Hospital){
-                                            if(((Hospital) gestion.getCentrosMedicos()[persona.lugar]).removePaciente((Paciente) persona)){
+                                        if (gestion.getCentrosMedicos()[persona.lugar] instanceof Hospital) {
+                                            if (((Hospital) gestion.getCentrosMedicos()[persona.lugar]).removePaciente((Paciente) persona)) {
                                                 System.out.println("Se le dio de alta al paciente");
-                                            }else {
+                                            } else {
                                                 System.out.println("El paciente no esta asingnado a ningun sitio");
                                             }
-                                        }else if(gestion.getCentrosMedicos()[persona.lugar] instanceof Clinica){
-                                            if(((Clinica) gestion.getCentrosMedicos()[persona.lugar]).removePaciente((Paciente) persona)){
+                                        } else if (gestion.getCentrosMedicos()[persona.lugar] instanceof Clinica) {
+                                            if (((Clinica) gestion.getCentrosMedicos()[persona.lugar]).removePaciente((Paciente) persona)) {
                                                 System.out.println("Se le dio de alta al paciente");
-                                            }else {
+                                            } else {
                                                 System.out.println("El paciente no esta asingnado a ningun sitio");
                                             }
                                         }
@@ -262,10 +266,10 @@ public class GestionMedica implements Serializable {
                         }
                         case 2 -> {
                             dni = PeticionDatos.pedirNIF_NIE();
-                            if(Persona.existePers(gestion.getCentrosMedicos(), dni, 1) == null){
+                            if (Persona.existePers(gestion.getCentrosMedicos(), dni, 1) == null) {
                                 System.out.println("El paciente no existe");
-                            }else{
-                                editarPersona(Persona.existePers(gestion.getCentrosMedicos(), dni, 0),0);
+                            } else {
+                                editarPersona(Persona.existePers(gestion.getCentrosMedicos(), dni, 0), 0);
                             }
 
                             //todo hacer algo para saber posicion en la que esta guardada el medico o administrativa
@@ -282,8 +286,8 @@ public class GestionMedica implements Serializable {
                 }
             }
         } while (opcion != 0);
-        if(PeticionDatos.pedirEnteroRango(1,2,3,"¿Desea guardar la informacion creada?Si(1)/No(2): ") == 1){
-            int[] guardar = {Persona.contID,Centro.contID,Centro.contCentros};
+        if (PeticionDatos.pedirEnteroRango(1, 2, 3, "¿Desea guardar la informacion creada?Si(1)/No(2): ") == 1) {
+            int[] guardar = {Persona.contID, Centro.contID, Centro.contCentros};
             ObjectOutputStream escribiendoFichero = new ObjectOutputStream(new FileOutputStream("objetos.dat"));
             ObjectOutputStream atributos = new ObjectOutputStream(new FileOutputStream("AtributosStatic.dat"));
             escribiendoFichero.writeObject(gestion);
@@ -294,30 +298,30 @@ public class GestionMedica implements Serializable {
     }
 
 
-    private static void añadirDia(Persona persona){
+    private static void añadirDia(Persona persona) {
         Fecha fecha = new Fecha();
         int anio, mes, dia;
-        if(persona instanceof Medico){
-            do{
+        if (persona instanceof Medico) {
+            do {
                 anio = PeticionDatos.pedirEntero("Año: ");
                 mes = PeticionDatos.pedirEnteroRango(1, 12, 3, "Mes: ");
                 dia = PeticionDatos.pedirEnteroRango(1, Fecha.rangoDia(mes, anio), 3, "Dia: ");
                 fecha.setFechaCompleta(dia, mes, anio);
-            }while (!((Medico) persona).addDiasTrabajados(fecha));
-        }else if(persona instanceof Administrativo){
-            do{
+            } while (!((Medico) persona).addDiasTrabajados(fecha));
+        } else if (persona instanceof Administrativo) {
+            do {
                 anio = PeticionDatos.pedirEntero("Año: ");
                 mes = PeticionDatos.pedirEnteroRango(1, 12, 3, "Mes: ");
                 dia = PeticionDatos.pedirEnteroRango(1, Fecha.rangoDia(mes, anio), 3, "Dia: ");
                 fecha.setFechaCompleta(dia, mes, anio);
-            }while (!((Administrativo) persona).addDiasTrabajados(fecha));
-        }else if(persona instanceof Paciente){
-            do{
+            } while (!((Administrativo) persona).addDiasTrabajados(fecha));
+        } else if (persona instanceof Paciente) {
+            do {
                 anio = PeticionDatos.pedirEntero("Año: ");
                 mes = PeticionDatos.pedirEnteroRango(1, 12, 3, "Mes: ");
                 dia = PeticionDatos.pedirEnteroRango(1, Fecha.rangoDia(mes, anio), 3, "Dia: ");
                 fecha.setFechaCompleta(dia, mes, anio);
-            }while (!((Paciente) persona).addVisita(fecha));
+            } while (!((Paciente) persona).addVisita(fecha));
         }
     }
 

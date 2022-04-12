@@ -73,18 +73,46 @@ public abstract class Centro implements Estadisticas, Serializable {
     }
 
     //todo Crear removeEmpleado para eliminarlo de array
-    public void removeTrabajador(String dni) throws IOException {
-        for (int x = 0; x < trabajadores.length; x++) {
-            if (trabajadores[x].getDni().equals(dni)) {
-                //todo añadir lo de guardar en el fichero antes de eliminar
-                ObjectOutputStream escribiendoFichero = new ObjectOutputStream(new FileOutputStream(".dat"));
-                trabajadores[x] = null;
-                if (trabajadores[x] instanceof Medico) {
-                    contMedicos--;
-                } else if (trabajadores[x] instanceof Administrativo) {
-                    contAdministrativos--;
+    public boolean removeTrabajador(Persona trabajador) throws IOException, ClassNotFoundException {
+        if (trabajador.lugar == -1 && trabajador.posArray == -1) ;
+        else if (trabajadores[trabajador.posArray].getDni().equals(trabajador.getDni())) {
+            trabajadores[trabajador.posArray] = null;
+            trabajador.lugar = -1;
+            trabajador.posArray = -1;
+            arrayRemoveTrabajador(trabajador);
+            return true;
+        }
+        return false;
+    }
+
+    private static void arrayRemoveTrabajador(Persona enf) throws IOException, ClassNotFoundException {
+        File fichero = new File("trabajadores.dat");
+        if(fichero.exists()){
+            ObjectInputStream leerFichero = new ObjectInputStream(new FileInputStream("trabajadores.dat"));
+            ObjectOutputStream escribiendoFichero = new ObjectOutputStream(new FileOutputStream("trabajadores.dat"));
+            Persona[] aux = (Persona[]) leerFichero.readObject();
+            for(int x = 0; x < aux.length; x++){
+                if(aux[x] == null){
+                    aux[x] = enf;
+                    break;
+                }else if(aux[x].getDni().equalsIgnoreCase(enf.getDni())){
+                    aux[x] = enf;
+                    break;
                 }
             }
+            escribiendoFichero.writeObject(aux);
+            escribiendoFichero.close();
+        }else{
+            Persona[] aux = new Persona[50];
+            for(int x = 0; x < aux.length; x++){
+                if(aux[x] == null){
+                    aux[x] = enf;
+                    break;
+                }
+            }
+            ObjectOutputStream escribiendoFichero = new ObjectOutputStream(new FileOutputStream("trabajadores.dat"));
+            escribiendoFichero.writeObject(aux);
+            escribiendoFichero.close();
         }
     }
 
