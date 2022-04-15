@@ -2,6 +2,7 @@ package daw_tarea5;
 
 import librerias.Fecha;
 
+import javax.naming.ContextNotEmptyException;
 import java.io.*;
 import java.time.Year;
 
@@ -83,21 +84,17 @@ public abstract class Persona implements Estadisticas, Serializable {
     }
 
     //todo comprobar que funcione bien
-    public static Persona existePers(Centro[] centro, String dni, int tipoPers) throws IOException, ClassNotFoundException {
+    public static Persona existePers(Centro[] centro, String dni, int tipoPers) {
         if (tipoPers == 0) {
-            File fichero = new File("pacientes.dat");
-            if(fichero.exists()){
-                ObjectInputStream lectura = new ObjectInputStream(new FileInputStream("pacientes.dat"));
-                Paciente[] aux = (Paciente[]) lectura.readObject();
-                for(int x = 0; x < aux.length; x++){
-                    if(aux[x].getDni().equalsIgnoreCase(dni)){
-                        return aux[x];
-                    }
+            for (int x = 0; x < Centro.delPaciente.length; x++) {
+                if (Centro.delPaciente[x] == null) ;
+                else if (Centro.delPaciente[x].getDni().equalsIgnoreCase(dni)) {
+                    return Centro.delPaciente[x];
                 }
             }
 
             for (int x = 0; x < centro.length; x++) {
-                if (centro[x] == null);
+                if (centro[x] == null) ;
                 else {
                     if (centro[x] instanceof Hospital) {
                         for (int j = 0; j < ((Hospital) centro[x]).getHabitaciones().length; j++) {
@@ -117,24 +114,35 @@ public abstract class Persona implements Estadisticas, Serializable {
                     }
                 }
             }
-        }else if(tipoPers == 1){
+        } else if (tipoPers == 1) {
+            /*
             File fichero = new File("trabajadores.dat");
             if(fichero.exists()){
                 ObjectInputStream lectura = new ObjectInputStream(new FileInputStream("trabajadores.dat"));
                 Persona[] aux = (Persona[]) lectura.readObject();
                 for(int x = 0; x < aux.length; x++){
-                    if(aux[x].getDni().equalsIgnoreCase(dni)){
+                    if(aux[x] == null);
+                    else if(aux[x].getDni().equalsIgnoreCase(dni)){
                         return aux[x];
                     }
                 }
             }
-            for (int x = 0; x < centro.length; x++){
-                if(centro[x] == null)continue;
-                for(int y = 0; y < centro[x].getTrabajadores().length; y++){
-                    if(centro[x].getTrabajadores()[y] == null);
-                    if(centro[x].getTrabajadores()[y] == null);
-                    else if(centro[x].getTrabajadores()[y].getDni().equalsIgnoreCase(dni)){
-                        return centro[x].getTrabajadores()[y];
+             */
+            for (int x = 0; x < Centro.delTrabajadores.length; x++) {
+                if (Centro.delTrabajadores[x] == null) ;
+                else if (Centro.delTrabajadores[x].getDni().equalsIgnoreCase(dni)) {
+                    return Centro.delTrabajadores[x];
+                }
+            }
+
+            for (int x = 0; x < centro.length; x++) {
+                if (centro[x] == null) ;
+                else {
+                    for (int y = 0; y < centro[x].getTrabajadores().length; y++) {
+                        if (centro[x].getTrabajadores()[y] == null) ;
+                        else if (centro[x].getTrabajadores()[y].getDni().equalsIgnoreCase(dni)) {
+                            return centro[x].getTrabajadores()[y];
+                        }
                     }
                 }
             }

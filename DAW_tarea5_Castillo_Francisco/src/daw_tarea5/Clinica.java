@@ -21,7 +21,7 @@ public class Clinica extends Centro{
     }
 
     //todo añadir que al eliminar lo guarde en un fichero
-    public boolean removePaciente(Paciente enf) throws IOException, ClassNotFoundException {
+    public boolean removePaciente(Paciente enf) {
         if (enf.consulta == -1) ;
         else if (getConsultas()[enf.consulta].getDni().equals(enf.getDni())) {
             getConsultas()[enf.consulta] = null;
@@ -33,34 +33,17 @@ public class Clinica extends Centro{
     }
 
     //todo si da tiempo hacer funcion de aumentar el array que se guarda en fichero
-    private static void arrayRemovePaciente(Paciente enf) throws IOException, ClassNotFoundException {
-        File fichero = new File("pacientes.dat");
-        if(fichero.exists()){
-            ObjectInputStream leerFichero = new ObjectInputStream(new FileInputStream("pacientes.dat"));
-            ObjectOutputStream escribiendoFichero = new ObjectOutputStream(new FileOutputStream("pacientes.dat"));
-            Paciente[] aux = (Paciente[]) leerFichero.readObject();
-            for(int x = 0; x < aux.length; x++){
-                if(aux[x] == null){
-                    aux[x] = enf;
-                    break;
-                }else if(aux[x].getDni().equalsIgnoreCase(enf.getDni())){
-                    aux[x] = enf;
-                    break;
-                }
+    private void arrayRemovePaciente(Paciente enf) {
+        aumentarArray(delPaciente);
+        for (int x = 0; x < delPaciente.length; x++) {
+            if (delPaciente[x] == null) {
+                delPaciente[x] = enf;
+                break;
+            } else if (delPaciente[x].getDni().equalsIgnoreCase(enf.getDni())) {
+                delPaciente[x] = null;
+                delPaciente[x] = enf;
+                break;
             }
-            escribiendoFichero.writeObject(aux);
-            escribiendoFichero.close();
-        }else{
-            Paciente[] aux = new Paciente[50];
-            for(int x = 0; x < aux.length; x++){
-                if(aux[x] == null){
-                    aux[x] = enf;
-                    break;
-                }
-            }
-            ObjectOutputStream escribiendoFichero = new ObjectOutputStream(new FileOutputStream("pacientes.dat"));
-            escribiendoFichero.writeObject(aux);
-            escribiendoFichero.close();
         }
     }
 

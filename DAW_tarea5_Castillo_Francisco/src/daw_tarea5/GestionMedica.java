@@ -34,16 +34,23 @@ public class GestionMedica implements Serializable {
         int opcion, peticion, z;
         boolean control = fichero.exists();
 
+
         if (control) {
             ObjectInputStream lectura = new ObjectInputStream(new FileInputStream("objetos.dat"));
             ObjectInputStream arrayescribir = new ObjectInputStream(new FileInputStream("AtributosStatic.dat"));
+            ObjectInputStream trabajadores = new ObjectInputStream(new FileInputStream("trabajadores.dat"));
+            ObjectInputStream pacientes = new ObjectInputStream(new FileInputStream("pacientes.dat"));
             gestion = (GestionMedica) lectura.readObject();
             array = (int[]) arrayescribir.readObject();
+            Centro.delTrabajadores = (Persona[]) trabajadores.readObject();
+            Centro.delPaciente = (Persona[]) trabajadores.readObject();
             Persona.contID = array[0];
             Centro.contID = array[1];
             Centro.contCentros = array[2];
             lectura.close();
             arrayescribir.close();
+            trabajadores.close();
+            pacientes.close();
         } else {
             gestion = new GestionMedica(5);
             for (int x = 0; x < 4; x += 2) {
@@ -98,7 +105,7 @@ public class GestionMedica implements Serializable {
                             System.out.println("2. Modificar datos del hospital seleccionado");
                             System.out.println("3. Volver al menu principal");
 
-                            switch (peticion = PeticionDatos.pedirEnteroRango(1, 3, 3, "Dame una opcion: ")) {
+                            switch (PeticionDatos.pedirEnteroRango(1, 3, 3, "Dame una opcion: ")) {
                                 case 1 -> {
                                     gestion.getCentrosMedicos()[z - 1].mostrarEstado();
                                 }
@@ -111,7 +118,9 @@ public class GestionMedica implements Serializable {
                             nuevoCentro(crearCentro(0), gestion.getCentrosMedicos());
                         }
                         case 3 -> {
-                            //todo hacer la eliminacion del hospital, si hay personas no se puede eliminar, si esta vacio se podra eliminar
+                            if (delCentro(gestion, 1)) {
+                                System.out.println("Hospital eliminado");
+                            }
                         }
                     }
 
@@ -144,7 +153,9 @@ public class GestionMedica implements Serializable {
                             nuevoCentro(crearCentro(1), gestion.getCentrosMedicos());
                         }
                         case 3 -> {
-                            //todo hacer la eliminacion del hospital, si hay personas no se puede eliminar, si esta vacio se podra eliminar
+                            if (delCentro(gestion, 2)) {
+                                System.out.println("Clinica eliminada");
+                            }
                         }
                     }
                 }
@@ -161,13 +172,7 @@ public class GestionMedica implements Serializable {
                                 persona = crearPersona(PeticionDatos.pedirEnteroRango(1, 2, 3, "Dame un opcion: "), dni);
                                 añadirPersona(gestion.getCentrosMedicos(), persona, 1);
                             } else {
-                                if (Persona.existePers(gestion.getCentrosMedicos(), dni, 1) instanceof Medico) {
-                                    numPers = 1;
-                                } else {
-                                    numPers = 2;
-                                }
-                                persona = Persona.existePers(gestion.getCentrosMedicos(), dni, numPers);
-                                //todo comprobar que el array no este lleno de trajadores, crear funcion que aumente
+                                persona = Persona.existePers(gestion.getCentrosMedicos(), dni, 1);
                                 System.out.println("La persona con DNI " + persona.getDni() + " existe: ");
                                 System.out.println(persona);//todo cambiar String persona para mostrarlo bien
                                 System.out.println("1. Asignar a hospital/clinica");
@@ -234,7 +239,7 @@ public class GestionMedica implements Serializable {
                                 System.out.println("1. Asignar a hospital/clinica");
                                 System.out.println("2. Modificar datos del paciente");
                                 System.out.println("3. Dar alta");
-                                System.out.println("4. Añadir visita medica");//todo añadir lo necesario para añadir visita medica
+                                System.out.println("4. Añadir visita medica");
 
                                 switch (PeticionDatos.pedirEnteroRango(1, 4, 3, "Dame una opcion: ")) {
                                     case 1 -> {
@@ -271,10 +276,6 @@ public class GestionMedica implements Serializable {
                             } else {
                                 editarPersona(Persona.existePers(gestion.getCentrosMedicos(), dni, 0), 0);
                             }
-
-                            //todo hacer algo para saber posicion en la que esta guardada el medico o administrativa
-                            //persona = Persona.existePers(gestion.getCentrosMedicos(), dni, numPers);
-                            //persona = crearPersona(numPers,dni);
                         }
                     }
                 }
@@ -287,14 +288,24 @@ public class GestionMedica implements Serializable {
             }
         } while (opcion != 0);
         if (PeticionDatos.pedirEnteroRango(1, 2, 3, "¿Desea guardar la informacion creada?Si(1)/No(2): ") == 1) {
-            int[] guardar = {Persona.contID, Centro.contID, Centro.contCentros};
-            ObjectOutputStream escribiendoFichero = new ObjectOutputStream(new FileOutputStream("objetos.dat"));
-            ObjectOutputStream atributos = new ObjectOutputStream(new FileOutputStream("AtributosStatic.dat"));
-            escribiendoFichero.writeObject(gestion);
-            atributos.writeObject(guardar);
-            escribiendoFichero.close();
-            atributos.close();
+            pasarFichero(gestion);
         }
+        System.out.print("Fin del Programa");
+    }
+
+    private static void pasarFichero(GestionMedica gestion) throws IOException {
+        int[] guardar = {Persona.contID, Centro.contID, Centro.contCentros};
+        ObjectOutputStream escribiendoFichero = new ObjectOutputStream(new FileOutputStream("objetos.dat"));
+        ObjectOutputStream atributos = new ObjectOutputStream(new FileOutputStream("AtributosStatic.dat"));
+        ObjectOutputStream trabajadores = new ObjectOutputStream(new FileOutputStream("trabajadores.dat"));
+        ObjectOutputStream pacientes = new ObjectOutputStream(new FileOutputStream("pacientes.dat"));
+        escribiendoFichero.writeObject(gestion);
+        atributos.writeObject(guardar);
+        trabajadores.writeObject(Centro.delTrabajadores);
+        pacientes.writeObject(Centro.delPaciente);
+        escribiendoFichero.close();
+        atributos.close();
+        trabajadores.close();
     }
 
 
@@ -355,6 +366,43 @@ public class GestionMedica implements Serializable {
                 break;
             }
         }
+    }
+
+    private static boolean delCentro(GestionMedica gestion, int tipo) {
+        int x;
+        System.out.println("¿Que hospital desea eliminar?");
+        if (tipo == 1) {
+            x = PeticionDatos.pedirEnteroRango(1, mostrarHosCli(gestion.getCentrosMedicos(), 1), 3, "Dame una opcion: ") - 1;
+        } else {
+            x = PeticionDatos.pedirEnteroRango(1, mostrarHosCli(gestion.getCentrosMedicos(), 2), 3, "Dame una opcion: ") - 1;
+        }
+
+        if (gestion.getCentrosMedicos()[x] instanceof Hospital) {
+            for (int j = 0; j < ((Hospital) gestion.getCentrosMedicos()[x]).getHabitaciones().length; j++) {
+                for (int y = 0; y < ((Hospital) gestion.getCentrosMedicos()[x]).getHabitaciones()[j].length; y++) {
+                    if (((Hospital) gestion.getCentrosMedicos()[x]).getHabitaciones()[j][y] == null) ;
+                    else {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < gestion.getCentrosMedicos()[x].getConsultas().length; i++) {
+            if (gestion.getCentrosMedicos()[x].getConsultas()[i] == null) ;
+            else {
+                return false;
+            }
+        }
+
+        for (int y = 0; y < gestion.getCentrosMedicos()[x].getTrabajadores().length; y++) {
+            if (gestion.getCentrosMedicos()[x].getTrabajadores()[y] == null) ;
+            else {
+                return false;
+            }
+        }
+        gestion.getCentrosMedicos()[x] = null;
+        return true;
     }
 
     private static Centro[] aumentarArray(Centro[] centro) {
@@ -437,11 +485,11 @@ public class GestionMedica implements Serializable {
 
         if (numTipo == 1) {
             do {
-                posicion = PeticionDatos.pedirCadena("Especialidad de medico: ");
+                posicion = PeticionDatos.pedirCadena("Especialidad del medico: ");
             } while (!Medico.comprobarEspecialidad(posicion));
         } else if (numTipo == 2) {
             do {
-                posicion = PeticionDatos.pedirCadena("Especialidad de medico: ");
+                posicion = PeticionDatos.pedirCadena("Especialidad del administrativo: ");
             } while (!Administrativo.comprobarEspecialidad(posicion));
         }
 
@@ -496,12 +544,12 @@ public class GestionMedica implements Serializable {
 
         if (numTipo == 1) {
             do {
-                posicion = PeticionDatos.pedirCadena("Especialidad de medico: ");
+                posicion = PeticionDatos.pedirCadena("Especialidad del medico: ");
             } while (!Medico.comprobarEspecialidad(posicion));
             ((Medico) persona).setEspecialidad(posicion);
         } else if (numTipo == 2) {
             do {
-                posicion = PeticionDatos.pedirCadena("Especialidad de medico: ");
+                posicion = PeticionDatos.pedirCadena("Especialidad del administrativo: ");
             } while (!Administrativo.comprobarEspecialidad(posicion));
             ((Administrativo) persona).setArea(posicion);
         }

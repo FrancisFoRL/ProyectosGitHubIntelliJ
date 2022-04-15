@@ -44,7 +44,7 @@ public class Hospital extends Centro {
     }
 
     //todo añadir que al eliminar lo guarde en un fichero
-    public boolean removePaciente(Paciente enf) throws IOException, ClassNotFoundException {
+    public boolean removePaciente(Paciente enf) {
         if (enf.planta == -1 && enf.habitacion == -1) ;
         else if (habitaciones[enf.planta][enf.habitacion].getDni().equals(enf.getDni())) {
             habitaciones[enf.planta][enf.habitacion] = null;
@@ -63,34 +63,17 @@ public class Hospital extends Centro {
         return false;
     }
 
-    private static void arrayRemovePaciente(Paciente enf) throws IOException, ClassNotFoundException {
-        File fichero = new File("pacientes.dat");
-        if(fichero.exists()){
-            ObjectInputStream leerFichero = new ObjectInputStream(new FileInputStream("pacientes.dat"));
-            ObjectOutputStream escribiendoFichero = new ObjectOutputStream(new FileOutputStream("pacientes.dat"));
-            Paciente[] aux = (Paciente[]) leerFichero.readObject();
-            for(int x = 0; x < aux.length; x++){
-                if(aux[x] == null){
-                    aux[x] = enf;
-                    break;
-                }else if(aux[x].getDni().equalsIgnoreCase(enf.getDni())){
-                    aux[x] = enf;
-                    break;
-                }
+    private void arrayRemovePaciente(Paciente enf) {
+        aumentarArray(delPaciente);
+        for (int x = 0; x < delPaciente.length; x++) {
+            if (delPaciente[x] == null) {
+                delPaciente[x] = enf;
+                break;
+            } else if (delPaciente[x].getDni().equalsIgnoreCase(enf.getDni())) {
+                delPaciente[x] = null;
+                delPaciente[x] = enf;
+                break;
             }
-            escribiendoFichero.writeObject(aux);
-            escribiendoFichero.close();
-        }else{
-            Paciente[] aux = new Paciente[50];
-            for(int x = 0; x < aux.length; x++){
-                if(aux[x] == null){
-                    aux[x] = enf;
-                    break;
-                }
-            }
-            ObjectOutputStream escribiendoFichero = new ObjectOutputStream(new FileOutputStream("pacientes.dat"));
-            escribiendoFichero.writeObject(aux);
-            escribiendoFichero.close();
         }
     }
 
@@ -137,7 +120,7 @@ public class Hospital extends Centro {
             if (getConsultas()[x] == null) {
                 System.out.println("Consulta " + (x + 1) + " libre");
             } else {
-                System.out.println("Consulta " + (x + 1) + " tiene un paciente // DNI: " + getConsultas()[x].getDni() + "|| Nombre: "
+                System.out.println("Consulta " + (x + 1) + " tiene un paciente || DNI: " + getConsultas()[x].getDni() + " || Nombre: "
                         + getConsultas()[x].getNombre() + " || Apellidos: " + getConsultas()[x].getApellido1() + " " + getConsultas()[x].getApellido2());
             }
         }
