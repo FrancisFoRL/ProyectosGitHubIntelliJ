@@ -85,11 +85,11 @@ public abstract class Centro implements Estadisticas, Serializable {
                 contAdministrativos--;
             }
             aumentarArray(delTrabajadores);
-            for(int x = 0; x < delTrabajadores.length; x++){
-                if(delTrabajadores[x] == null){
+            for (int x = 0; x < delTrabajadores.length; x++) {
+                if (delTrabajadores[x] == null) {
                     delTrabajadores[x] = trabajador;
                     break;
-                }else if(delTrabajadores[x].getDni().equalsIgnoreCase(trabajador.getDni())){
+                } else if (delTrabajadores[x].getDni().equalsIgnoreCase(trabajador.getDni())) {
                     delTrabajadores[x] = null;
                     delTrabajadores[x] = trabajador;
                     break;
@@ -100,64 +100,30 @@ public abstract class Centro implements Estadisticas, Serializable {
         return false;
     }
 
-    private static void arrayRemoveTrabajador(Persona enf) throws IOException, ClassNotFoundException {
-        File fichero = new File("trabajadores.dat");
-        if(fichero.exists()){
-            ObjectInputStream leerFichero = new ObjectInputStream(new FileInputStream("trabajadores.dat"));
-            ObjectOutputStream escribiendoFichero = new ObjectOutputStream(new FileOutputStream("trabajadores.dat"));
-            Persona[] aux = (Persona[]) leerFichero.readObject();
-            for(int x = 0; x < aux.length; x++){
-                if(aux[x] == null){
-                    aux[x] = enf;
-                    break;
-                }else if(aux[x].getDni().equalsIgnoreCase(enf.getDni())){
-                    aux[x] = null;
-                    aux[x] = enf;
-                    break;
-                }
-            }
-            escribiendoFichero.writeObject(aux);
-            escribiendoFichero.close();
-
-        }else{
-            Persona[] aux = new Persona[50];
-            for(int x = 0; x < aux.length; x++){
-                if(aux[x] == null){
-                    aux[x] = enf;
-                    break;
-                }
-            }
-            ObjectOutputStream escribiendoFichero = new ObjectOutputStream(new FileOutputStream("trabajadores.dat"));
-            escribiendoFichero.writeObject(aux);
-            escribiendoFichero.close();
-        }
-    }
 
     /**
      * Funcion que analiza si el array esta lleno y en el caso de que este lleno, aumenta el espacio del array.
      */
     protected void aumentarArray(Persona[] array) {
-        if (!Arrays.asList(array).contains(null)){//Arrays.asList nos permite buscar en el array el valor que deseemos, en este caso un null
+        if (!Arrays.asList(array).contains(null)) {//Arrays.asList nos permite buscar en el array el valor que deseemos, en este caso un null
             Persona[] aux = new Persona[array.length];
-            for(int x=0; x< aux.length;x++){
+            for (int x = 0; x < aux.length; x++) {
                 aux[x] = array[x];
             }
             array = new Persona[aux.length * 2];
-            for(int x=0; x< aux.length;x++){
+            for (int x = 0; x < aux.length; x++) {
                 array[x] = aux[x];
             }
         }
     }
 
-    public static Centro existeCentro(Centro[] centros, String nombre){
-        for(int x = 0; x < centros.length; x++){
-            if(centros[x] == null);
-            else if(centros[x].getNombreCentro().equalsIgnoreCase(nombre)){
+    public static Centro existeCentro(Centro[] centros, String nombre) {
+        for (int x = 0; x < centros.length; x++) {
+            if (centros[x] == null) ;
+            else if (centros[x].getNombreCentro().equalsIgnoreCase(nombre)) {
                 return centros[x];
             }
         }
         return null;
     }
-
-
 }//Fin de Centro

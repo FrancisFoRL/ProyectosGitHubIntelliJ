@@ -1,9 +1,5 @@
 package daw_tarea5;
 
-import librerias.Fecha;
-
-import java.io.*;
-
 public class Hospital extends Centro {
     protected int plantas, habitacionesPorPlanta;
     private Paciente[][] habitaciones;
@@ -80,18 +76,14 @@ public class Hospital extends Centro {
     @Override
     public int diaporMes(int mes) {
         int cont = 0;
+
         for (int x = 0; x < habitaciones.length; x++) {
             for (int y = 0; y < habitaciones[x].length; y++) {
                 if (habitaciones[x][y] == null) ;
                 else {
-                    for (int i = 0; i < habitaciones[x][y].getVisitasMedicas().length; i++) {
-                        if (habitaciones[x][y].getVisitasMedicas()[i] == null) ;
-                        else {
-                            if (habitaciones[x][y].getVisitasMedicas()[i].getMes() == mes) {
-                                cont++;
-                                break;
-                            }
-                        }
+                    if (habitaciones[x][y].diaporMes(mes) > 0) {
+                        cont++;
+                        habitaciones[x][y].mostrarEstado();
                     }
                 }
             }
@@ -99,17 +91,30 @@ public class Hospital extends Centro {
         for (int x = 0; x < getConsultas().length; x++) {
             if (getConsultas()[x] == null) ;
             else {
-                for (int y = 0; y < getConsultas()[x].getVisitasMedicas().length; y++) {
-                    if (getConsultas()[x].getVisitasMedicas()[y] == null) ;
-                    else {
-                        if (getConsultas()[x].getVisitasMedicas()[y].getMes() == mes) {
-                            cont++;
-                            break;
-                        }
+                if (getConsultas()[x].diaporMes(mes) > 0) {
+                    cont++;
+                    getConsultas()[x].mostrarEstado();
+                }
+            }
+        }
+        /*
+        }else if(tipo > 0){
+            for(int x = 0; x < getTrabajadores().length; x++){
+                if(tipo == 1 && getTrabajadores()[x] instanceof Medico){
+                    if(getTrabajadores()[x].diaporMes(mes) > 0){
+                        cont++;
+                        System.out.println(cont+".- "+getTrabajadores()[x].getNombre()+" "+getTrabajadores()[x].getApellido1()+" "+getTrabajadores()[x].getApellido2());
+                    }
+                }else if(tipo == 2 && getTrabajadores()[x] instanceof Administrativo){
+                    if(getTrabajadores()[x].diaporMes(mes) > 0){
+                        cont++;
+                        System.out.println(cont+".- "+getTrabajadores()[x].getNombre()+" "+getTrabajadores()[x].getApellido1()+" "+getTrabajadores()[x].getApellido2());
                     }
                 }
             }
         }
+
+         */
         return cont;
     }
 
@@ -120,8 +125,8 @@ public class Hospital extends Centro {
             if (getConsultas()[x] == null) {
                 System.out.println("Consulta " + (x + 1) + " libre");
             } else {
-                System.out.println("Consulta " + (x + 1) + " tiene un paciente || DNI: " + getConsultas()[x].getDni() + " || Nombre: "
-                        + getConsultas()[x].getNombre() + " || Apellidos: " + getConsultas()[x].getApellido1() + " " + getConsultas()[x].getApellido2());
+                System.out.print("Consulta " + (x + 1) + " tiene un paciente || ");
+                getConsultas()[x].mostrarEstado();
             }
         }
         System.out.println("---------Plantas Hospital---------");
@@ -129,8 +134,8 @@ public class Hospital extends Centro {
             for (int y = 0; y < habitaciones[x].length; y++) {
                 if (habitaciones[x][y] == null) ;
                 else {
-                    System.out.println("Planta " + (x + 1) + " / Habitacion " + (y + 1) + " || DNI: " + habitaciones[x][y].getDni() + "|| Nombre: "
-                            + habitaciones[x][y].getNombre() + " || Apellidos: " + habitaciones[x][y].getApellido1() + " " + habitaciones[x][y].getApellido2());
+                    System.out.print("Planta " + (x + 1) + " / Habitacion " + (y + 1) + " || ");
+                    habitaciones[x][y].mostrarEstado();
                 }
             }
         }

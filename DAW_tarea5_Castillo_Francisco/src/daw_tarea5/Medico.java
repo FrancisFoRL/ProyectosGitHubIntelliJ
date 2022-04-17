@@ -36,6 +36,10 @@ public class Medico extends Persona{
         this.especialidad = especialidad;
     }
 
+    public Fecha[] getDiasTrabajados() {
+        return diasTrabajados;
+    }
+
     //Funciones
     /**
      * Funcion que añade los dias trabajados del medico al array diasTrabajados. Este controla que la fecha sea correcta y que no este repetida en el array.
@@ -140,7 +144,7 @@ public class Medico extends Persona{
      */
     @Override
     public void mostrarEstado() {
-        System.out.print("Dni Medico: " + getDni() + " || Nombre: " + getNombre() + " || Apellidos: " + getApellido1() + " " + getApellido2() +
+        System.out.print("ID: "+getIdentificador()+ " || DNI Medico: " + getDni() + " || Nombre: " + getNombre() + " || Apellidos: " + getApellido1() + " " + getApellido2() +
                 " || Dias Trabajados: "+ contDiasTrabajados());
     }
 

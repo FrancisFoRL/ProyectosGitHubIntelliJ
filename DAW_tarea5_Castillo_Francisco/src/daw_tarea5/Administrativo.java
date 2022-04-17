@@ -26,6 +26,10 @@ public class Administrativo extends Persona{
         this.area = area;
     }
 
+    public Fecha[] getDiasTrabajados() {
+        return diasTrabajados;
+    }
+
     //Funcion
     public boolean addDiasTrabajados(Fecha trabajo){
         if (!trabajo.comprobarFechaValida(getFechaNacimiento(),18)) {
@@ -87,7 +91,6 @@ public class Administrativo extends Persona{
         int cont = 0;
         for (Fecha diaTrabajado : diasTrabajados) {
             if (diaTrabajado == null) {
-                break;
             } else {
                 if (diaTrabajado.getMes() == mes) {
                     cont++;
@@ -99,7 +102,7 @@ public class Administrativo extends Persona{
 
     @Override
     public void mostrarEstado() {
-        System.out.print("Dni Medico: " + getDni() + " || Nombre: " + getNombre() + " || Apellidos: " + getApellido1() + " " + getApellido2() +
+        System.out.print("ID: "+getIdentificador()+ "|| DNI Administrativo: " + getDni() + " || Nombre: " + getNombre() + " || Apellidos: " + getApellido1() + " " + getApellido2() +
                 " || Dias Trabajados: "+ contDiasTrabajados());
     }
 }//Fin Administrativo

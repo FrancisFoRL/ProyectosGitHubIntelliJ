@@ -1,8 +1,6 @@
 package daw_tarea5;
 
-import java.io.*;
-
-public class Clinica extends Centro{
+public class Clinica extends Centro {
 
     //Constructor
     public Clinica(String nombreCentro, String direccionCentro, int limiteConsultas) {
@@ -51,19 +49,32 @@ public class Clinica extends Centro{
     public int diaporMes(int mes) {
         int cont = 0;
         for (int x = 0; x < getConsultas().length; x++) {
-            if (getConsultas()[x] == null);
+            if (getConsultas()[x] == null) ;
             else {
-                for (int y = 0; y < getConsultas()[x].getVisitasMedicas().length; y++) {
-                    if (getConsultas()[x].getVisitasMedicas()[y] == null) break;
-                    else {
-                        if (getConsultas()[x].getVisitasMedicas()[y].getMes() == mes) {
-                            cont++;
-                            break;
-                        }
+                if (getConsultas()[x].diaporMes(mes) > 0) {
+                    cont++;
+                    getConsultas()[x].mostrarEstado();
+                }
+            }
+        }
+            /*
+        }else if(tipo > 0){
+            for(int x = 0; x < getTrabajadores().length; x++){
+                if(tipo == 1 && getTrabajadores()[x] instanceof Medico){
+                    if(getTrabajadores()[x].diaporMes(mes) > 0){
+                        cont++;
+                        System.out.println(cont+".- "+getTrabajadores()[x].getNombre()+" "+getTrabajadores()[x].getApellido1()+" "+getTrabajadores()[x].getApellido2());
+                    }
+                }else if(tipo == 2 && getTrabajadores()[x] instanceof Administrativo){
+                    if(getTrabajadores()[x].diaporMes(mes) > 0){
+                        cont++;
+                        System.out.println(cont+".- "+getTrabajadores()[x].getNombre()+" "+getTrabajadores()[x].getApellido1()+" "+getTrabajadores()[x].getApellido2());
                     }
                 }
             }
         }
+
+             */
         return cont;
     }
 
@@ -74,8 +85,8 @@ public class Clinica extends Centro{
             if (getConsultas()[x] == null) {
                 System.out.println("Consulta " + (x + 1) + " libre");
             } else {
-                System.out.println("Consulta " + (x + 1) + " tiene un paciente ( DNI: " + getConsultas()[x].getDni() + "|| Nombre: "
-                        + getConsultas()[x].getNombre() + " || Apellidos: " + getConsultas()[x].getApellido1() + " " + getConsultas()[x].getApellido2());
+                System.out.print("Consulta " + (x + 1) + " tiene un paciente ||");
+                getConsultas()[x].mostrarEstado();
             }
         }
     }

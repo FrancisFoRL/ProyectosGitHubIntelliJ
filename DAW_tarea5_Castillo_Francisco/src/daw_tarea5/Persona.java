@@ -2,7 +2,6 @@ package daw_tarea5;
 
 import librerias.Fecha;
 
-import javax.naming.ContextNotEmptyException;
 import java.io.*;
 import java.time.Year;
 
@@ -115,19 +114,6 @@ public abstract class Persona implements Estadisticas, Serializable {
                 }
             }
         } else if (tipoPers == 1) {
-            /*
-            File fichero = new File("trabajadores.dat");
-            if(fichero.exists()){
-                ObjectInputStream lectura = new ObjectInputStream(new FileInputStream("trabajadores.dat"));
-                Persona[] aux = (Persona[]) lectura.readObject();
-                for(int x = 0; x < aux.length; x++){
-                    if(aux[x] == null);
-                    else if(aux[x].getDni().equalsIgnoreCase(dni)){
-                        return aux[x];
-                    }
-                }
-            }
-             */
             for (int x = 0; x < Centro.delTrabajadores.length; x++) {
                 if (Centro.delTrabajadores[x] == null) ;
                 else if (Centro.delTrabajadores[x].getDni().equalsIgnoreCase(dni)) {

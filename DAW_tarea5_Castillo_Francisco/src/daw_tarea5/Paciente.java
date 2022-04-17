@@ -120,7 +120,7 @@ public class Paciente extends Persona {
 
     @Override
     public void mostrarEstado() {
-        System.out.println("Dni Paciente: " + getDni() + " || Nombre: " + getNombre() + " || Apellidos: " + getApellido1() + " " + getApellido2() +
+        System.out.println("ID: "+getIdentificador()+"|| DNI:" + getDni() + " || Nombre: " + getNombre() + " || Apellidos: " + getApellido1() + " " + getApellido2() +
                 " || Ultima visita medica: " + ultimaVisita());
     }
 

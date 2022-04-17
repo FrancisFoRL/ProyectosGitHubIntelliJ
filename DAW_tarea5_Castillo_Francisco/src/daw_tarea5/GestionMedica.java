@@ -280,9 +280,14 @@ public class GestionMedica implements Serializable {
                     }
                 }
                 case 5 -> {
-
+                    int mes = PeticionDatos.pedirEnteroRango(1,12,3,"Dame un mes del año (1/12): ");
+                    peticion = PeticionDatos.pedirEnteroRango(1,mostrarHosCli(gestion.getCentrosMedicos(),3),3,"Dame una opcion: ");
+                    gestion.getCentrosMedicos()[peticion - 1].diaporMes(mes);
                 }
                 case 6 -> {
+                    mostrarEstadisticaEm(PeticionDatos.pedirEnteroRango(1,12,3,"Dame un mes del año (1/12): "),
+                            gestion.getCentrosMedicos()[PeticionDatos.pedirEnteroRango(1,mostrarHosCli(gestion.getCentrosMedicos(),3),3,"Dame una opcion: ")-1],
+                            PeticionDatos.pedirEnteroRango(1,2,3,"¿La estadisticas a mostrar seran de un medico(1) o de un administrador(2)?: "));
 
                 }
             }
@@ -308,6 +313,41 @@ public class GestionMedica implements Serializable {
         trabajadores.close();
     }
 
+    private static void mostrarEstadisticaEm(int mes, Centro centro,int tipo){
+        int opcion;
+        Persona[] personas = new Persona[5];
+        int cont=0;
+        for(int x = 0; x < centro.getTrabajadores().length; x++){
+            if(!Arrays.asList(personas).contains(null)){
+                Persona[] aux = new Persona[personas.length];
+                for (int y = 0; y < aux.length; y++) {
+                    aux[y] = personas[y];
+                }
+                personas = new Persona[aux.length * 2];
+                for (int y = 0; y < aux.length; y++) {
+                    personas[y] = aux[y];
+                }
+            }
+            if(centro.getTrabajadores()[x] == null);
+            else if(tipo == 1 && centro.getTrabajadores()[x] instanceof Medico){
+                if(centro.getTrabajadores()[x].diaporMes(mes) > 0){
+                    personas[cont] = centro.getTrabajadores()[x];
+                    cont++;
+                    System.out.println(cont+"-."+centro.getTrabajadores()[x].getNombre()+" "+centro.getTrabajadores()[x].getApellido1()+" "+centro.getTrabajadores()[x].getApellido2());
+                }
+            }else if(tipo == 2 && centro.getTrabajadores()[x] instanceof Administrativo){
+                personas[cont] = centro.getTrabajadores()[x];
+                cont++;
+                System.out.println(cont+"-."+centro.getTrabajadores()[x].getNombre()+" "+centro.getTrabajadores()[x].getApellido1()+" "+centro.getTrabajadores()[x].getApellido2());
+            }
+        }
+        if(cont == 1){
+            personas[cont-1].mostrarEstado();
+        }else{
+            opcion = PeticionDatos.pedirEnteroRango(1,cont,3,"Dame una opcion: ");
+            personas[opcion-1].mostrarEstado();
+        }
+    }
 
     private static void añadirDia(Persona persona) {
         Fecha fecha = new Fecha();
