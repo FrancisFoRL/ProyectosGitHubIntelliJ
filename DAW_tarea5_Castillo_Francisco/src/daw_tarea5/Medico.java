@@ -148,4 +148,8 @@ public class Medico extends Persona{
                 " || Dias Trabajados: "+ contDiasTrabajados());
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + " || Especialidad: "+especialidad;
+    }
 }//Fin Medico

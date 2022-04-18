@@ -4,9 +4,6 @@ import librerias.Fecha;
 
 import java.time.Year;
 import java.util.Arrays;
-//todo comprobar todos los breaks en if, ya que si se despide un trabajador, este quedaria null(este se guardaria en un fichero) y los siguientes no se mostrarian
-
-
 public class Administrativo extends Persona{
     private Fecha[] diasTrabajados;
     private String area;
@@ -104,5 +101,10 @@ public class Administrativo extends Persona{
     public void mostrarEstado() {
         System.out.print("ID: "+getIdentificador()+ "|| DNI Administrativo: " + getDni() + " || Nombre: " + getNombre() + " || Apellidos: " + getApellido1() + " " + getApellido2() +
                 " || Dias Trabajados: "+ contDiasTrabajados());
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+ " || Area: "+area;
     }
 }//Fin Administrativo

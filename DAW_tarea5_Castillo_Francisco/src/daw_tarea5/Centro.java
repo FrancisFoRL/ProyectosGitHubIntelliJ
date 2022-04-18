@@ -17,7 +17,7 @@ public abstract class Centro implements Estadisticas, Serializable {
     public Centro(String nombreCentro, String direccionCentro, int limiteConsultas) {
         this.nombreCentro = nombreCentro;
         this.direccionCentro = direccionCentro;
-        this.consultas = new Paciente[limiteConsultas];//todo limiteconsultas el numero de consultas que tendra?
+        this.consultas = new Paciente[limiteConsultas];
         this.limiteConsultas = limiteConsultas;
         this.trabajadores = new Persona[5];
         identificador = contID++;
@@ -54,7 +54,26 @@ public abstract class Centro implements Estadisticas, Serializable {
     }
 
     //Funciones
-    //todo si contMedico es para el numero de medicos, hacer funcion booleana que devuelva falta si todos los puestos ya estan ocupados
+
+    protected static boolean validarNombre(String nombreCentro, Centro[] centros){
+        for(int x = 0; x < centros.length; x++){
+            if(centros[x] == null);
+            else if(centros[x].nombreCentro.equalsIgnoreCase(nombreCentro)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean validarDireccion(String nombreDireccion, Centro[] centros){
+        for(int x = 0; x < centros.length; x++){
+            if(centros[x] == null);
+            else if(centros[x].nombreCentro.equalsIgnoreCase(nombreDireccion)){
+                return false;
+            }
+        }
+        return true;
+    }
     public void addTrabajador(Persona trabajador) {
         aumentarArray(trabajadores);
         for (int x = 0; x < trabajadores.length; x++) {

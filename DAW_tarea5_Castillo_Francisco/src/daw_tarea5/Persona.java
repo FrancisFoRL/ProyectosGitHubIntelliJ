@@ -143,11 +143,6 @@ public abstract class Persona implements Estadisticas, Serializable {
 
     @Override
     public String toString() {
-        return "Persona{" +
-                "dni='" + dni + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", apellido1='" + apellido1 + '\'' +
-                ", apellido2='" + apellido2 + '\'' +
-                '}';
+        return "ID: "+ identificador+ " || DNI: " + dni + " || Nombre: " + nombre + " || Apellidos: " + apellido1 + " " + apellido2 + " || Fecha de nacimiento: "+fechaNacimiento;
     }
 }//Fin Persona

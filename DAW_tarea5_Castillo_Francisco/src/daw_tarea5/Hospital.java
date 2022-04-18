@@ -76,14 +76,12 @@ public class Hospital extends Centro {
     @Override
     public int diaporMes(int mes) {
         int cont = 0;
-
         for (int x = 0; x < habitaciones.length; x++) {
             for (int y = 0; y < habitaciones[x].length; y++) {
                 if (habitaciones[x][y] == null) ;
                 else {
                     if (habitaciones[x][y].diaporMes(mes) > 0) {
                         cont++;
-                        habitaciones[x][y].mostrarEstado();
                     }
                 }
             }
@@ -93,7 +91,6 @@ public class Hospital extends Centro {
             else {
                 if (getConsultas()[x].diaporMes(mes) > 0) {
                     cont++;
-                    getConsultas()[x].mostrarEstado();
                 }
             }
         }
@@ -120,7 +117,7 @@ public class Hospital extends Centro {
 
     @Override
     public void mostrarEstado() {
-        System.out.println("---------Consultas---------");
+        System.out.println("\n---------Consultas---------");
         for (int x = 0; x < getConsultas().length; x++) {
             if (getConsultas()[x] == null) {
                 System.out.println("Consulta " + (x + 1) + " libre");
@@ -129,13 +126,16 @@ public class Hospital extends Centro {
                 getConsultas()[x].mostrarEstado();
             }
         }
-        System.out.println("---------Plantas Hospital---------");
+        System.out.println("\n---------Plantas Hospital---------");
         for (int x = 0; x < habitaciones.length; x++) {
             for (int y = 0; y < habitaciones[x].length; y++) {
-                if (habitaciones[x][y] == null) ;
+                if (habitaciones[x][y] == null);
                 else {
                     System.out.print("Planta " + (x + 1) + " / Habitacion " + (y + 1) + " || ");
                     habitaciones[x][y].mostrarEstado();
+                }
+                if(x == habitaciones.length-1 && y == habitaciones[x].length-1){
+                    System.out.println("Habitaciones vacias");
                 }
             }
         }

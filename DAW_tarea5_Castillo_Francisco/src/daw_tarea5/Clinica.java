@@ -18,7 +18,6 @@ public class Clinica extends Centro {
         return true;
     }
 
-    //todo añadir que al eliminar lo guarde en un fichero
     public boolean removePaciente(Paciente enf) {
         if (enf.consulta == -1) ;
         else if (getConsultas()[enf.consulta].getDni().equals(enf.getDni())) {
@@ -53,7 +52,6 @@ public class Clinica extends Centro {
             else {
                 if (getConsultas()[x].diaporMes(mes) > 0) {
                     cont++;
-                    getConsultas()[x].mostrarEstado();
                 }
             }
         }
