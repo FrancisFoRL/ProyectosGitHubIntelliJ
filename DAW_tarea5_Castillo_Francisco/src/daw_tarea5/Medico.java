@@ -3,9 +3,15 @@ package daw_tarea5;
 import librerias.Fecha;
 
 import java.util.Arrays;
-//todo comprobar todos los breaks en if, ya que si se despide un trabajador, este quedaria null y los siguientes no se mostrarian
 
+/**
+ * Clase de Medico que contiene lo necesario para gestionar a un medico.
+ * @author Francisco Castillo
+ * @see Persona
+ * @version 19/04/2022
+ */
 public class Medico extends Persona{
+
     //Atributos
     /**
      * Array de tipo Fecha que guardara todos los dias trabajados de un medico.
@@ -17,9 +23,7 @@ public class Medico extends Persona{
      */
     private String especialidad;
 
-
     //Constructor
-
     public Medico(String dni, String nombre, String apellido1, String apellido2, String genero, Fecha fechaNacimiento, String especialidad) {
         super(dni, nombre, apellido1, apellido2, genero, fechaNacimiento);
         this.diasTrabajados = new Fecha[5];
@@ -27,27 +31,17 @@ public class Medico extends Persona{
     }
 
     //Getters y Setters
-
-    public String getEspecialidad() {
-        return especialidad;
-    }
-
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
     }
 
-    public Fecha[] getDiasTrabajados() {
-        return diasTrabajados;
-    }
-
     //Funciones
     /**
-     * Funcion que añade los dias trabajados del medico al array diasTrabajados. Este controla que la fecha sea correcta y que no este repetida en el array.
-     * Se comprueba si el array no esta lleno, si esta lleno se aumentara con la funcion aumentarArray.
-     * @param trabajo atributo de tipo fecha que contendra la fecha nueva a introducir.
-     * @return devuelve true si se añadio correctamente la fecha, en el caso de que haya algun fallo, se devolvera un false.
+     * Funcion booleana que añade un dia trabajado nuevo del Medico. Comprobara que la fecha no sea menor a la fecha de nacimiento del Medico. Si es menor a su fecha de
+     * nacimiento devolvera un false.
+     * @param trabajo parametro de tipo Fecha que contiene la fecha que se quiere añadir.
+     * @return devuelve falso si la fecha pasada por parametro no es valida, si es valida se devolvera true y se añadira al array de diasTrabajados.
      */
-    //todo contralar que la fecha sea entre hoy y la fecha de nacimiente mas mayoria de edad
     public boolean addDiasTrabajados(Fecha trabajo){
         if (!trabajo.comprobarFechaValida(getFechaNacimiento(), 22)) {
             return false;
@@ -70,7 +64,9 @@ public class Medico extends Persona{
     }
 
     /**
-     * Funcion que analiza si el array esta lleno y en el caso de que este lleno, aumenta el espacio del array.
+     * Funcion que aumenta el array de diasTrabajados si esta lleno y lo aumenta al doble de la capacidad que puede tener.
+     * En el caso de no usar Arrays.asList, lo que se haria sería un bucle que compruebe todas la posiciones, si encuentra un null saldria del bucle y no aumentaria.
+     * En el caso de llegar a la ultima posicion y no encontrar ningun nulo ya se aumentaria el array.
      */
     private void aumentarArray() {
         if (!Arrays.asList(diasTrabajados).contains(null)){//Arrays.asList nos permite buscar en el array el valor que deseemos, en este caso un null
@@ -111,7 +107,11 @@ public class Medico extends Persona{
         return cont;
     }
 
-    //todo controlar tambien dia y mes
+    /**
+     * Funcion de tipo booleana que comprueba que la fecha de nacimiento este entre rango que se indica.
+     * @param fNacimiento atributo de tipo fecha que contiene la fecha a comprobar.
+     * @return devuelve false si la fecha esta fuera de rango devolvera false, si no, devolvera true.
+     */
     public static boolean validarFechaNacimiento(Fecha fNacimiento) {
         return fNacimiento.getAnio() >= YEAR - 70 && fNacimiento.getAnio() <= YEAR - 22;
     }
@@ -148,6 +148,7 @@ public class Medico extends Persona{
                 " || Dias Trabajados: "+ contDiasTrabajados());
     }
 
+    //toString
     @Override
     public String toString() {
         return super.toString() + " || Especialidad: "+especialidad;

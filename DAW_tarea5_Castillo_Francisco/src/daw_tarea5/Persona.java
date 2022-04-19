@@ -5,19 +5,49 @@ import librerias.Fecha;
 import java.io.*;
 import java.time.Year;
 
+/**
+ * Clase abstrata Persona que contiene toda la informacion necesaria que hace falta para crear una nueva Persona.
+ * @author Francisco Castillo
+ * @version 19/04/2022
+ */
 public abstract class Persona implements Estadisticas, Serializable {
+
+    /**
+     * Atributos que contendran los datos principales de una persona.
+     */
     private String dni, nombre, apellido1, apellido2, genero;
+
+    /**
+     * Atributos que lleva la cuenta de los ID que se asignan a las personas.
+     */
     protected static int contID;
+
+    /**
+     * Atributo que guarda el ID propio de la persona.
+     */
     private int identificador;
+
+    /**
+     * Atributo que guarda la fecha de nacimiento de la persona.
+     */
     private Fecha fechaNacimiento;
+
+    /**
+     * Atributo que devuelve el año actual del sistema.
+     */
     protected static final int YEAR = Year.now().getValue();
+
+    /**
+     * Atributo que guarda en que lugar (Hospital o Clinica) se encuentra la persona.
+     */
     protected int lugar = -1;
+
+    /**
+     * Atributo que guarda en que lugar del array se encuentra la persona.
+     */
     protected int posArray = -1;
 
     //Constructores
-    public Persona() {
-        identificador = contID++;
-    }
 
     public Persona(String dni, String nombre, String apellido1, String apellido2, String genero, Fecha fechaNacimiento) {
         this.dni = dni;
@@ -32,10 +62,6 @@ public abstract class Persona implements Estadisticas, Serializable {
     //Getters y Setters
     public String getDni() {
         return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
     }
 
     public String getNombre() {
@@ -82,7 +108,15 @@ public abstract class Persona implements Estadisticas, Serializable {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    //todo comprobar que funcione bien
+    /**
+     * Funcion de tipo Persona que busca un persona en los varios arrays de los centros que se le pasen. Esta funcion es valida tanto para Pacientes como para Personal, ya que con el
+     * tipoPers indicamos que tipo de persona estamos buscando. Tambien se comprueba en los arrays de los Pacientes y Personal dados de baja si existe una persona con el Dni igual que
+     * el pasado por parametro.
+     * @param centro Array de tipo Centro que contiene varios centros, como pueden Hospitales o Clinicas.
+     * @param dni cadena que contiene el Dni que se está buscando.
+     * @param tipoPers indica que tipo de Persona se está buscando, si es 0 será un Paciente y si es 1 será Personal.
+     * @return se devuelve un objeto de tipo Persona si el Dni se encuentra, si no es el caso, se devolvera un null.
+     */
     public static Persona existePers(Centro[] centro, String dni, int tipoPers) {
         if (tipoPers == 0) {
             for (int x = 0; x < Centro.delPaciente.length; x++) {
@@ -136,11 +170,16 @@ public abstract class Persona implements Estadisticas, Serializable {
         return null;
     }
 
-
+    /**
+     * Funcion que comprueba si la cadena género pasada por parametro es igual que las que son validas.
+     * @param genero cadena que contiene de que genero es la persona.
+     * @return devuelve true si el parametro pasado es igual que uno de los valores validos, si no, devolvera false.
+     */
     public static boolean validarGenero(String genero) {
         return genero.equalsIgnoreCase("Masculino") || genero.equalsIgnoreCase("Femenino") || genero.equalsIgnoreCase("Sin definir");
     }
 
+    //ToString
     @Override
     public String toString() {
         return "ID: "+ identificador+ " || DNI: " + dni + " || Nombre: " + nombre + " || Apellidos: " + apellido1 + " " + apellido2 + " || Fecha de nacimiento: "+fechaNacimiento;

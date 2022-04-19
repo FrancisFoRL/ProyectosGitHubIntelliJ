@@ -1,5 +1,11 @@
 package daw_tarea5;
 
+/**
+ * Clase de Clinica que contiene lo necesario para gestiona una Clinica.
+ * @author Francisco Castillo
+ * @see Centro
+ * @version 19/04/2022
+ */
 public class Clinica extends Centro {
 
     //Constructor
@@ -8,6 +14,15 @@ public class Clinica extends Centro {
     }
 
     //Funciones
+
+    /**
+     * Funcion booleana que añade un paciente a un consulta si es posible, en el caso de que no sea posible,
+     * se devolvera un false.
+     * @param enf Objeto de tipo paciente que se añadira a una consulta.
+     * @param consulta numero de consulta a la que se quiere añadir el paciente.
+     * @return devuelve false si el numero de consulta pasado por parametro esta ocupado, si no, devolvera
+     * true.
+     */
     public boolean addPaciente(Paciente enf, int consulta) {
         if (getConsultas()[consulta - 1] != null) {
             return false;
@@ -18,10 +33,18 @@ public class Clinica extends Centro {
         return true;
     }
 
+    /**
+     * Funcion booleana que elimina al paciente de la clinica. Si el paciente esta asignado a algun lugar de la clinica, su
+     * posicion se quedara nula y el objeto de esta persona se añadira al array de delPaciente y se devolvera true. En caso
+     * de que no este asignado se devolvera false, ya que no habra nada que eliminar.
+     * @param enf Objeto de tipo Paciente que se quiere eliminar.
+     * @return devolvera true si el paciente se elimino correctamente, si no, se devolvera un false.
+     */
     public boolean removePaciente(Paciente enf) {
         if (enf.consulta == -1) ;
         else if (getConsultas()[enf.consulta].getDni().equals(enf.getDni())) {
             getConsultas()[enf.consulta] = null;
+            enf.lugar = -1;
             enf.consulta = -1;
             arrayRemovePaciente(enf);
             return true;
@@ -29,9 +52,13 @@ public class Clinica extends Centro {
         return false;
     }
 
-    //todo si da tiempo hacer funcion de aumentar el array que se guarda en fichero
+    /**
+     * Funcion que busca una posicion vacia para guarda el objeto pasado por parametro. Si ya existe en el
+     * array, se sobreescribira.
+     * @param enf Objeto de tipo Paciente que se guardara.
+     */
     private void arrayRemovePaciente(Paciente enf) {
-        aumentarArray(delPaciente);
+        delPaciente = aumentarArray(delPaciente);
         for (int x = 0; x < delPaciente.length; x++) {
             if (delPaciente[x] == null) {
                 delPaciente[x] = enf;
@@ -44,6 +71,13 @@ public class Clinica extends Centro {
         }
     }
 
+    /**
+     * Funcion implementada de la interfaz Estadisticas. Esta funcion busca los dias de visita medica en un mes y devuelve el numero de dias que se hizo una visita medica
+     * en dicho mes.
+     * @param mes atributo de tipo entero que contiene el mes en el que se buscaran los dias de visitas medicas.
+     * @return devuelve el numero de dias que se visito en el mes pasado por parametros.
+     * @see Estadisticas
+     */
     @Override
     public int diaporMes(int mes) {
         int cont = 0;
@@ -55,27 +89,13 @@ public class Clinica extends Centro {
                 }
             }
         }
-            /*
-        }else if(tipo > 0){
-            for(int x = 0; x < getTrabajadores().length; x++){
-                if(tipo == 1 && getTrabajadores()[x] instanceof Medico){
-                    if(getTrabajadores()[x].diaporMes(mes) > 0){
-                        cont++;
-                        System.out.println(cont+".- "+getTrabajadores()[x].getNombre()+" "+getTrabajadores()[x].getApellido1()+" "+getTrabajadores()[x].getApellido2());
-                    }
-                }else if(tipo == 2 && getTrabajadores()[x] instanceof Administrativo){
-                    if(getTrabajadores()[x].diaporMes(mes) > 0){
-                        cont++;
-                        System.out.println(cont+".- "+getTrabajadores()[x].getNombre()+" "+getTrabajadores()[x].getApellido1()+" "+getTrabajadores()[x].getApellido2());
-                    }
-                }
-            }
-        }
-
-             */
         return cont;
     }
 
+    /**
+     * Funcion implementada de la interfaz Estadisticas. Esta funcion muestra la informacion de una Clinica.
+     * @see Persona
+     */
     @Override
     public void mostrarEstado() {
         System.out.println("---------Consultas---------");
