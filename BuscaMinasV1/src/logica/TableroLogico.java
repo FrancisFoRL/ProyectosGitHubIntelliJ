@@ -13,7 +13,7 @@ import java.util.Random;
  */
 public class TableroLogico {
     
-    private int dim; //no hace falta poner filas y columnas ya que si establezco dimensión 4= 4x4
+    private int dim;  //no hace falta poner filas y columnas ya que si establezco dimensión 4= 4x4
     private int numMinas;
     private int numCasillasAbiertas; //este atributo me permitirá saber cuando he ganado 
     private Casilla [][] tableroJuego; //este array bidimensional de Casilla será mi tablero
